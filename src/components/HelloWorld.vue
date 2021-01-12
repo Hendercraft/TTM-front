@@ -1,13 +1,16 @@
 <template>
   <div class="hello">
-    
+    <Register/>
   </div>
 </template>
 
 <script>
+import Register from './Register/index.vue'
 export default {
   name: 'HelloWorld',
-  components: {register},
+  components: {
+    Register,
+    },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
