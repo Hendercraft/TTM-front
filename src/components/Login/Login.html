@@ -1,5 +1,18 @@
 
 <section class="login">
   <h1>login Component</h1>
+  <router-link to="/">Home</router-link>
+  <router-link to="/register">Register</router-link>
+
+  <p>Username</p>
+  <input type="text" v-model="username">
+
+  <p>Password</p>
+  <input type="password" v-model="password">
+
+  <button class="login" v-on:click="Login">Login</button>
+  </br>
+  <p class="error-message" v-if="errors!=null">{{ errors }}</p>
+
 </section>
 

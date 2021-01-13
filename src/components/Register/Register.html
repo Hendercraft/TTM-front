@@ -1,6 +1,8 @@
 
 <section class="register">
   <h1>Register page</h1>
+  <router-link to="/login">Login</router-link>
+  <router-link to="/">Home</router-link>
   <p>Username</p>
   <input type="text" v-model="username">
 
@@ -22,5 +24,8 @@
   <p class="warning-password" v-if="password !== password_bis && password_bis !== null">Warning! Passwords are different</p>
 
   <button class="register" v-if="password == password_bis && password_bis !== null" v-on:click="Registered">Register</button>
+  </br>
+  </br>
+  <p class="error-message" v-if="errors!=null">{{ errors }}</p>
 </section>
 

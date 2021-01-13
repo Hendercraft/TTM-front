@@ -12,6 +12,7 @@ export default {
       email : null,
       password : null,
       password_bis : null,
+      errors : null,
 
     }
   },
@@ -33,9 +34,12 @@ export default {
         this.password_bis = null;
 
       })
+      .catch(error => {
+        console.log(error.response.data)
+        this.errors = error.response.data.detail
+        this.errors = error.response.data.email[0]
+      })
     }
     
   }
 }
-
-

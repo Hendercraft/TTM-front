@@ -1,4 +1,3 @@
 <template src="./Login.html"></template>
 <script src="./Login.js"></script>
-<style src="./Login.scss" scoped lang="scss"></style>
-
+<style src="./Login.css" scoped lang="css"></style>
