@@ -1,5 +1,26 @@
 
 <section class="register">
-  <h1>register Component</h1>
+  <h1>Register page</h1>
+  <p>Username</p>
+  <input type="text" v-model="username">
+
+  <p>First name</p>
+  <input type="text" v-model="first_name">
+
+  <p>Last name</p>
+  <input type="text" v-model="last_name">
+
+  <p>Email</p>
+  <input type="email" v-model="email">
+
+  <p>Password</p>
+  <input type="password" v-model="password">
+
+  <p>Repeat password</p>
+  <input type="password" v-model="password_bis">
+
+  <p class="warning-password" v-if="password !== password_bis && password_bis !== null">Warning! Passwords are different</p>
+
+  <button class="register" v-if="password == password_bis && password_bis !== null" v-on:click="Registered">Register</button>
 </section>
 
