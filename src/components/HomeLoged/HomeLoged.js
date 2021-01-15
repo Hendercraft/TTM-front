@@ -1,12 +1,13 @@
 import axios from "axios"
 
 export default {
-  name: 'home-loged',
+  name: 'homeLoged',
   components: {},
   props: [],
   data () {
     return {
-
+      items: null,
+      jsondata: null
     }
   },
   computed: {
@@ -27,14 +28,20 @@ export default {
                 },
                 {"username":this.username, "password":this.password})
       .then(response => {
-        console.log(response)
+        console.log(response.data.results),
+        this.items = response.data.results
 
       })
       .catch(error => {
         console.log(error.response) 
-        console.log(error.response.data) 
-        this.errors = error.response.data.detail
+        // console.log(error.response.data)
+        // this.errors = error.response.data.detail
       })
     }
+    // GetJsonData(Json) {
+    //   fetch(Json)
+    //     .then(response => response.json())
+    //     .then(data => (this.jsondata = data));
+    // }
   }
 }

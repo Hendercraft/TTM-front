@@ -1,12 +1,16 @@
 
-<section class="home-loged">
+<section class="homeLoged">
   <h1>home-loged Component</h1>
   <ul id="Users">
-    <li v-for="item in items" :key="item.message">
-      {{ item.message }}
-
+    <li v-for="item in items" :key="item.id">
+      <span>Nom de la discipline : {{ item.discipline }}</span>
+    </br>
+      <span>Commentaire : {{ item.commentsDiscipline }}</span>
+    </br>
+      <span>Id de l'utilisateur : {{ item.user }}</span>
+    </br>
     </li>
-    <button v-on:click="GetProfiles"> Click here</button>
   </ul>
+  <button v-on:click="GetProfiles"> Click here</button>
 </section>
 
