@@ -13,9 +13,12 @@ export default {
     }
   },
   computed: {
-
+    
   },
   mounted () {
+    intervalId : setInterval(function() {
+      console.log("Interval reached every 5s")
+    }, 1000)
 
   },
   methods: {
@@ -34,16 +37,13 @@ export default {
       })
     },
     loginSuccessful (req) {
-      console.log("test")
-      console.log(req.data.access)
+      console.log("success")
       if (!req.data.access) {
         this.loginFailed()
         return
       }
       
-      localStorage.token = req.data.access
-      console.log(localStorage.token)
-    
+      localStorage.token = req.data.access    
       this.$router.replace(this.$route.query.redirect || '/home')
     },
     
@@ -51,6 +51,7 @@ export default {
       console.log("Login failed!")
       this.error = 'Login failed!'
       delete localStorage.token
-    }
+    },
+    
   }
 } 

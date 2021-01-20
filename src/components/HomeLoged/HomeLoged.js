@@ -1,4 +1,5 @@
 import axios from "axios"
+import { jwtDecrypt } from "../../services/jwtHelper"
 
 export default {
   name: 'homeLoged',
@@ -37,11 +38,15 @@ export default {
         // console.log(error.response.data)
         // this.errors = error.response.data.detail
       })
-    }
+    },
     // GetJsonData(Json) {
     //   fetch(Json)
     //     .then(response => response.json())
     //     .then(data => (this.jsondata = data));
     // }
+    Decrypt: function(){
+      var Json = jwtDecrypt(localStorage.token)
+      console.log(Json)
+    }
   }
 }

@@ -14,10 +14,10 @@ export default {
             userName: "",
         }
     },
+    computed:{
+        Token = jwtDecrypt()
+    },
     methods:{
-        decodeToken: function(token){
-            
-        }
         isTokenActive: function(state) {
             if (!state.authData.tokenExp) {
             return false;
