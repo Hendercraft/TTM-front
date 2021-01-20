@@ -15,7 +15,8 @@ export default {
         }
     },
     computed:{
-        Token = jwtDecrypt()
+        Token = jwtDecrypt(),
+        console.log(Token),
     },
     methods:{
         isTokenActive: function(state) {

@@ -1,5 +1,6 @@
 import axios from "axios"
 
+
 export default {
   name: 'login',
   components: {},
@@ -43,7 +44,8 @@ export default {
         return
       }
       
-      localStorage.token = req.data.access    
+      localStorage.setItem('token', req.data.access)
+      localStorage.setItem('refresh', req.data.refresh)    
       this.$router.replace(this.$route.query.redirect || '/home')
     },
     
