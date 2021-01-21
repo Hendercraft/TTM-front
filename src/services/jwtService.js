@@ -1,58 +1,40 @@
-import axios from "axios";
-import store from '../components/';
+import axios from 'axios'
 
-import { tokenAlive } from "jwtHelper";
-import { jwtDecrypt } from "jwtHelper";
+import { tokenAlive, jwtDecrypt } from '../services/jwtHelper'
 
 export default {
-    data(){
-        return {
-            token: "",
-            refreshToken: "",
-            tokenExp: "",
-            userId: "",
-            userName: "",
-        }
-    },
-    computed:{
-        Token = jwtDecrypt(),
-        console.log(Token),
-    },
-    methods:{
-        isTokenActive: function(state) {
-            if (!state.authData.tokenExp) {
-            return false;
-            }
-            return tokenAlive(state.authData.tokenExp);
-        },
-        
-        // jwtInterceptor : axios.create({}),
-        
-        
-        // jwtInterceptor.interceptors.request.use(config => {
-        
-        //     const authData = store.getters['auth/getAuthData'];
-        //     const isAuthenticated = store.getters['auth/isTokenActive'];
-        //     if(isAuthenticated){
-        //         config.headers.common["Authorization"] = `bearer ${authData.token}` ;
-        //         return config;
-        //     }
-        //     else{
-        //         const payload ={
-        //             access_token: authData.token,
-        //             refresh_token:authData.refresh_token
-        //         };
-        //         axios.post('http://localhost:8000/auth/refreshtoken',payload)
-        //         .then(response => {
-        //             console.log(response);
-        //             store.commit('auth/saveTokenData',response.data);
-        //             return jwtInterceptor(config);
-        //         },error => {
-        //             config.log(error);
-        //             return jwtInterceptor(config);
-        //         });
-        //     }
-        
-        // })
+  name: 'jwtService',
+  data () {
+    return {
+      token: '',
+      refreshToken: '',
+      tokenExp: '',
+      userId: '',
+      userName: ''
     }
+  },
+  computed: {
+    isTokenValid: function () {
+      this.token = jwtDecrypt(localStorage.getItem('token'))
+      this.userId = this.token.user
+      this.refreshToken = null
+      if (!tokenAlive(this.token.exp) && (localStorage.getItem('refreshToken') == null)) {
+        axios.post('http://127.0.0.1:8000/api/token/refresh/', {'refresh': localStorage.getItem('refresh')})
+          .then(response => {
+            localStorage.setItem('refreshToken', response.data.access)
+            this.refreshToken = jwtDecrypt(localStorage.getItem('refreshToken'))
+          })
+          .catch(error => {
+            console.log('Refresh token failed')
+            console.log(error)
+          })
+      } else if (!tokenAlive(this.token.exp) && !tokenAlive(this.refreshToken.exp)) {
+        return false
+      } else {
+        return true
+      }
+    }
+  },
+  methods: {
+  }
 }

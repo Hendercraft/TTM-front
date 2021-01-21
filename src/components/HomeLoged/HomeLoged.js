@@ -16,15 +16,6 @@ export default {
   },
   mounted () {
     this.GetProfiles()
-    var Json = jwtDecrypt(localStorage.token)
-    console.log(Json.exp)
-    console.log(Json.token_type)
-    console.log(Json.jti)
-    setInterval(function() {
-      console.log(jwtDecrypt(localStorage.token))
-    }, 1000)
-    
-
   },
   methods: {
     GetProfiles: function(){

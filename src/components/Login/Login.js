@@ -17,10 +17,6 @@ export default {
     
   },
   mounted () {
-    intervalId : setInterval(function() {
-      console.log("Interval reached every 5s")
-    }, 1000)
-
   },
   methods: {
     Login: function(){
@@ -45,7 +41,9 @@ export default {
       }
       
       localStorage.setItem('token', req.data.access)
-      localStorage.setItem('refresh', req.data.refresh)    
+      console.log(req.data.access)
+      localStorage.setItem('refresh', req.data.refresh)
+      localStorage.setItem('refreshToken', null)  
       this.$router.replace(this.$route.query.redirect || '/home')
     },
     

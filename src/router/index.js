@@ -1,9 +1,11 @@
 import Vue from 'vue'
+// import axios from 'axios'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import HomeLoged from '@/components/HomeLoged'
+import {isTokenValid} from '../services/jwtHelper'
 
 Vue.use(Router)
 
@@ -48,7 +50,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('token') == null) {
+    if ((localStorage.getItem('token') == null) || !isTokenValid()) {
       next({
         path: '/login',
         params: { nextUrl: to.fullPath }
@@ -59,7 +61,7 @@ router.beforeEach((to, from, next) => {
         if (user.is_admin === 1) {
           next()
         } else {
-          next({name: 'userboard'})
+          next({name: 'Home'})
         }
       } else {
         next()
@@ -69,11 +71,31 @@ router.beforeEach((to, from, next) => {
     if (localStorage.getItem('token') == null) {
       next()
     } else {
-      next({name: 'userboard'})
+      next({name: 'Home'})
     }
   } else {
     next()
   }
 })
+
+// function isTokenValid () {
+//   var jsonToken = jwtDecrypt(localStorage.getItem('token'))
+//   var jsonRefreshToken = null
+//   if (!tokenAlive(jsonToken.exp) && (localStorage.getItem('refreshToken') == null)) {
+//     axios.post('http://127.0.0.1:8000/api/token/refresh/', {'refresh': localStorage.getItem('refresh')})
+//       .then(response => {
+//         localStorage.setItem('refreshToken', response.data.access)
+//         jsonRefreshToken = jwtDecrypt(localStorage.getItem('refreshToken'))
+//       })
+//       .catch(error => {
+//         console.log('Refresh token failed')
+//         console.log(error)
+//       })
+//   } else if (!tokenAlive(jsonToken.exp) && !tokenAlive(jsonRefreshToken.exp)) {
+//     return false
+//   } else {
+//     return true
+//   }
+// }
 
 export default router
