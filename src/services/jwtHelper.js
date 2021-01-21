@@ -44,7 +44,8 @@ export function authHeader () {
 export function isTokenValid () {
   data.token = jwtDecrypt(localStorage.getItem('token'))
   console.log(data.token)
-  console.log(data.refreshToken)
+  console.log('test')
+  console.log(localStorage.getItem('refreshToken'))
   data.userId = data.token.user_id
   if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') == null)) {
     console.log('refreshing token..')

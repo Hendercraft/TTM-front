@@ -43,7 +43,7 @@ export default {
       localStorage.setItem('token', req.data.access)
       console.log(req.data.access)
       localStorage.setItem('refresh', req.data.refresh)
-      localStorage.setItem('refreshToken', null)  
+      // localStorage.setItem('refreshToken')  
       this.$router.replace(this.$route.query.redirect || '/home')
     },
     
