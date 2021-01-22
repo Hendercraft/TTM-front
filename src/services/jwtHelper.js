@@ -17,17 +17,21 @@ export function tokenAlive (exp) {
 }
 
 export function jwtDecrypt (token) {
-  var base64Url = token.split('.')[1]
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
-  var jsonPayload = decodeURIComponent(
-    atob(base64)
-      .split('')
-      .map(function (c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-      })
-      .join('')
-  )
-  return JSON.parse(jsonPayload)
+  if (token == null) {
+    return null
+  } else {
+    var base64Url = token.split('.')[1]
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        })
+        .join('')
+    )
+    return JSON.parse(jsonPayload)
+  }
 }
 
 export function authHeader () {
@@ -36,8 +40,10 @@ export function authHeader () {
 
   if (tokenAlive(data.token.exp)) {
     return { Authorization: 'Bearer ' + data.token.jti }
+  } else if (tokenAlive(data.refreshToken.exp)) {
+    return { Authorization: 'Bearer' + data.refreshToken.jti }
   } else {
-    return {}
+    return null
   }
 }
 
@@ -47,7 +53,7 @@ export function isTokenValid () {
   console.log('test')
   console.log(localStorage.getItem('refreshToken'))
   data.userId = data.token.user_id
-  if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') == null)) {
+  if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') === 'null')) {
     console.log('refreshing token..')
     axios.post('http://127.0.0.1:8000/api/token/refresh/', {'refresh': localStorage.getItem('refresh')})
       .then(response => {
@@ -58,8 +64,7 @@ export function isTokenValid () {
         console.log('Refresh token failed')
         console.log(error)
       })
-  } else if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') != null)) {
-    console.log('it')
+  } else if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') !== 'null')) {
     console.log(data.refreshToken)
     if (!tokenAlive(data.refreshToken.exp)) {
       data.token = null
