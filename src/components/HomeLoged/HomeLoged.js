@@ -1,5 +1,5 @@
 import axios from "axios"
-import { jwtDecrypt } from "../../services/jwtHelper"
+import { jwtDecrypt } from "../../services/jwtService"
 
 export default {
   name: 'homeLoged',

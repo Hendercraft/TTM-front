@@ -5,7 +5,7 @@ import Home from '@/components/Home'
 // import Register from '@/components/Register'
 import Login from '@/components/Login'
 import HomeLoged from '@/components/HomeLoged'
-import {isTokenValid} from '../services/jwtHelper'
+import {isTokenValid} from '../services/jwtService'
 
 Vue.use(Router)
 
