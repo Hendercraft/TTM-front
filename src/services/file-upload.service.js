@@ -14,7 +14,7 @@ function upload (formData) {
     //   img, { url: `${BASE_URL}/${img.id}` })))
 }
 
-function uploadBis(){
+function uploadBis (formData) {
   const url = `${BASE_URL}/api/database/files/`
   console.log(formData.get('photo'))
   return axios.post(url, formData)
