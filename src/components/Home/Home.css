@@ -1,3 +1,20 @@
 .home {
 
 }
+
+.title {
+    letter-spacing: 1.2em;
+}
+
+.upper-nabar-elements {
+    float: left;
+    text-decoration: none;
+    list-style-type: none
+}
+
+router-link {
+    display: block;
+    padding: 8px;
+    background-color: #dddddd;
+    text-decoration: none;
+}

@@ -1,0 +1,46 @@
+
+<section class="new-ressource">
+  <h1>new-ressource Component</h1>
+  <form
+  id="app"
+  @submit.prevent="submitForm"
+  >
+
+    <p v-if="errors.length">
+      <b>Please correct the following error(s):</b>
+      <ul>
+        <li v-for="error in errors">{{ error }}</li>
+      </ul>
+    </p>
+
+    <p>
+      <label for="name">Nom de la date</label>
+      <input
+        id="name"
+        v-model="name"
+        type="text"
+        name="name"
+      >
+    </p>
+
+    <p>
+      <label for="date">Date</label>
+      <input
+        id="date"
+        v-model="date"
+        type="date"
+        name="date"
+        min="0"
+      >
+    </p>
+
+    <p>
+      <input
+        type="submit"
+        value="Submit"
+      >
+    </p>
+
+  </form>
+</section>
+

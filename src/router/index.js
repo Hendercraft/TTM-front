@@ -5,7 +5,8 @@ import Home from '@/components/Home'
 // import Register from '@/components/Register'
 import Login from '@/components/Login'
 import HomeLoged from '@/components/HomeLoged'
-import {isTokenValid} from '../services/jwtService'
+import NewRessource from '@/components/NewRessource'
+// import {isTokenValid} from '../services/jwtService'
 
 Vue.use(Router)
 
@@ -44,38 +45,43 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/NewRessource',
+      name: 'NewRessource',
+      component: NewRessource
     }
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if ((localStorage.getItem('token') == null) || !isTokenValid()) {
-      next({
-        path: '/login',
-        params: { nextUrl: to.fullPath }
-      })
-    } else {
-      let user = JSON.parse(localStorage.getItem('user'))
-      if (to.matched.some(record => record.meta.is_admin)) {
-        if (user.is_admin === 1) {
-          next()
-        } else {
-          next({name: 'Home'})
-        }
-      } else {
-        next()
-      }
-    }
-  } else if (to.matched.some(record => record.meta.guest)) {
-    if (localStorage.getItem('token') == null) {
-      next()
-    } else {
-      next({name: 'Home'})
-    }
-  } else {
-    next()
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     if ((localStorage.getItem('token') == null) || !isTokenValid()) {
+//       next({
+//         path: '/login',
+//         params: { nextUrl: to.fullPath }
+//       })
+//     } else {
+//       let user = JSON.parse(localStorage.getItem('user'))
+//       if (to.matched.some(record => record.meta.is_admin)) {
+//         if (user.is_admin === 1) {
+//           next()
+//         } else {
+//           next({name: 'Home'})
+//         }
+//       } else {
+//         next()
+//       }
+//     }
+//   } else if (to.matched.some(record => record.meta.guest)) {
+//     if (localStorage.getItem('token') == null) {
+//       next()
+//     } else {
+//       next({name: 'Home'})
+//     }
+//   } else {
+//     next()
+//   }
+// })
 
 export default router

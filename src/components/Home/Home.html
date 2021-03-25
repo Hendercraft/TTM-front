@@ -1,7 +1,30 @@
 
 <section class="home">
-  <h1>home Component</h1>
-  <router-link to="/login">Login</router-link>
-  <router-link to="/register">Register</router-link>
+  <header class="header">
+    <h1 class="title">Frise chronologique</h1>
+    <nav id="upper-navbar">
+      <ul>
+        <li class="upper-nabar-elements"><router-link to="/login">Login</router-link></li>
+        <li class="upper-nabar-elements"><router-link to="/register">Register</router-link></li>
+        <li class="upper-nabar-elements"><router-link to="/NewRessource">New Ressource</router-link></li>
+      </ul>
+    </nav>
+  </header>
+
+  <body>
+    <div class="side-bar">
+      <Bar></Bar>
+    </div>
+
+    <div>
+      <upload></upload>
+    </div>
+
+  </body>
+  <footer>
+
+  </footer>
+  
+  
 </section>
 

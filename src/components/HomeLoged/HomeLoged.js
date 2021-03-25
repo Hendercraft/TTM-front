@@ -23,9 +23,8 @@ export default {
                 {
                   headers: {
                   'Authorization': `Bearer ${localStorage.token}`
-                }
-                },
-                {"username":this.username, "password":this.password})
+                  }
+                })
       .then(response => {
         console.log(response.data.results),
         this.items = response.data.results
