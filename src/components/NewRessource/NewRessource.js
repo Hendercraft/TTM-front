@@ -1,14 +1,16 @@
 import axios from "axios"
+import FormHandler from '@/components/FormHandler'
 
 export default {
   name: 'new-ressource',
-  components: {},
+  components: {FormHandler},
   props: [],
   data () {
     return {
       errors: [],
       name: null,
       date: null,
+      table: undefined,
       // event: null,
       // description: null,
 
@@ -54,11 +56,7 @@ export default {
         this.errors.push(error.response.data.detail)
       })
     },
-    submitForm: function(){
-      if(this.checkForm()){
-        this.sendForm()
-      }
-    }
+    
 
   }
 }
