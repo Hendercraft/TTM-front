@@ -4,9 +4,10 @@ class UploadFilesService {
   upload (file, onUploadProgress) {
     let formData = new FormData()
 
-    formData.append('file', file)
+    formData.append('url', file)
+    formData.append('fileType', 'Image')
 
-    return http.post('/upload', formData, {
+    return http.post('database/files/create/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
@@ -15,7 +16,7 @@ class UploadFilesService {
   }
 
   getFiles () {
-    return http.get('/files')
+    return http.get('database/files/')
   }
 }
 
