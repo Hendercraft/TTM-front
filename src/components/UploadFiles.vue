@@ -31,15 +31,15 @@
           v-for="(file, index) in fileInfos"
           :key="index"
         >
-          <a :href="file.url">{{ file.name }}</a>
+          <a :href="file.url">{{ file.id }}</a>
         </li>
       </ul>
     </div>
   </div>
-
 </template>
 
 <script>
+/*eslint-disable*/
 import UploadService from '../services/UploadFilesService'
 
 export default {
@@ -50,13 +50,18 @@ export default {
       currentFile: undefined,
       progress: 0,
       message: '',
-
       fileInfos: []
     }
   },
   mounted () {
+    // setTimeout(() => {
+    // }, 1000)
+    while (!localStorage.token) {
+    }
+    console.log(localStorage.token)
+    console.log('Fin timeout')
     UploadService.getFiles().then(response => {
-      this.fileInfos = response.data
+      this.fileInfos = response.data.results
     })
   },
 
@@ -66,7 +71,7 @@ export default {
     },
     upload () {
       this.progress = 0
-
+      console.log('uploading...')
       this.currentFile = this.selectedFiles.item(0)
       UploadService.upload(this.currentFile, event => {
         this.progress = Math.round((100 * event.loaded) / event.total)
@@ -76,7 +81,7 @@ export default {
           return UploadService.getFiles()
         })
         .then(files => {
-          this.fileInfos = files.data
+          this.fileInfos = files.data.results
         })
         .catch(() => {
           this.progress = 0
