@@ -1,5 +1,4 @@
-import axios from "axios"
-
+import http from '../../http-common'
 
 export default {
   name: 'login',
@@ -20,7 +19,7 @@ export default {
   },
   methods: {
     Login: function(){
-      axios.post('http://127.0.0.1:8000/api/token/',{"username":this.username, "password":this.password})
+      http.post('token/',{"username":this.username, "password":this.password})
       .then(response => {
         this.loginSuccessful(response)
         this.username = null;
@@ -43,7 +42,7 @@ export default {
       localStorage.setItem('token', req.data.access)
       console.log(req.data.access)
       localStorage.setItem('refresh', req.data.refresh)
-      localStorage.setItem('refreshToken', null)  
+      localStorage.setItem('refreshToken', null)
       this.$router.replace(this.$route.query.redirect || '/home')
     },
     
