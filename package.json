@@ -13,10 +13,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "JSON": "^1.0.0",
     "axios": "^0.21.1",
     "babel-plugin-dynamic-import-webpack": "^1.1.0",
     "json": "^10.0.0",
+    "JSON": "^1.0.0",
+    "module": "^1.2.5",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

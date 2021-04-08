@@ -1,0 +1,126 @@
+
+<section class="human-form">
+  <form>
+    <div>
+      <label for="selected_type">Veuillez sélectionner un type : </label>
+      <select v-model="selected_type"> 
+        <option selected disabled>Sélectionnez un type</option>
+        <option value="MainOeuvre">Main d'oeuvre</option>
+        <option value="OeuvreSociales">Oeuvres sociales</option>
+        <option value="Formation">Formation</option>
+      </select>
+    </div>
+  </form>
+
+  <form class="ressource-form" v-if="selected_type">
+    <div>
+      <label for="designation"> Désignation : </label>
+      <input type="text" name="designation" id="designation" required>
+    </div>
+
+    <div>
+      <label for="Repères historiques">Repères historiques : </label>
+      <input type="text" name="Repères historiques" id="Repères historiques" required>
+    </div>
+
+    <div>
+      <label for="date">Date : </label>
+      <input type="date" name="date" id="date">
+    </div>
+
+    <div>
+      <label for="localisation">Localisation : </label>
+      <input type="text" name="localisation" id="localisation" required>
+    </div>
+
+    <div>
+      <label for="adresse">Adresse : </label>
+      <input type="text" name="adresse" id="adresse">
+    </div>
+
+    <div>
+      <label for="description">Description : </label>
+      <input type="text" name="description" id="description" required>
+    </div>
+
+    <div>
+      <label for="mots-clés">Mots-clés : </label>
+      <input type="text" name="mots-clés" id="mots-clés" required>
+    </div>
+
+    <div>
+      <label for="source">Source : </label>
+      <input type="text" name="source" id="source" required>
+    </div>
+
+    <div>
+      <label for="Editeur">Editeur : </label>
+      <input type="text" name="Editeur" id="Editeur">
+    </div>
+
+    <div>
+      <label for="droits">Droits : </label>
+      <input type="text" name="droits" id="droits">
+    </div>
+
+    <div>
+      <label for="type">Type : </label>
+      <input type="text" name="type" id="type" required>
+    </div>
+
+    <div>
+      <label for="format">Format : </label>
+      <select v-model="format" @change="getFormatGroup($event)" required>
+        <optgroup label="Image">
+          <option value="JPG">JPG</option>
+          <option value="PNG">PNG</option>
+        </optgroup>
+        <optgroup label="Video">
+          <option value="MP4">MP4</option>
+          <option value="AVI">AVI</option>
+          <option value="MOV">MOV</option>
+        </optgroup>        
+        
+        <optgroup  label="Document">
+          <option value="PDF">PDF</option>
+        </optgroup>
+
+        <optgroup label="CAO">
+          <option value="STL">STL</option>
+          <option value="CAD">CAD</option>
+        </optgroup>
+
+        <optgroup label="Audio">
+          <option value="MP3">MP3</option>
+          <option value="FLAC">FLAC</option>
+          <option value="WAV">WAV</option>
+        </optgroup>
+        
+      </select>
+    </div>
+
+    <div>
+      <label for="immatriculation">Immatriculation : </label>
+      <input type="text" name="immatriculation" id="immatriculation" required>
+    </div>
+
+    <div>
+      <label for="etude">Etude : </label>
+      <input type="text" name="etude" id="etude" required>
+    </div>
+
+    <div>
+      <label for="autheur">Autheur : </label>
+      <input type="text" name="autheur" id="autheur">
+    </div>
+
+    <div>
+      <label for="date de l'etude">Date de l'étude : </label>
+      <input type="date" name="date de l'etude" id="date de l'etude" required>
+    </div>
+  </form>
+  <div class="output" v-html="output">{{ output }}</div>
+  <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files>
+
+</section>
+

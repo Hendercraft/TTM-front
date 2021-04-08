@@ -1,19 +1,19 @@
 
 <section class="homeLoged">
-  <h1>home-loged Component</h1>
-  <ul id="Users">
-    <li v-for="item in items" :key="item.id">
-      <span>Nom de la discipline : {{ item.discipline }}</span>
-    </br>
-      <span>Commentaire : {{ item.commentsDiscipline }}</span>
-    </br>
-      <span>Id de l'utilisateur : {{ item.user }}</span>
-    </br>
-    </li>
-  </ul>
-  <button v-on:click="GetProfiles"> Click here</button>
-  <button v-on:click="Decrypt">Decrypt Json</button>
+  <div class="sidenav">
+    <Bar></Bar>
+  </div>
 
-  <upload-files></upload-files>
+  <div class="main">
+    <h1 class="title">Frise chronologique</h1>
+    <!-- <nav id="upper-navbar">
+      <ul>
+       <li class="upper-nabar-elements"><router-link to="/NewRessource">New Ressource</router-link></li>
+      </ul>
+    </nav> -->
+  <img src="../../assets/patrimoine1.jpg"/>
+  </div>
+
+  
 </section>
 

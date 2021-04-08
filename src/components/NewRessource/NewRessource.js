@@ -1,16 +1,22 @@
 import axios from "axios"
 import FormHandler from '@/components/FormHandler'
+import FormDate from '@/components/FormDate'
+import UrbanismForm from '@/components/UrbanismForm'
+import ArchitectureForm from '@/components/ArchitectureForm'
+import ProductionForm from '@/components/ProductionForm'
+import HumanForm from '@/components/HumanForm'
+
 
 export default {
   name: 'new-ressource',
-  components: {FormHandler},
+  components: {FormHandler, FormDate, UrbanismForm, ArchitectureForm, ProductionForm, HumanForm},
   props: [],
   data () {
     return {
       errors: [],
       name: null,
       date: null,
-      table: undefined,
+      category: undefined,
       // event: null,
       // description: null,
 

@@ -1,0 +1,23 @@
+
+<section class="form-date">
+  <form method="POST" class="date-form">
+    <div class="date-form">
+      <label for="name">Nom de la date: </label>
+      <input v-model="name" ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssrequired>
+    </div>
+    <div class="date-form">
+      <label for="date">Date: </label>
+      <input type="date" v-model="date" id="date" required>
+    </div>
+    <div class="date-form" v-if="sources.length > 0">
+      <p>Yes</p>
+      <select v-model.lazy="selected_source" v-if="sources.length > 0" aria-label="Séléctionez une source">
+        <option v-for="source in sources" :value="source.name">{{source.name}}</option>
+      </select>
+    </div>
+  </form>
+  <button class="btn" @click="sendForm">
+    Submit
+  </button>
+</section>
+

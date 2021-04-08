@@ -1,10 +1,11 @@
 import axios from "axios"
 import { jwtDecrypt } from "../../services/jwtService"
 import UploadFiles from '../UploadFiles.vue'
+import Bar from '@/components/Bar'
 
 export default {
   name: 'homeLoged',
-  components: { UploadFiles },
+  components: { UploadFiles, Bar },
   props: [],
   data () {
     return {

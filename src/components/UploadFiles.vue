@@ -17,13 +17,13 @@
       <input type="file" ref="file" @change="selectFile" />
     </label>
 
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
+    <button class="btn btn-success" :disabled="!selectedFiles" @click="upload" v-on:click.stop="$emit('getId', this.fileId)">
       Upload
     </button>
 
     <div class="alert alert-light" role="alert">{{ message }}</div>
 
-    <div class="card">
+    <!-- <div class="card">
       <div class="card-header">List of Files</div>
       <ul class="list-group list-group-flush">
         <li
@@ -34,7 +34,7 @@
           <a :href="file.url">{{ file.id }}</a>
         </li>
       </ul>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -44,25 +44,22 @@ import UploadService from '../services/UploadFilesService'
 
 export default {
   name: 'upload-files',
+  props:{
+    type: String
+  },
   data () {
     return {
       selectedFiles: undefined,
       currentFile: undefined,
       progress: 0,
       message: '',
-      fileInfos: []
+      fileId: null,
+      fileInfos: [],
+      // type:"Image"
     }
   },
   mounted () {
-    // setTimeout(() => {
-    // }, 1000)
-    while (!localStorage.token) {
-    }
-    console.log(localStorage.token)
-    console.log('Fin timeout')
-    UploadService.getFiles().then(response => {
-      this.fileInfos = response.data.results
-    })
+    console.log(this.type)
   },
 
   methods: {
@@ -75,10 +72,13 @@ export default {
       this.currentFile = this.selectedFiles.item(0)
       UploadService.upload(this.currentFile, event => {
         this.progress = Math.round((100 * event.loaded) / event.total)
-      })
+      }, this.type)
         .then(response => {
-          this.message = response.data.message
-          return UploadService.getFiles()
+          console.log("Uploaded")
+          this.message = response.data
+          this.fileId = response.data.id
+          // this.$emit(this.fileId)
+          // console.log(this.fileId)
         })
         .then(files => {
           this.fileInfos = files.data.results
