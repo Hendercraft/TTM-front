@@ -5,7 +5,15 @@ import Home from '@/components/Home'
 // import Register from '@/components/Register'
 import Login from '@/components/Login'
 import HomeLoged from '@/components/HomeLoged'
+
+/* Side bar */
+import Architecture from '@/components/Side-Bar/Architecture'
+import Hommes from '@/components/Side-Bar/Hommes'
+import Production from '@/components/Side-Bar/Production'
+import Propos from '@/components/Side-Bar/Propos'
+import Urbanisme from '@/components/Side-Bar/Urbanisme'
 import NewRessource from '@/components/NewRessource'
+
 // import {isTokenValid} from '../services/jwtService'
 
 Vue.use(Router)
@@ -50,6 +58,31 @@ const router = new Router({
       path: '/NewRessource',
       name: 'NewRessource',
       component: NewRessource
+    },
+    {
+      path: '/A-Propos',
+      name: 'A_Propos',
+      component: Propos
+    },
+    {
+      path: '/Urbanisme',
+      name: 'Urbanisme',
+      component: Urbanisme
+    },
+    {
+      path: '/Architecture',
+      name: 'Architecture',
+      component: Architecture
+    },
+    {
+      path: '/Production',
+      name: 'Production',
+      component: Production
+    },
+    {
+      path: '/Hommes',
+      name: 'Hommes',
+      component: Hommes
     }
   ]
 })
