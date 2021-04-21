@@ -1,16 +1,23 @@
 
 <section class="login">
-  <h1>login Component</h1>
-  <router-link to="/">Home</router-link>
-  <router-link to="/register">Register</router-link>
+  <h1>Connexion</h1>
 
-  <p>Username</p>
-  <input type="text" v-model="username">
+  <form class="login-form">
+    <div>
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" v-model="username">
+    </div>
 
-  <p>Password</p>
-  <input type="password" v-model="password">
+    <div>
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" v-model="password">
+    </div>
 
-  <button class="login" v-on:click="Login">Login</button>
+    
+  </form>
+  <button class="login" v-if="password != null && username !== null" v-on:click="Login">Connexion</button>
+
+  
   </br>
   <p class="error-message" v-if="errors!=null">{{ errors }}</p>
 
