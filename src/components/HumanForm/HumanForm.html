@@ -1,6 +1,6 @@
 
 <section class="human-form">
-  <form>
+  <form class="select-type">
     <div>
       <label for="selected_type">Veuillez sélectionner un type : </label>
       <select v-model="selected_type"> 
@@ -15,57 +15,57 @@
   <form class="ressource-form" v-if="selected_type">
     <div>
       <label for="designation"> Désignation : </label>
-      <input type="text" name="designation" id="designation" required>
+      <input v-model="designation" type="text" name="designation" id="designation" required>
     </div>
 
     <div>
-      <label for="Repères historiques">Repères historiques : </label>
-      <input type="text" name="Repères historiques" id="Repères historiques" required>
+      <label for="repères_historiques">Repères historiques : </label>
+      <input v-model="repères_historiques" type="text" name="repères_historiques" id="repères_historiques" required>
     </div>
 
     <div>
       <label for="date">Date : </label>
-      <input type="date" name="date" id="date">
+      <input v-model="date" type="date" name="date" id="date">
     </div>
 
     <div>
-      <label for="localisation">Localisation : </label>
-      <input type="text" name="localisation" id="localisation" required>
+      <label for="localization">Localisation : </label>
+      <input v-model="localization" type="text" name="localization" id="localization" required>
     </div>
 
     <div>
       <label for="adresse">Adresse : </label>
-      <input type="text" name="adresse" id="adresse">
+      <input v-model="adresse" type="text" name="adresse" id="adresse">
     </div>
 
     <div>
       <label for="description">Description : </label>
-      <input type="text" name="description" id="description" required>
+      <input v-model="description" type="text" name="description" id="description" required>
     </div>
 
     <div>
-      <label for="mots-clés">Mots-clés : </label>
-      <input type="text" name="mots-clés" id="mots-clés" required>
+      <label for="mots_cles">Mots-clés : </label>
+      <input v-model="mots_cles" type="text" name="mots_cles" id="mots_cles" required>
     </div>
 
     <div>
       <label for="source">Source : </label>
-      <input type="text" name="source" id="source" required>
+      <input v-model="source" type="text" name="source" id="source" required>
     </div>
 
     <div>
-      <label for="Editeur">Editeur : </label>
-      <input type="text" name="Editeur" id="Editeur">
+      <label for="editeur">Editeur : </label>
+      <input v-model="editeur" type="text" name="editeur" id="editeur">
     </div>
 
     <div>
       <label for="droits">Droits : </label>
-      <input type="text" name="droits" id="droits">
+      <input v-model="droits" type="text" name="droits" id="droits">
     </div>
 
     <div>
-      <label for="type">Type : </label>
-      <input type="text" name="type" id="type" required>
+      <label for="ressource_type">Type : </label>
+      <input v-model="ressource_type" type="text" name="ressource_type" id="ressource_type" required>
     </div>
 
     <div>
@@ -85,7 +85,7 @@
           <option value="PDF">PDF</option>
         </optgroup>
 
-        <optgroup label="CAO">
+        <optgroup label="Cao">
           <option value="STL">STL</option>
           <option value="CAD">CAD</option>
         </optgroup>
@@ -101,26 +101,54 @@
 
     <div>
       <label for="immatriculation">Immatriculation : </label>
-      <input type="text" name="immatriculation" id="immatriculation" required>
+      <input v-model="immatriculation" type="text" name="immatriculation" id="immatriculation" required>
     </div>
 
     <div>
       <label for="etude">Etude : </label>
-      <input type="text" name="etude" id="etude" required>
+      <input v-model="etude" type="text" name="etude" id="etude" required>
     </div>
 
     <div>
       <label for="autheur">Autheur : </label>
-      <input type="text" name="autheur" id="autheur">
+      <input v-model="autheur" type="text" name="autheur" id="autheur">
     </div>
 
     <div>
-      <label for="date de l'etude">Date de l'étude : </label>
-      <input type="date" name="date de l'etude" id="date de l'etude" required>
+      <label for="date_etude">Date de l'étude : </label>
+      <input v-model="date_etude" type="date" name="date_etude" id="date_etude" required>
     </div>
   </form>
+
   <div class="output" v-html="output">{{ output }}</div>
-  <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files>
+
+  
+  <div class="uploadFile" v-if="selected_type">
+
+    <div v-if="currentFile" class="progress">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        :aria-valuenow="progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        :style="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+
+    <label class="btn btn-default">
+      <input type="file" ref="file" @change="selectFile" />
+    </label>
+
+    <button class="btn btn-success" :disabled="!selectedFiles" @click="upload">
+      Upload
+    </button>
+
+    <div class="alert alert-light" role="alert">{{ message }}</div>
+  </div>
+  <!-- <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files> -->
 
 </section>
 

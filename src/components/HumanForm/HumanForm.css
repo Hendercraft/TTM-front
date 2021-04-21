@@ -1,3 +1,43 @@
 .human-form {
 
 }
+
+.select-type{
+    margin-bottom: 3em;
+}
+
+.ressource-form{
+    margin: 0 auto;
+    width: 600px;
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+}
+
+.ressource-form div + div{
+    margin-top: 1em;
+}
+
+.ressource-form label {
+    /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+}
+
+input {
+    /* Pour s'assurer que tous les champs texte ont la même police.
+       Par défaut, les textarea ont une police monospace */
+    font: 1em sans-serif;
+  
+    /* Pour que tous les champs texte aient la même dimension */
+    width: 300px;
+    box-sizing: border-box;
+  
+    /* Pour harmoniser le look & feel des bordures des champs texte */
+    border: 1px solid #999;
+}
+
+input:focus{
+    border-color: #000;
+}
