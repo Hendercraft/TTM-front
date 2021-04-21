@@ -2,13 +2,254 @@
 <section class="architecture-form">
   <form>
     <div>
-      <label for="table-select">Veuillez sélectionner un type : </label>
-      <select v-model="selected_type"> 
+      <label for="table-select">Veuillez sélectionner un sous-menu : </label>
+      <select id="table-select" v-model="selected_menu"> 
         <option selected disabled>Sélectionnez un type</option>
         <option value="Ateliers">Ateliers</option>
-        <option value="Logements">Logements</option>
-        <option value="StructureSociales">Structure sociales</option>
+        <option value="CiteOuvriere">Cité ouvrière</option>
+        <option value="InfrastructureSociales">Infrastructure sociales</option>
       </select>
     </div>
+  </form>
+
+  <form class="object-type">
+    <label for="type-select">Veuillez sélectionner un type </label>
+    <select id="type-select" v-model="selected_type">
+      <option selected disabled>Sélectionnez un type</option>
+      <option value="Machine">Machine</option>
+      <option value="Building">Batiment</option>
+      <option value="Actor">Personne</option>
+    </select>
+  </form>
+
+  <form class="architecture_form" v-if="selected_type !='Actor' && selected_menu">
+    
+    <div>
+      <label for="Domaine">Domaine</label>
+      <input id="domaine" v-model="domaine" type="text" required>
+    </div>
+
+    <div>
+      <label for="Domaine">Domaine</label>
+      <input id="domaine" v-model="domaine" type="text" required>
+    </div>
+
+  </form>
+
+  <!-- Actor part -->
+  <form class="architecture_actor_form" v-if="selected_type =='Actor' && selected_menu">
+    
+    <div>
+      <label for="domaine">Domaine :</label>
+      <input id="domaine" v-model="domaine" type="text" required>
+    </div>
+
+    <div class="foreign_key">
+      <label for="brand-select">Raison sociale :</label>
+      <select id="brand-select" v-model="selected_brand">
+        <option selected disabled>Sélectionnez une raison</option>
+        <option v-for="brand in brands" v-bind:value="brand.id">
+          {{ brand.name }}
+        </option>
+      </select>
+      <input id="addbrand" v-model="addBrand" type="checkbox">
+      <span><img src="@/assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addBrand">
+      <div>
+        <label for="brandName">Nom de la société :</label>
+        <input id="brandName" v-model="brandName" type="text">
+      </div>
+
+      <div>
+        <textarea placeholder="Description" v-model="brandDescription"></textarea>
+      </div>
+
+    </form>
+
+    <div>
+      <label for="building">Bâtiment :</label>
+      <input id="building" v-model="building" type="text" required>
+    </div>
+
+    <div>
+      <label for="lname">Nom :</label>
+      <input id="lname" v-model="lname" type="text" required>
+    </div>
+
+    <div>
+      <label for="fname">Prénom :</label>
+      <input id="fname" v-model="fname" type="text" required>
+    </div>
+
+    <div>
+      <label for="birthdate">Date de naissance :</label>
+      <input id="birthdate" v-model="birthdate" type="date" required>
+    </div>
+
+    <div>
+      <label for="gender">Sexe :</label>
+      <input id="gender" v-model="gender" type="text">
+    </div>
+
+    <div class="foreign_key">
+      <label for="fonction-select">Fonction :</label>
+      <select id="fonction-select" v-model="selected_profession">
+        <option selected disabled>Sélectionnez une fonction</option>
+        <option v-for="profession in professions" v-bind:value="profession.id">
+          {{ profession.name }}
+        </option>
+      </select>
+      <input id="addProfession" v-model="addProfession" type="checkbox">
+      <span><img src="@/assets/plus.png"/></span>
+    </div>
+    
+    <form class="addProfession_form" v-if="addProfession">
+      <div>
+        <label for="professionName">Nom de la profession :</label>
+        <input id="professionName" v-model="professionName" type="text">
+      </div>
+
+      <div>
+        <textarea placeholder="Description" v-model="professionDescription"></textarea>
+      </div>
+
+    </form>
+
+    <div>
+      <label for="arrivalDate">Date d'arrivée : </label>
+      <input id="arrivalDate" v-model="arrivalDate" type="date">
+    </div>
+
+    <div>
+      <label for="departureDate">Date de départ : </label>
+      <input id="departureDate" v-model="departureDate" type="date">
+    </div>
+
+    <div>
+      <label for="nationality">Nationalité :</label>
+      <input id="nationality" v-model="nationality" type="text">
+    </div>
+
+    <div class="foreign_key">
+      <label for="place-select">Domicile :</label>
+      <select id="place-select" v-model="selected_place">
+        <option selected disabled>Sélectionnez un domicile</option>
+        <option v-for="place in places" v-bind:value="place.id">
+          {{ place.name }}
+        </option>
+      </select>
+      <input id="addplace" v-model="addPlace" type="checkbox">
+      <span><img src="@/assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addPlace">
+      <div>
+        <label for="placeName">Nom du lieu :</label>
+        <input id="placeName" v-model="placeName" type="text">
+      </div>
+
+      <!-- START OF PLACELOCATION TABLE -->
+      <div>
+        <label for="street_number">Numéro de rue :</label>
+        <input id="street_number" v-model="street_number" type="number">
+      </div>
+
+      <div>
+        <label for="street_type">Extension :</label>
+        <input id="street_type" v-model="street_type" type="text">
+      </div>
+
+      <div>
+        <label for="street_name">Nom de la rue :</label>
+        <input id="street_name" v-model="street_name" type="text">
+      </div>
+
+      <div>
+        <label for="post_code">Code postal :</label>
+        <input id="post_code" v-model="post_code" type="number">
+      </div>
+
+      <div>
+        <label for="city">Ville :</label>
+        <input id="city" v-model="city" type="text">
+      </div>
+
+      <div>
+        <label for="country">Pays :</label>
+        <input id="country" v-model="country" type="text">
+      </div>
+
+      <div>
+        <label for="place_said">Lieu-dit :</label>
+        <input id="place_said" v-model="place_said" type="text">
+      </div>
+
+      
+
+      <!-- END OF PLACELOCATION TABLE -->
+
+      <div>
+        <textarea placeholder="Description" v-model="placeDescription"></textarea>
+      </div>
+
+    </form>
+
+    </br>
+  
+    <div class="foreign_key">
+      <label for="source">Source :</label>
+      <input id="source" v-model="source" type="date" required>
+      <input id="addSource" v-model="addSource" type="checkbox">
+      <span><img src="@/assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addSource">
+      <div>
+        <label for="editor">Editeur :</label>
+        <input id="editor" v-model="editor" type="text">
+      </div>
+
+      <div>
+        <label for="droits">Droits :</label>
+        <input id="droits" v-model="droits" type="text">
+      </div>
+
+      <div>
+        <label for="source_type">Type :</label>
+        <input id="source_type" v-model="source_type" type="text">
+      </div>
+
+      <div>
+        <label for="format">Format :</label>
+        <input id="format" v-model="format" type="text">
+      </div>
+
+      <div>
+        <label for="immatriculation">Immatriculation :</label>
+        <input id="immatriculation" v-model="immatriculation" type="number">
+      </div>
+
+      <div>
+        <label for="original_immatriculation">Immatriculation originelle :</label>
+        <input id="original_immatriculation" v-model="original_immatriculation" type="text">
+      </div>
+
+      <div>
+        <label for="author">Auteur notice(date) :</label>
+        <input id="author" v-model="author" type="text">
+      </div>
+
+      <div>
+        <label for="study">Etude :</label>
+        <input id="study" v-model="study" type="text">
+      </div>
+    </form>
+
+    <div>
+      <textarea placeholder="Commentaire" v-model="commentary"></textarea>
+    </div>
+
   </form>
 </section>
