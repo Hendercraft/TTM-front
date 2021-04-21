@@ -1,11 +1,21 @@
 
 <section class="bar">
   <nav>
-    <h1>TTM</h1>
+    <h1><router-link to="/">TTM</router-link></h1>
     <div id="content">
-      <div class="element1"><router-link to="/NewRessource">New Ressource</router-link></div>
-      <div class="element2">Element2</div>
-      <div class="element3">Element3</div>
+      <!-- <router-link to="/A-Propos" tag="li">A propos</router-link>
+      <router-link to="/Urbanisme">Urbanisme</router-link>
+      <router-link to="/Architecture">Architecture</router-link>
+      <router-link to="/Production">Production</router-link>
+      <router-link to="/Hommes">Hommes</router-link>
+      <router-link to="/NewRessource">Ressource</router-link> -->
+
+      <div class="element1"><router-link to="/A-Propos" tag="a" active-class="active">A propos</router-link></div>
+      <div class="element2"><router-link to="/Urbanisme" tag="a" active-class="active">Urbanisme</router-link></div>
+      <div class="element3"><router-link to="/Architecture" tag="a" active-class="active">Architecture</router-link></div>
+      <div class="element4"><router-link to="/Production" tag="a" active-class="active">Production</router-link></div>
+      <div class="element5"><router-link to="/Hommes" tag="a" active-class="active">Hommes</router-link></div>
+      <div class="element6"><router-link to="/NewRessource" tag="a" active-class="active">Ressource</router-link></div>
     </div>
   </nav>
   </section>
