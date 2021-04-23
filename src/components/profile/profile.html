@@ -1,0 +1,40 @@
+
+<section class="profile">
+  <h1>Profile</h1>
+  <div class="main">
+    <div class="upper-bar">
+      <div class="bt-data">
+        <button v-on:click='changeToData'>Information peronnelles</button>
+      </div>
+      <div class="bt-discipline">
+        <button v-on:click='changeToDiscipline'>Discipline</button>
+      </div>
+      <div class="bt-champs">
+        <button v-on:click='changeToChamps'>Champs de recherche</button>
+      </div>
+      <div class="bt-etablissement">
+        <button v-on:click='changeToEtablissement'>Etablissement de recherche</button>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="data" v-if='data'>
+        <p>Ceci correspond à l'onglet information peronnelles</p>
+      </div>
+      
+      <div class="discipline" v-if='discipline'>
+        <p>Ceci correspond à l'onglet discipline</p>
+      </div>
+    
+      <div class="champs" v-if='champs'>
+        <p>Ceci correspond à l'onglet champs</p>
+      </div>
+
+      <div class="etablissement" v-if='etablissement'>
+        <p>Ceci correspond à l'onglet etablissement</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
