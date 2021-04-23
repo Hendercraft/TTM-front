@@ -40,10 +40,11 @@ export default {
       }
       
       localStorage.setItem('token', req.data.access)
+      console.log(req)
       console.log(req.data.access)
       localStorage.setItem('refresh', req.data.refresh)
       localStorage.setItem('refreshToken', null)
-      this.$router.replace(this.$route.query.redirect || '/home')
+      this.$router.replace(this.$route.query.redirect || '/')
     },
     
     loginFailed () {
