@@ -16,7 +16,7 @@ export function tokenAlive (exp) {
   return true
 }
 
-export function jwtDecrypt (token) {
+export default function jwtDecrypt (token) {
   if (token == null) {
     return null
   } else {
