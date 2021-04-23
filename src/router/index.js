@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Vue from 'vue'
 // import axios from 'axios'
 import Router from 'vue-router'
@@ -13,6 +14,7 @@ import Production from '@/components/Side-Bar/Production'
 import Propos from '@/components/Side-Bar/Propos'
 import Urbanisme from '@/components/Side-Bar/Urbanisme'
 import NewRessource from '@/components/NewRessource'
+import profile from '@/components/profile'
 
 // import {isTokenValid} from '../services/jwtService'
 
@@ -42,6 +44,14 @@ const router = new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+      meta: {
+        guest: true
+      }
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: profile,
       meta: {
         guest: true
       }
