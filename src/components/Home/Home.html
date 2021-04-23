@@ -1,9 +1,38 @@
 
 <section class="home">
-  <div class="main">
-    <h1 class="title">Frise chronologique</h1>
-    <img src="../../assets/patrimoine1.jpg"/>
+  
+  <div class="head">
+    <h1 class="title">DES USINES DANS LA VILLE</h1>
   </div>
+
+  <div class="upper-bar">
+    <div class="bt-visite-virtuelle">
+      <button v-on:click='changeToVisite_virtuelle'>Visite Virtuelle</button>
+    </div>
+    <div class="bt-multimedia">
+      <button v-on:click='changeToMultimedia'>Multimédia</button>
+    </div>
+    <div class="bt-cartographie">
+      <button v-on:click='changeToCartographie'>Cartographie</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="visite-virtuelle" v-if='visite_virtuelle'>
+      <p>Ceci correspond à l'onglet visite virtuelle</p>
+    </div>
+    
+    <div class="multimedia" v-if='multimedia'>
+      <p>Ceci correspond à l'onglet multimedia</p>
+    </div>
+  
+    <div class="cartographie" v-if='cartographie'>
+      <p>Ceci correspond à l'onglet cartographie</p>
+      <img src="../../assets/patrimoine1.jpg"/>
+    </div>
+  </div>
+  
+  
   
   
 </section>
