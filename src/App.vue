@@ -2,8 +2,10 @@
   <div id="app">
     <nav id="upper-navbar">
       <ul>
-        <li class="upper-nabar-elements"><router-link to="/login">Connexion</router-link></li>
-        <li class="upper-nabar-elements"><router-link to="/register">Inscription</router-link></li>
+        <li class="upper-nabar-elements" v-if="!logged"><router-link to="/login">Connexion</router-link></li>
+        <li class="upper-nabar-elements" v-if="!logged"><router-link to="/register">Inscription</router-link></li>
+        <li class="upper-nabar-elements" v-if="logged"><router-link to="/profile">Profile</router-link></li>
+        <li class="upper-nabar-elements" v-if="logged"><button v-on:click="logout">Déconnexion</button></li>
       </ul>
     </nav>
     <bar class="sidenav"></bar>
@@ -13,10 +15,43 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Bar from '@/components/Bar'
+import jwtDecrypt from '@/services/jwtService'
+
 export default {
   components: { Bar },
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      logged: null,
+      token:null,
+      user_json:null,
+    }
+  },
+  mounted () {
+    if (this.token ==null){
+      this.token = localStorage.getItem('token')
+    }
+    if (this.token !=null){
+      this.$forceUpdate()
+      this.logged = true
+      this.user_json = jwtDecrypt(this.token)
+      console.log(this.user_json)
+      this.$forceUpdate()
+    }
+    else{
+      this.logged = false
+    }
+    
+  },
+  methods:{
+    logout(){
+      localStorage.removeItem('token')
+      this.$forceUpdate()
+      this.logged = false
+    }
+  }
 }
 </script>
 
@@ -32,6 +67,14 @@ export default {
   padding: 0px 10px;
 }
 
+button{
+  border: none;
+  background-color: white;
+}
+button:hover{
+  background-color: rgba(117, 117, 117, 0.623);
+  color: white;
+}
 /* The sidebar menu */
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
