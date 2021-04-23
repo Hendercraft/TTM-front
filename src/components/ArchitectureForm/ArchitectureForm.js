@@ -1,3 +1,4 @@
+import { error } from 'shelljs'
 import http from '../../http-common'
 
 export default {
@@ -102,8 +103,219 @@ export default {
           .then(response => {
             this.professions = response.data.results
           })
+    },
+    postActorForm(){
+      if(this.addBrand && this.addPlace && this.addProfession){
+
+        // Brand post part
+        http.post("database/abstractObject/create/", {
+          "name":this.brandName, "definition":this.brandDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+          this.selected_brand = response.data.id
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+        // Profession post part
+        http.post("database/profession/create/", {
+          "name":this.professionName, "definition":this.professionDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+          this.selected_profession = response.data.id
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+        // Place post part
+        http.post("database/placeLocation/create/", {
+          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
+        }, {
+          headers: {
+          'Authorization': `Bearer ${localStorage.token}` 
+          }
+        })
+        .then(response =>{
+          console.log(response)
+          this.selected_place = response.data.id
+
+          http.post("database/actor/create/", {
+            
+          },{
+            headers: {
+              'Authorization': `Bearer ${localStorage.token}` 
+              }
+          })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+
+
+
+      if(this.addBrand && this.addPlace && !this.addProfession){
+        // Brand post part
+        http.post("database/abstractObject/create/", {
+          "name":this.brandName, "definition":this.brandDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+        // Place post part
+        http.post("database/placeLocation/create/", {
+          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
+        }, {
+          headers: {
+          'Authorization': `Bearer ${localStorage.token}` 
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+
+
+      if(this.addBrand && !this.addPlace && this.addProfession){
+        // Brand post part
+        http.post("database/abstractObject/create/", {
+          "name":this.brandName, "definition":this.brandDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+        // Profession post part
+        http.post("database/profession/create/", {
+          "name":this.professionName, "definition":this.professionDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+      if(this.addBrand && !this.addPlace && !this.addProfession){
+        // Brand post part
+        http.post("database/abstractObject/create/", {
+          "name":this.brandName, "definition":this.brandDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+      if(!this.addBrand && this.addPlace && this.addProfession){
+        // Profession post part
+        http.post("database/profession/create/", {
+          "name":this.professionName, "definition":this.professionDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+        // Place post part
+        http.post("database/placeLocation/create/", {
+          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
+        }, {
+          headers: {
+          'Authorization': `Bearer ${localStorage.token}` 
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+
+
+      if(!this.addBrand && this.addPlace && !this.addProfession){
+        // Place post part
+        http.post("database/placeLocation/create/", {
+          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
+        }, {
+          headers: {
+          'Authorization': `Bearer ${localStorage.token}` 
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+
+
+      if(!this.addBrand && !this.addPlace && this.addProfession){
+        // Profession post part
+        http.post("database/profession/create/", {
+          "name":this.professionName, "definition":this.professionDescription
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+      if(!this.addBrand && !this.addPlace && !this.addProfession){
+        console.log("yes")
+      }
     }
   }
 }
-
-
