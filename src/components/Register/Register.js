@@ -32,6 +32,7 @@ export default {
         this.email = null;
         this.password = null;
         this.password_bis = null;
+        this.$router.replace(this.$route.query.redirect || '/login');
 
       })
       .catch(error => {
