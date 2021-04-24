@@ -17,23 +17,27 @@
 <script>
 /* eslint-disable */
 import Bar from '@/components/Bar'
-import jwtDecrypt from '@/services/jwtService'
+import {jwtDecrypt, tokenAlive } from '@/services/jwtService'
 
 export default {
   components: { Bar },
   name: 'App',
   data () {
     return {
-      logged: null,
+      logged: false,
       token:null,
       user_json:null,
     }
   },
   mounted () {
-    if (this.token ==null){
+    if (this.token == null || this.token == 'null'){
       this.token = localStorage.getItem('token')
     }
-    if (this.token !=null){
+    // if (!tokenAlive(this.token)){
+    //   
+    // }
+    console.log(tokenAlive(this.token))
+    if (tokenAlive(this.token)){
       this.$forceUpdate()
       this.logged = true
       this.user_json = jwtDecrypt(this.token)
@@ -46,6 +50,11 @@ export default {
     
   },
   methods:{
+    beforeCreate () {
+      if (!this.logged) {
+        this.$router.push({ name: 'login' })
+      }
+    },
     logout(){
       localStorage.removeItem('token')
       this.$forceUpdate()
