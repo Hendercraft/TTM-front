@@ -17,6 +17,7 @@ import NewRessource from '@/components/NewRessource'
 import profile from '@/components/profile'
 
 // import {isTokenValid} from '../services/jwtService'
+import {tokenAlive} from '@/services/jwtService'
 
 Vue.use(Router)
 
@@ -96,6 +97,23 @@ const router = new Router({
     }
   ]
 })
+
+/*
+router.beforeEach((to, from, next) => {
+  console.log("yes")
+  console.log(localStorage.token)
+  if(!tokenAlive(localStorage.token)){
+    console.log("true token")
+    next()
+  }
+  else{
+    if (to.name !== "Login" && to.name !== "Home" && to.name !="/") {
+      entryUrl = to.fullPath;
+    }
+    console.log("enter here")
+    next({ name: 'Login' })
+  }
+}) */
 
 // router.beforeEach((to, from, next) => {
 //   if (to.matched.some(record => record.meta.requiresAuth)) {
