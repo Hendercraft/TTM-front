@@ -63,7 +63,10 @@ p{
 }
 
 .element6{
+    height: 100%;
     padding-top: 2em;
+    margin-top: 0em;
+    border: 1px white solid;
     padding-bottom: 0em;
     margin-bottom: 0em;
 }
@@ -76,6 +79,7 @@ p{
 }
 .element6 a{
     font-style: italic;
+    border: 1px red solid;
     font-size: .8em;
     margin-top: 2em;
 }
