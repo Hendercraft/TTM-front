@@ -15,6 +15,8 @@ import Propos from '@/components/Side-Bar/Propos'
 import Urbanisme from '@/components/Side-Bar/Urbanisme'
 import NewRessource from '@/components/NewRessource'
 import profile from '@/components/profile'
+import testimony from '@/components/testimony'
+import research from '@/components/research'
 
 // import {isTokenValid} from '../services/jwtService'
 import {tokenAlive} from '@/services/jwtService'
@@ -94,6 +96,16 @@ const router = new Router({
       path: '/Hommes',
       name: 'Hommes',
       component: Hommes
+    },
+    {
+      path: '/Temoignage',
+      name: 'Temoignage',
+      component: testimony
+    },
+    {
+      path: '/Recherche',
+      name: 'Recherche',
+      component: research
     }
   ]
 })
