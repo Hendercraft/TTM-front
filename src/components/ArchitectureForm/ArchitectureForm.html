@@ -1,9 +1,9 @@
 
 <section class="architecture-form">
   <form>
-    <div>
+    <div class="select">
       <label for="table-select">Veuillez sélectionner un sous-menu : </label>
-      <select id="table-select" v-model="selected_menu"> 
+      <select id="table-select" v-model="selected_menu" multiple> 
         <option selected disabled>Sélectionnez un type</option>
         <option value="Ateliers">Ateliers</option>
         <option value="CiteOuvriere">Cité ouvrière</option>
@@ -12,37 +12,8 @@
     </div>
   </form>
 
-  <form class="object-type">
-    <label for="type-select">Veuillez sélectionner un type </label>
-    <select id="type-select" v-model="selected_type">
-      <option selected disabled>Sélectionnez un type</option>
-      <option value="Machine">Machine</option>
-      <option value="Building">Batiment</option>
-      <option value="Actor">Personne</option>
-    </select>
-  </form>
-
-  <form class="architecture_form" v-if="selected_type !='Actor' && selected_menu">
-    
-    <div>
-      <label for="Domaine">Domaine</label>
-      <input id="domaine" v-model="domaine" type="text" required>
-    </div>
-
-    <div>
-      <label for="Domaine">Domaine</label>
-      <input id="domaine" v-model="domaine" type="text" required>
-    </div>
-
-  </form>
-
-  <!-- Actor part -->
-  <form class="architecture_actor_form" v-if="selected_type =='Actor' && selected_menu">
-    
-    <div>
-      <label for="domaine">Domaine :</label>
-      <input id="domaine" v-model="domaine" type="text" required>
-    </div>
+  <!-- Architecture part -->
+  <form class="architecture_form" v-if="selected_menu">
 
     <div class="foreign_key">
       <label for="brand-select">Raison sociale :</label>
@@ -69,67 +40,250 @@
     </form>
 
     <div>
-      <label for="building">Bâtiment :</label>
-      <input id="building" v-model="building" type="text" required>
-    </div>
-
-    <div>
-      <label for="lname">Nom :</label>
-      <input id="lname" v-model="lname" type="text" required>
-    </div>
-
-    <div>
-      <label for="fname">Prénom :</label>
-      <input id="fname" v-model="fname" type="text" required>
-    </div>
-
-    <div>
-      <label for="birthdate">Date de naissance :</label>
-      <input id="birthdate" v-model="birthdate" type="date" required>
-    </div>
-
-    <div>
-      <label for="gender">Sexe :</label>
-      <input id="gender" v-model="gender" type="text">
-    </div>
-
-    <div class="foreign_key">
-      <label for="fonction-select">Fonction :</label>
-      <select id="fonction-select" v-model="selected_profession">
-        <option selected disabled>Sélectionnez une fonction</option>
-        <option v-for="profession in professions" v-bind:value="profession.id">
-          {{ profession.name }}
-        </option>
+      <label for="building_select">Bâtiment :</label>
+      <select id="building_select" v-model="building_select">
+        <option selected disabled>Sélectionnez un bâtiment</option>
+        <option value="Atelier d'ajustage">Atelier d'ajustage</option>
+        <option value="Atelier d'usinage">Atelier d'usinage</option>
+        <option value="Atelier de blanchissement">Atelier de blanchissement</option>
+        <option value="Atelier de construction mécanique">Atelier de construction mécanique</option>
+        <option value="Atelier de filature">Atelier de filature</option>
+        <option value="Atelier de finissage">Atelier de finissage</option>
+        <option value="Atelier de forge">Atelier de forge</option>
+        <option value="Atelier de gros usinage">Atelier de gros usinage</option>
+        <option value="Atelier de montage">Atelier de montage</option>
+        <option value="Atelier de peinture">Atelier de peinture</option>
+        <option value="Atelier de réparation">Atelier de réparation</option>
+        <option value="Atelier de retordage">Atelier de retordage</option>
+        <option value="Atelier de soudure">Atelier de soudure</option>
+        <option value="Atelier de teinturerie">Atelier de teinturerie</option>
+        <option value="Atelier de tôlerie">Atelier de tôlerie</option>
+        <option value="Atelier de tréfilerie">Atelier de tréfilerie</option>
+        <option value="Bureaux">Bureaux</option>
+        <option value="Centre de formation">Centre de formation</option>
+        <option value="Chaufferie">Chaufferie</option>
+        <option value="Eglise">Eglise</option>
+        <option value="Entrepôt">Entrepôt</option>
+        <option value="Fonderie">Fonderie</option>
+        <option value="Garage">Garage</option>
+        <option value="Gazogène">Gazogène</option>
+        <option value="Hangar">Hangar</option>
+        <option value="Infirmerie">Infirmerie</option>
+        <option value="Laboratoire">Laboratoire</option>
+        <option value="Loge du concierge">Loge du concierge</option>
+        <option value="Logement de contremaître">Logement de contremaître</option>
+        <option value="Logement de gardien">Logement de gardien</option>
+        <option value="Logement ouvrier">Logement ouvrier</option>
+        <option value="Logament patronal">Logament patronal</option>
+        <option value="Magasin">Magasin</option>
+        <option value="Salle blanche">Salle blanche</option>
+        <option value="Salle des machines">Salle des machines</option>
+        <option value="Station électrique">Station électrique</option>
+        <option value="Transformateur">Transformateur</option>
       </select>
-      <input id="addProfession" v-model="addProfession" type="checkbox">
+    </div>
+
+    <div>
+      <label for="typo_periode_select">Période :</label>
+      <select id="typo_periode_select" v-model="typo_periode_select">
+        <option selected disabled>Sélectionnez une période</option>
+        <option value="1er quart 19e siècle">1er quart 19e siècle</option>
+        <option value="2e quart 19e siècle">2e quart 19e siècle</option>
+        <option value="3e quart 19e siècle">3e quart 19e siècle</option>
+        <option value="4e quart 19e siècle">4e quart 19e siècle</option>
+        <option value="1er quart 20e siècle">1er quart 20e siècle</option>
+        <option value="2e quart 20e siècle">2e quart 20e siècle</option>
+        <option value="3e quart 20e siècle">3e quart 20e siècle</option>
+        <option value="4e quart 20e siècle">4e quart 20e siècle</option>
+        <option value="1er quart 21e siècle">1er quart 21e siècle</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="date">Date :</label>
+      <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31'><span>/</span>
+      <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12'><span>/</span>
+      <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999'>
+    </div> 
+
+    <div>
+      <label for="typo_select">Typographie :</label>
+      <select id="typo_select" v-model="typo_select">
+        <option selected disabled>Sélectionnez une typographie</option>
+        <option value="Bâtiment à étage">Bâtiment à étage</option>
+        <option value="Halle">Halle</option>
+        <option value="Cheminée d'usine">Cheminée d'usine</option>
+      </select>
+      <input id="addTypo" v-model="addTypo" type="checkbox">
       <span><img src="@/assets/plus.png"/></span>
     </div>
-    
-    <form class="addProfession_form" v-if="addProfession">
+
+    <form class="addProfession_form" v-if="addTypo">
+
       <div>
-        <label for="professionName">Nom de la profession :</label>
-        <input id="professionName" v-model="professionName" type="text">
+        <label for="typo_plan_select">Plan :</label>
+        <select id="typo_plan_select" v-model="typo_plan_select">
+          <option selected disabled>Sélectionnez un plan</option>
+          <option value="Ensemble concerté type cité ouvrière">Ensemble concerté type cité ouvrière</option>
+          <option value="Ensemble régulier">Ensemble régulier</option>
+          <option value="Ensemble irrégulier">Ensemble irrégulier</option>
+          <option value="Jardin irrégulier">Jardin irrégulier</option>
+          <option value="Jardin mixte">Jardin mixte</option>
+          <option value="Jardin régulier">Jardin régulier</option>
+          <option value="Plan allongé">Plan allongé</option>
+          <option value="Plan centré">Plan centré</option>
+          <option value="Plan en croix grecque">Plan en croix grecque</option>
+          <option value="Plan en croix latine">Plan en croix latine</option>
+          <option value="Plan en échiquier">Plan en échiquier</option>
+          <option value="Plan en H">Plan en H</option>
+          <option value="Plan en L">Plan en L</option>
+          <option value="Plan en U">Plan en U</option>
+          <option value="Plan orthogonal">Plan orthogonal</option>
+          <option value="Plan radioconcentrique">Plan radioconcentrique</option>
+          <option value="Plan rayonnant">Plan rayonnant</option>
+          <option value="Plan rectangulaire">Plan rectangulaire</option>
+          <option value="Rotonde">Rotonde</option>
+        </select>
+      </div>
+      <div>
+        <label for="typo_wall_select">Mur :</label>
+        <select id="typo_wall_select" v-model="typo_wall_select">
+          <option selected disabled>Sélectionnez un mur</option>
+          <option value="Acier">Acier</option>
+          <option value="Aluminium">Aluminium</option>
+          <option value="Basalte">Basalte</option>
+          <option value="Béton">Béton</option>
+          <option value="Béton armé">Béton armé</option>
+          <option value="Béton précontraint">Béton précontraint</option>
+          <option value="Bois">Bois</option>
+          <option value="Brique">Brique</option>
+          <option value="Calcaire">Calcaire</option>
+          <option value="Ciment">Ciment</option>
+          <option value="Ciment amiante">Ciment amiante</option>
+          <option value="Crépi">Crépi</option>
+          <option value="Enduit">Enduit</option>
+          <option value="Essentage de ciment amiante">Essentage de ciment amiante</option>
+          <option value="Essantage de matériaux synthétique">Essantage de matériaux synthétique</option>
+          <option value="Essantage de planches">Essantage de planches</option>
+          <option value="Essantage de tôles">Essantage de tôles</option>
+          <option value="Fonte">Fonte</option>
+          <option value="Gneiss">Gneiss</option>
+          <option value="Granite">Granite</option>
+          <option value="Grès">Grès</option>
+          <option value="Marbre">Marbre</option>
+          <option value="Meulière">Meulière</option>
+          <option value="Moellon">Moellon</option>
+          <option value="Mur-rideau">Mur-rideau</option>
+          <option value="Pan de bois">Pan de bois</option>
+          <option value="Pan de métal">Pan de métal</option>
+          <option value="Parpaing de béton">Parpaing de béton</option>
+          <option value="Pierre">Pierre</option>
+          <option value="Pierre artificielle">Pierre artificielle</option>
+          <option value="Pierre de taille">Pierre de taille</option>
+          <option value="Plâtre">Plâtre</option>
+          <option value="Poudingue">Poudingue</option>
+          <option value="Quartz">Quartz</option>
+          <option value="Schiste">Schiste</option>
+          <option value="Silex">Silex</option>
+          <option value="Torchis">Torchis</option>
+          <option value="Tuf">Tuf</option>
+          <option value="Verre">Verre</option>
+        </select>
       </div>
 
       <div>
-        <textarea placeholder="Description" v-model="professionDescription"></textarea>
+        <label for="typo_roof_select">Toit :</label>
+        <select id="typo_roof_select" v-model="typo_roof_select">
+          <option selected disabled>Sélectionnez une toiture</option>
+          <option value="Ardoise">Ardoise</option>
+          <option value="Béton">Béton</option>
+          <option value="Bois">Bois</option>
+          <option value="Chaume">Chaume</option>
+          <option value="Ciment">Ciment</option>
+          <option value="Ciment amiante">Ciment amiante</option>
+          <option value="Plomb">Plomb</option>
+          <option value="Tôle nervurée">Tôle nervurée</option>
+          <option value="Tôle ondulée">Tôle ondulée</option>
+          <option value="Tuiles">Tuiles</option>
+          <option value="Tuiles en écaille">Tuiles en écaille</option>
+          <option value="Tuilles flamande">Tuilles flamande</option>
+          <option value="Tuilles mécaniques">Tuilles mécaniques</option>
+          <option value="Tuilles mécaniques à glaçure plombifère">Tuilles mécaniques à glaçure plombifère</option>
+          <option value="Tuilles plates">Tuilles plates</option>
+          <option value="Verre">Verre</option>
+          <option value="Zinc">Zinc</option>
+        </select>
       </div>
 
+      <div>
+        <label for="typo_floor_select">Etage :</label>
+        <select id="typo_floor_select" v-model="typo_select">
+          <option selected disabled>Sélectionnez un etage</option>
+          <option value="Sous-sol">Sous-sol</option>
+          <option value="Etage de soubassement">Etage de soubassement</option>
+          <option value="Rez-de-chaussée">Rez-de-chaussée</option>
+          <option value="Rez-de-chaussée surélevé">Rez-de-chaussée surélevé</option>
+          <option value="Entresol">Entresol</option>
+          <option value="Etage">Etage</option>
+          <option value="Etage de comble">Etage de comble</option>
+          <option value="Comble à surcroît">Comble à surcroît</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="typo_couverture_select">Couverture :</label>
+        <select id="typo_couverture_select" v-model="typo_couverture_select">
+          <option selected disabled>Sélectionnez une courverture</option>
+          <option value="Apprentis">Apprentis</option>
+          <option value="Bulbe">Bulbe</option>
+          <option value="Dôme">Dôme</option>
+          <option value="Shed">Shed</option>
+          <option value="Toit à longs pans">Toit à longs pans</option>
+          <option value="Toit conique">Toit conique</option>
+          <option value="Toit en bâtière">Toit en bâtière</option>
+          <option value="Toit en double bâtière">Toit en double bâtière</option>
+          <option value="Toit polygonal">Toit polygonal</option>
+          <option value="Croupe">Croupe</option>
+          <option value="Croupe brisée">Croupe brisée</option>
+          <option value="Demi-croupe">Demi-croupe</option>
+          <option value="Flèche">Flèche</option>
+          <option value="Lanterneau">Lanterneau</option>
+          <option value="Lanternon">Lanternon</option>
+          <option value="Pignon">Pignon</option>
+          <option value="Pignon couvert">Pignon couvert</option>
+          <option value="Pigon découvert">Pigon découvert</option>
+          <option value="Toit brisé en pavillon">Toit brisé en pavillon</option>
+          <option value="Toit en pavillon">Toit en pavillon</option>
+          <option value="Toit plat">Toit plat</option>
+          <option value="Toit terrasse">Toit terrasse</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="typo_light_select">Lumière :</label>
+        <select id="typo_light_select" v-model="typo_light_select">
+          <option selected disabled>Sélectionnez une lumière</option>
+          <option value="Artificielle">Artificielle</option>
+          <option value="Latérale">Latérale</option>
+          <option value="Zénitale">Zénitale</option>
+        </select>
+      </div>
     </form>
-
     <div>
-      <label for="arrivalDate">Date d'arrivée : </label>
-      <input id="arrivalDate" v-model="arrivalDate" type="date">
-    </div>
-
-    <div>
-      <label for="departureDate">Date de départ : </label>
-      <input id="departureDate" v-model="departureDate" type="date">
-    </div>
-
-    <div>
-      <label for="nationality">Nationalité :</label>
-      <input id="nationality" v-model="nationality" type="text">
+      <label for="typo_energie_select">Energie :</label>
+      <select id="typo_energie_select" v-model="typo_energie_select">
+        <option selected disabled>Sélectionnez une énergie</option>
+        <option value="Energie animale">Energie animale</option>
+        <option value="Energie électrique">Energie électrique</option>
+        <option value="Energie éolienne">Energie éolienne</option>
+        <option value="Energie humaine">Energie humaine</option>
+        <option value="Energie hydraulique">Energie hydraulique</option>
+        <option value="Energie solaire">Energie solaire</option>
+        <option value="Energie thermique">Energie thermique</option>
+        <option value="Achetée">Achetée</option>
+        <option value="Produite à distance">Produite à distance</option>
+        <option value="Produite sur place">Produite sur place</option>
+      </select>
     </div>
 
     <div class="foreign_key">

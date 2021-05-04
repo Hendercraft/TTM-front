@@ -7,8 +7,11 @@ export default {
   props: [],
   data () {
     return {
-      selected_menu:null,
-      selected_type:null,
+      selected_menu:[],
+      selected_type:[],
+
+      typo_select:null,
+      addTypo:false,
 
       domaine:null,
       building:null,

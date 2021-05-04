@@ -2,20 +2,60 @@
 
 }
 
+
+/* Select part */
+.select-type{
+    margin-bottom: 3em;
+}
+
+.select{
+    display: grid;
+    place-content: center;
+}
+
+.select[multiple]{
+    display: grid;
+    grid-template-areas: "select";
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 12px;
+
+
+    min-width: 15ch;
+    max-width: 30ch;
+
+    border: 1px solid var(--select-border);
+    /* border-radius: 0.25em; */
+    padding: 0.25em 0.5em;
+
+    /* font-size: 1.25rem; */
+    cursor: pointer;
+    line-height: 1.1;
+
+
+    background-color: #fff;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+
+    /* // Custom arrow */
+    /* &:not(.select--multiple)::after {
+    content: "";
+    justify-self: end;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    } */
+}
+
 h1{
     text-align: center;
     margin-left: 100px;
     padding-bottom: 2em;
 }
 
-.architecture_actor_form{
-    margin: 0 auto;
-    width: 800px;
-    padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
-}
 
+/* Form part */
 .architecture_form{
     margin: 0 auto;
     width: 800px;
@@ -32,19 +72,8 @@ h1{
     border-radius: 1em;
 }
 
-.architecture_actor_form div + div {
-    margin-top: 1em;
-}
-
 .architecture_form div + div {
     margin-top: 1em;
-}
-
-.architecture_actor_form label{
-    /* Pour être sûrs que toutes les étiquettes ont même taille et sont correctement alignées */
-    display: inline-block;
-    width: 200px;
-    text-align: right;
 }
 
 .architecture_form label{
@@ -115,4 +144,28 @@ button {
 
 button:hover{
     background-color: rgb(63, 63, 63);
+}
+
+.date{
+    width: 95px;
+    /* margin-right: 5em; */
+}
+
+#date_j{
+    width: 50px;
+}
+#date_m{
+    width: 50px;
+}
+#date_y{
+    width: 100px;
+    padding-right: 1em;
+    margin-right: 5em;
+}
+
+#format{
+    margin-right: 13.5em;
+}
+#addSource{
+    margin-left: 12.8em;
 }
