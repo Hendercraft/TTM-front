@@ -10,7 +10,8 @@ export default {
     return {
       visite_virtuelle:false,
       multimedia:false,
-      cartographie:true,
+      cartographie:false,
+      home:true,
     }
   },
   computed: {
@@ -24,16 +25,19 @@ export default {
       this.multimedia = false
       this.cartographie = false
       this.visite_virtuelle = true
+      this.home = false
     },
     changeToMultimedia(){
       this.multimedia = true
       this.cartographie = false
       this.visite_virtuelle = false
+      this.home = false
     },
     changeToCartographie(){
       this.multimedia = false
       this.cartographie = true
       this.visite_virtuelle = false
+      this.home = false
     }
   }
 }
