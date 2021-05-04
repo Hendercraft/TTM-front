@@ -11,7 +11,7 @@ export default {
       selected_menu:null,
       selected_type:[],
 
-      building:null,
+      building_select:null,
       lname:null,
       fname:null,
       birthdate:null,

@@ -40,8 +40,47 @@
     </form>
 
     <div>
-      <label for="building">Bâtiment :</label>
-      <input id="building" v-model="building" type="text" required>
+      <label for="building_select">Bâtiment :</label>
+      <select id="building_select" v-model="building_select">
+        <option selected disabled>Sélectionnez un bâtiment</option>
+        <option value="Atelier d'ajustage">Atelier d'ajustage</option>
+        <option value="Atelier d'usinage">Atelier d'usinage</option>
+        <option value="Atelier de blanchissement">Atelier de blanchissement</option>
+        <option value="Atelier de construction mécanique">Atelier de construction mécanique</option>
+        <option value="Atelier de filature">Atelier de filature</option>
+        <option value="Atelier de finissage">Atelier de finissage</option>
+        <option value="Atelier de forge">Atelier de forge</option>
+        <option value="Atelier de gros usinage">Atelier de gros usinage</option>
+        <option value="Atelier de montage">Atelier de montage</option>
+        <option value="Atelier de peinture">Atelier de peinture</option>
+        <option value="Atelier de réparation">Atelier de réparation</option>
+        <option value="Atelier de retordage">Atelier de retordage</option>
+        <option value="Atelier de soudure">Atelier de soudure</option>
+        <option value="Atelier de teinturerie">Atelier de teinturerie</option>
+        <option value="Atelier de tôlerie">Atelier de tôlerie</option>
+        <option value="Atelier de tréfilerie">Atelier de tréfilerie</option>
+        <option value="Bureaux">Bureaux</option>
+        <option value="Centre de formation">Centre de formation</option>
+        <option value="Chaufferie">Chaufferie</option>
+        <option value="Eglise">Eglise</option>
+        <option value="Entrepôt">Entrepôt</option>
+        <option value="Fonderie">Fonderie</option>
+        <option value="Garage">Garage</option>
+        <option value="Gazogène">Gazogène</option>
+        <option value="Hangar">Hangar</option>
+        <option value="Infirmerie">Infirmerie</option>
+        <option value="Laboratoire">Laboratoire</option>
+        <option value="Loge du concierge">Loge du concierge</option>
+        <option value="Logement de contremaître">Logement de contremaître</option>
+        <option value="Logement de gardien">Logement de gardien</option>
+        <option value="Logement ouvrier">Logement ouvrier</option>
+        <option value="Logament patronal">Logament patronal</option>
+        <option value="Magasin">Magasin</option>
+        <option value="Salle blanche">Salle blanche</option>
+        <option value="Salle des machines">Salle des machines</option>
+        <option value="Station électrique">Station électrique</option>
+        <option value="Transformateur">Transformateur</option>
+      </select>
     </div>
 
     <div>
@@ -52,11 +91,6 @@
     <div>
       <label for="fname">Prénom :</label>
       <input id="fname" v-model="fname" type="text" required>
-    </div>
-
-    <div>
-      <label for="birthdate">Date de naissance :</label>
-      <input id="birthdate" v-model="birthdate" type="date" required>
     </div>
 
     <div>
@@ -73,7 +107,10 @@
 
     <div>
       <label for="gender">Sexe :</label>
-      <input id="gender" v-model="gender" type="text">
+      <select id="gender" v-model="gender">
+        <option value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+      </select>
     </div>
 
     <div class="foreign_key">
@@ -101,28 +138,18 @@
     </form>
 
     <div>
-      <label for="arrivalDate_d">Date de naissance :</label>
+      <label for="arrivalDate_d">Date d'arrivée :</label>
       <input class="date" id="arrivalDate_d" v-model="arrivalDate_d" type="number" min='0' max='31'><span>/</span>
       <input class="date" id="arrivalDate_m" v-model="arrivalDate_m" type="number" min='0' max='12'><span>/</span>
       <input class="date" id="arrivalDate_y" v-model="arrivalDate_y" type="number" min='0' max='9999'>
     </div> 
 
     <div>
-      <label for="departureDate_d">Date de naissance :</label>
+      <label for="departureDate_d">Date de départ :</label>
       <input class="date" id="departureDate_d" v-model="departureDate_d" type="number" min='0' max='31'><span>/</span>
       <input class="date" id="departureDate_m" v-model="departureDate_m" type="number" min='0' max='12'><span>/</span>
       <input class="date" id="departureDate_y" v-model="departureDate_y" type="number" min='0' max='9999'>
     </div> 
-
-    <div>
-      <label for="arrivalDate">Date d'arrivée : </label>
-      <input id="arrivalDate" v-model="arrivalDate" type="date">
-    </div>
-
-    <div>
-      <label for="departureDate">Date de départ : </label>
-      <input id="departureDate" v-model="departureDate" type="date">
-    </div>
 
     <div>
       <label for="nationality">Nationalité :</label>
