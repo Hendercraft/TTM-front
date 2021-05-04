@@ -72,6 +72,7 @@ p{
 }
 .element7{
     margin-top: 0em;
+    border: 1px red solid;
     padding-top: 0em;
 }
 .element8{
@@ -115,14 +116,18 @@ a{
     text-decoration: none; */
     color: rgb(218, 218, 218);
 }
-
+/*
 a.router-link-exact-active{ 
     /* background: -webkit-linear-gradient(rgb(129, 129, 129) 45%, #333);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
-}
+/*}*/
 a:hover{
     /* font-weight: bold; */
     text-decoration:none;
+    /* background-color: black; */
     color: white;
+}
+a:active{
+    background-color: black;
 }
