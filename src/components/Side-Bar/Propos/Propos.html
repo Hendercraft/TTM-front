@@ -1,5 +1,164 @@
 
 <section class="propos">
-  <h1>propos Component</h1>
+
+  <div class="upper-bar">
+    <div class="bt-projet">
+      <button id="button-project" v-on:click='changeToProject'>Projet</button>
+    </div>
+    <div class="bt-team">
+      <button id="button-team" v-on:click='changeToTeam'>L'équipe</button>
+    </div>
+    <div class="bt-contact">
+      <button id="button-contact" v-on:click='changeToContact'>Contact</button>
+    </div>
+  </div>
+
+  <div class="project" v-if="project">
+    <div class="main-project">    
+      <h1>Mots-clés</h1>
+      <p>Patrimoine industriel et technique ; 
+        interdisciplinarité ; territoire ; 
+        renouvellement des approches historiques ; 
+        humanités numériques ; 
+        archéologie industrielle avancée</p>
+
+
+      <h1>Objectifs</h1>
+      <p>- Reconstitution historique spatio-temporelle en 3D d’un ancien quartier industriel du Nord Franche-Comté.</br>
+        - Promouvoir la culture scientifique, technique et industrielle à travers les humanités numériques.</br>
+        - Articuler enseignement et recherche autour d’un projet structurant.</br>
+        - Valoriser le patrimoine industriel et technique, matériel et immatériel, comme source de développement territorial.</p>
+
+      <h1>Résumé</h1>
+      <p>Techn'hom Time Machine envisage le développement de nouvelles formes de recherche et d’apprentissage entre les sciences historiques 
+        (histoire, patrimoine, géomatique) et les sciences de l’ingénierie (génie mécanique, ergonomie, informatique, graphisme). 
+        Il s'agit d'expérimenter de nouvelles façons de produire la connaissance autour d’un objet historique grâce au croisement des compétences 
+        et au recours aux humanités numériques. L'objet vise la reconstitution numérique en 3D d’un vaste ensemble industriel implanté à Belfort en 1879, 
+        aujourd’hui connu sous le nom de Techn’hom. Il s'agit de proposer une histoire totale du quartier, retraçant les évolutions urbanistique, architecturale, 
+        technique, démographique ou encore sociale à partir de l’exploitation des archives, d’enquêtes de terrain, de témoignages oraux et du recours aux 
+        technologies informatiques. A court terme, le produit sera présenté sur une dalle numérique valorisant le mariage heureux entre histoire et ingénierie, 
+        technologie et patrimoine, et favorisant le lien social.</p>
+
+
+      <h1>Positionnement géographique et scientifique</h1>
+      <p>Le terrain d’élection du projet se compose de deux anciens sites industriels 
+        (Filature Dollfus, Mieg et Cie -DMC-  et Société alsacienne de constructions mécaniques dite SACM, devenue Alsthom en 1928) 
+        ayant fusionné au début des années 2000 pour former Techn’hom. A ce parc d’activité économique urbain de plus de 100 hectares, 
+        s’ajoutent des cités ouvrières et autres infrastructures sociales polycentriques contribuant au développement urbanistique de la ville de Belfort. 
+        Le domaine d’étude est celui de l’archéologie industrielle avancée (Laroche, 2007) consistant, à partir du présent, 
+        à remonter dans le passé via un croisement des sources d’archives, de l’enquête orale et des observations de terrain, et ce grâce à des outils numériques. 
+        A travers ce projet de reconstitution historique spatio-temporelle en 3D, 
+        l’un des résultats attendus est de concevoir une méthodologie structurée et reproductible dédiée à la valorisation scientifique d’objets patrimoniaux 
+        ainsi qu’à leur médiation culturelle, dans une perspective de dynamisation territoriale.
+        </p>
+
+
+    </div>
+    <div class="add-project">
+      <img src="../../../assets/TA_Belfort_1827_ad09003_anu0303p032ta.jpg" />
+
+
+      <h1>Responsable</h1>
+      <p>Marina Gasnier, professeur des universités UTBM,</br>
+        FEMTO-ST/RECITS (UMR 6174)
+      </p>
+
+      <h1>Partenaires</h1>
+      <p>FEMTO-ST/RECITS – UTBM/UBFC (sciences humaines et sociales)</br>
+        MSHE Ledoux (géomatique)</br>
+        CIAD – UTBM/UBFC (intelligence artificielle)</br>
+        LE2I – UTBM/UBFC (ingénierie des connaissances)</br>
+        ELLIAD-ERCOS – UTBM/UBFC (ergonomie, graphisme)</br>
+        ICB-PMDM-LERMPS – UTBM/UBFC (génie mécanique)</br>
+        Pb2i Belfort (Bull informatique)
+        </p>
+
+
+      <h1>Financements</h1>
+      <p>AAP Région – Equipements pédagogiques et numériques, 2019</br>
+        Crunch-Lab – UTBM, 2019</br>
+        MSHE Ledoux – ORTEP, 2019</br>
+        AAP CEVU UTBM – innovation pédagogique, 2020</br>
+        ANR « Lab in Virtuo » en collaboration avec l’Université de Bretagne Occidentale et le Centre Francois Viète, à Brest ; </br>
+        l’Ecole nationale des Ingénieurs de Brest, le LabSTICC et le Centre européen de Réalité Virtuelle ; </br>
+        le CREDA (UMR 7227) à l’Institut des Hautes Etudes de l’Amérique Latine, Université Sorbonne Nouvelle Paris 3 ; </br>
+        enfin l’Ecole Centrale, à Nantes, 2021</p>
+
+    </div>
+  </div>
+
+  <div class="team" v-if="team">
+    <h1>Nos chercheurs</h1>
+    <div class="reseacher">
+      <div id="Marina-Gasnier">
+        <img class="img-team" src="../../../assets/avatar.png"/>
+        <p>Marina Gasnier, professeur des universités UTBM, </br>
+          FEMTO-st/RECITS(UMR 6174)</p>
+      </div>
+    </div>
+
+    <h1>Nos partenaires</h1>
+    <div class="Partnership">
+      <div id="femto-st">
+        <img class="img-team" src="../../../assets/femto-st.png"/>
+        <p>FEMTO-ST/RECITS - UTBM/UBFC (sciences humaines et sociales)</p>
+      </div>
+
+      <div id="MSHE">
+        <img class="img-team" src="../../../assets/MSHE.jpg"/>
+        <p>MSHE Ledoux (géomatique</p>
+      </div>
+
+      <div id="CIAD">
+        <img class="img-team" src="../../../assets/CIAD.png"/>
+        <p>CIAD - UTBM/UBFC </br> 
+          (intelligence artificielle)</p>
+      </div>
+
+      <div id="LE2I">
+        <img class="img-team" src="../../../assets/le2i.jpg"/>
+        <p>LE2I - UTBM/UBFC (ingénierie des connaissances)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact" v-if="contact">
+    <form class="contact-form">
+      <div class="identity">
+        <div class="name">
+          <label for="name">Nom :</label>
+          <input id="name" v-model="name" type="text">
+        </div>
+  
+        <div class="last_name">
+          <label for="last_name">Prénom :</label>
+          <input id="last_name" v-model="last_name" type="text">
+        </div>
+      </div>
+      
+      <div class="credentials">
+        <div class="email">
+          <label for="email">Email :</label>
+          <input id="email" v-model="email" type="email">
+        </div>
+  
+        <div class="phone">
+          <label for="phone">Téléphone :</label>
+          <input id="phone" v-model="phone" type="tel">
+        </div>
+      </div>
+
+      <div class="subject">
+        <label for="subject">Sujet :</label>
+        <input id="subject" v-model="subject" type="text">
+      </div>
+
+      <div class="message">
+          <textarea id="message" placeholder="Veuillez insérer un message" v-model="message"></textarea>
+      </div>
+
+      <button id="contact-send" @click="sendContactForm">Envoyer</button>
+    </form>
+  </div>
 </section>
 
