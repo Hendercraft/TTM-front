@@ -1,16 +1,61 @@
 <template>
   <div id="app">
-    <nav id="upper-navbar">
-      <ul>
-        <li class="upper-nabar-elements" v-if="!logged"><router-link to="/login">Connexion</router-link></li>
-        <li class="upper-nabar-elements" v-if="!logged"><router-link to="/register">Inscription</router-link></li>
-        <li class="upper-nabar-elements" v-if="logged"><router-link to="/profile">Profile</router-link></li>
-        <li class="upper-nabar-elements" v-if="logged"><button v-on:click="logout">Déconnexion</button></li>
-      </ul>
-    </nav>
-    <bar class="sidenav"></bar>
-    <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <router-view/>
+    <div class="main">
+      <nav id="upper-navbar">
+        <ul>
+          <li class="upper-nabar-elements" v-if="!logged"><router-link to="/login">Connexion</router-link></li>
+          <li class="upper-nabar-elements" v-if="!logged"><router-link to="/register">Inscription</router-link></li>
+          <li class="upper-nabar-elements" v-if="logged"><router-link to="/profile">Profil</router-link></li>
+          <li class="upper-nabar-elements" v-if="logged"><button v-on:click="logout">Déconnexion</button></li>
+        </ul>
+      </nav>
+      <bar class="sidenav"></bar>
+      <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+      <router-view/>
+    </div>
+    <div class="footer">
+      <footer>
+        <h1>Coordonnées</h1>
+        <div id="container_footer">
+          <div id="adress_footer">
+            <div id="logo_adress_footer">
+              <img src="../src/assets/position.png" width="30" height="40"/>
+            </div>
+            <div id="text_adress_footer">
+              <p>
+                <span>Adresse: </span>
+                "Rue de Leupe, 90400 Sevenans"
+              </p>
+            </div>
+          </div>
+
+          <div id="phone_footer">
+            <div id="logo_phone_footer">
+              <img src="../src/assets/phone.png" width="30" height="30"/>
+            </div>
+            <div id="text_phone_footer">
+              <p>
+                <span>Téléphone: </span>
+                <a href="tel://651907292">+336 51 90 72 92</a>
+              </p>
+            </div>
+          </div>
+
+          <div id="email_footer">
+            <div id="logo_email_footer">
+              <img src="../src/assets/email.png" width="40" height="30"/>
+            </div>
+            <div id="text_email_footer">
+              <p>
+                <span>Email: </span>
+                <a href="mailto:gabriel.garcia@utbm.fr">contact@TTM.utbm.fr</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
@@ -65,6 +110,8 @@ export default {
 </script>
 
 <style>
+
+/* Main part */
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -73,7 +120,11 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   margin-left: 10%; /* Same as the width of the sidebar */
-  padding: 0px 10px;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 button{
@@ -84,7 +135,10 @@ button:hover{
   background-color: rgba(117, 117, 117, 0.623);
   color: white;
 }
-/* The sidebar menu */
+
+
+/* Navbar on the right */
+
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 10%; /* Set the width of the sidebar */
@@ -96,6 +150,8 @@ button:hover{
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
   }
+
+/* Logged, unlogged part */
 .upper-nabar-elements {
     margin: 0;
     padding: 0;
@@ -119,5 +175,56 @@ li a:hover {
 .active {
   background-color: #4CAF50;
   color: white;
+}
+
+
+/* Footer part */
+
+footer{
+  /* padding:50px 0; */
+  color:#f0f9ff;
+  background-color: #282d32;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+
+}
+
+.footer{
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+}
+
+#container_footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-left: 5em;
+  padding-right: 5em;
+}
+#adress_footer{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+#phone_footer{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+#email_footer{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+footer h1 {
+  font-size: 1.2em;
+}
+
+footer p {
+  font-size: smaller;
 }
 </style>
