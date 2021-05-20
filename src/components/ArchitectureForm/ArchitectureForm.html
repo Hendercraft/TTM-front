@@ -13,7 +13,7 @@
   </form>
 
   <!-- Architecture part -->
-  <form class="architecture_form" v-if="selected_menu">
+  <form class="ressource-form" v-if="selected_menu!=[]">
 
     <div class="foreign_key">
       <label for="brand-select">Raison sociale :</label>
@@ -39,7 +39,7 @@
 
     </form>
 
-    <div>
+    <div class="custom_select">
       <label for="building_select">Bâtiment :</label>
       <select id="building_select" v-model="building_select">
         <option selected disabled>Sélectionnez un bâtiment</option>
@@ -83,7 +83,7 @@
       </select>
     </div>
 
-    <div>
+    <div class="custom_select">
       <label for="typo_periode_select">Période :</label>
       <select id="typo_periode_select" v-model="typo_periode_select">
         <option selected disabled>Sélectionnez une période</option>
@@ -100,14 +100,14 @@
     </div>
 
     <div>
-      <label for="date">Date :</label>
-      <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31'><span>/</span>
-      <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12'><span>/</span>
-      <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999'>
+      <label for="date_t">Date :</label>
+      <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+      <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+      <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
     </div> 
 
-    <div>
-      <label for="typo_select">Typographie :</label>
+    <div class="foreign_key">
+      <label for="typo_select">Typologie :</label>
       <select id="typo_select" v-model="typo_select">
         <option selected disabled>Sélectionnez une typographie</option>
         <option value="Bâtiment à étage">Bâtiment à étage</option>
@@ -120,7 +120,7 @@
 
     <form class="addProfession_form" v-if="addTypo">
 
-      <div>
+      <div class="custom_select">
         <label for="typo_plan_select">Plan :</label>
         <select id="typo_plan_select" v-model="typo_plan_select">
           <option selected disabled>Sélectionnez un plan</option>
@@ -145,7 +145,7 @@
           <option value="Rotonde">Rotonde</option>
         </select>
       </div>
-      <div>
+      <div class="custom_select">
         <label for="typo_wall_select">Mur :</label>
         <select id="typo_wall_select" v-model="typo_wall_select">
           <option selected disabled>Sélectionnez un mur</option>
@@ -191,7 +191,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="custom_select">
         <label for="typo_roof_select">Toit :</label>
         <select id="typo_roof_select" v-model="typo_roof_select">
           <option selected disabled>Sélectionnez une toiture</option>
@@ -215,7 +215,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="custom_select">
         <label for="typo_floor_select">Etage :</label>
         <select id="typo_floor_select" v-model="typo_select">
           <option selected disabled>Sélectionnez un etage</option>
@@ -230,7 +230,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="custom_select">
         <label for="typo_couverture_select">Couverture :</label>
         <select id="typo_couverture_select" v-model="typo_couverture_select">
           <option selected disabled>Sélectionnez une courverture</option>
@@ -259,7 +259,7 @@
         </select>
       </div>
 
-      <div>
+      <div class="custom_select">
         <label for="typo_light_select">Lumière :</label>
         <select id="typo_light_select" v-model="typo_light_select">
           <option selected disabled>Sélectionnez une lumière</option>
@@ -269,7 +269,7 @@
         </select>
       </div>
     </form>
-    <div>
+    <div class="custom_select">
       <label for="typo_energie_select">Energie :</label>
       <select id="typo_energie_select" v-model="typo_energie_select">
         <option selected disabled>Sélectionnez une énergie</option>
@@ -287,9 +287,9 @@
     </div>
 
     <div class="foreign_key">
-      <label for="place-select">Domicile :</label>
+      <label for="place-select">Adresse :</label>
       <select id="place-select" v-model="selected_place">
-        <option selected disabled>Sélectionnez un domicile</option>
+        <option selected disabled>Sélectionnez une adresse</option>
         <option v-for="place in places" v-bind:value="place.id">
           {{ place.name }}
         </option>
@@ -354,12 +354,39 @@
   
     <div class="foreign_key">
       <label for="source">Source :</label>
-      <input id="source" v-model="source" type="date" required>
       <input id="addSource" v-model="addSource" type="checkbox">
       <span><img src="@/assets/plus.png"/></span>
     </div>
 
     <form class="addProfession_form" v-if="addSource">
+
+      <div>
+        <label for="sourceName">Nom de la source :</label>
+        <input id="sourceName" v-model="sourceName" type="text" required>
+      </div>
+
+      <div>
+        <label for="date_d">Date :</label>
+        <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
+      </div> 
+
+      <div>
+        <label for="date_comp">Complément de date :</label>
+        <input id="date_comp" v-model="date_comp" type="text">
+      </div>
+
+      <div>
+        <label for="conservation">Lieu de conservation :</label>
+        <input id="conservation" v-model="conservation" type="text">
+      </div>
+
+      <div>
+        <label for="cote">Cote :</label>
+        <input id="cote" v-model="cote" type="text">
+      </div> 
+
       <div>
         <label for="editor">Editeur :</label>
         <input id="editor" v-model="editor" type="text">
@@ -376,13 +403,39 @@
       </div>
 
       <div>
-        <label for="format">Format :</label>
-        <input id="format" v-model="format" type="text">
+        <label for="format">Format : </label>
+        <select id="format" v-model="format" @change="getFormatGroup($event)" required>
+          <optgroup label="Image">
+            <option value="JPG">JPG</option>
+            <option value="PNG">PNG</option>
+          </optgroup>
+          <optgroup label="Video">
+            <option value="MP4">MP4</option>
+            <option value="AVI">AVI</option>
+            <option value="MOV">MOV</option>
+          </optgroup>        
+          
+          <optgroup  label="Document">
+            <option value="PDF">PDF</option>
+          </optgroup>
+    
+          <optgroup label="Cao">
+            <option value="STL">STL</option>
+            <option value="CAD">CAD</option>
+          </optgroup>
+    
+          <optgroup label="Audio">
+            <option value="MP3">MP3</option>
+            <option value="FLAC">FLAC</option>
+            <option value="WAV">WAV</option>
+          </optgroup>
+          
+        </select>
       </div>
 
       <div>
         <label for="immatriculation">Immatriculation :</label>
-        <input id="immatriculation" v-model="immatriculation" type="number">
+        <input id="immatriculation" v-model="immatriculation" type="number" required>
       </div>
 
       <div>
@@ -392,12 +445,12 @@
 
       <div>
         <label for="author">Auteur notice(date) :</label>
-        <input id="author" v-model="author" type="text">
+        <input id="author" v-model="author" type="text" required>
       </div>
 
       <div>
         <label for="study">Etude :</label>
-        <input id="study" v-model="study" type="text">
+        <input id="study" v-model="study" type="text" placeholder="Techn'hom Time Machine">
       </div>
     </form>
 
@@ -406,7 +459,33 @@
     </div>
 
   </form>
-  <button class="btn btn-success" :disabled="!selected_type" @click="postActorForm">
-    Envoyer
-  </button>
+  <div class="output" v-html="output">{{ output }}</div>
+
+  
+  <div class="uploadFile" v-if="selected_type">
+
+    <div v-if="currentFile" class="progress">
+      <div
+        class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar"
+        :aria-valuenow="progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        :style="{ width: progress + '%' }"
+      >
+        {{ progress }}%
+      </div>
+    </div>
+
+    <label class="btn btn-default">
+      <input type="file" ref="file" @change="selectFile" />
+    </label>
+
+    <button class="btn btn-success" :disabled="!selectedFiles" @click="postActorForm">
+      Upload
+    </button>
+
+    <div class="alert alert-light" role="alert">{{ message }}</div>
+  </div>
+  <!-- <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files> -->
 </section>
