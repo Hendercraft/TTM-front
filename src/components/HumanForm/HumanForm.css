@@ -19,7 +19,6 @@
     position: relative;
     border-radius: 12px;
 
-
     min-width: 15ch;
     max-width: 30ch;
 
@@ -111,6 +110,17 @@ input {
     border: 1px solid #999;
 }
 
+textarea{
+    resize: none;
+    overflow: auto;
+
+    height: 100px;
+    width: 50%;
+
+    margin-bottom: 0em;
+
+    border-radius: 0.5em;
+}
 
 img{
     width: 20px;

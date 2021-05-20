@@ -39,7 +39,7 @@
 
     </form>
 
-    <div>
+    <div class="custom_select">
       <label for="building_select">Bâtiment :</label>
       <select id="building_select" v-model="building_select">
         <option selected disabled>Sélectionnez un bâtiment</option>
@@ -90,14 +90,14 @@
 
     <div>
       <label for="fname">Prénom :</label>
-      <input id="fname" v-model="fname" type="text" required>
+      <input id="fname" v-model="fname" type="text">
     </div>
 
     <div>
       <label for="birth_d">Date de naissance :</label>
-      <input class="date" id="birth_d" v-model="birth_d" type="number" min='0' max='31'><span>/</span>
-      <input class="date" id="birth_m" v-model="birth_m" type="number" min='0' max='12'><span>/</span>
-      <input class="date" id="birth_y" v-model="birth_y" type="number" min='0' max='9999'>
+      <input class="date" id="birth_d" v-model="birth_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+      <input class="date" id="birth_m" v-model="birth_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+      <input class="date" id="birth_y" v-model="birth_y" type="number" min='0' max='9999' placeholder="AAAA">
     </div> 
 
     <div>
@@ -237,14 +237,24 @@
 
       <div>
         <label for="date_d">Date :</label>
-        <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31'><span>/</span>
-        <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12'><span>/</span>
-        <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999'>
+        <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
       </div> 
 
       <div>
         <label for="date_comp">Complément de date :</label>
         <input id="date_comp" v-model="date_comp" type="text">
+      </div> 
+
+      <div>
+        <label for="conservation">Lieu de conservation :</label>
+        <input id="conservation" v-model="conservation" type="text">
+      </div>
+
+      <div>
+        <label for="cote">Cote :</label>
+        <input id="cote" v-model="cote" type="text">
       </div> 
 
       <div>
@@ -310,7 +320,7 @@
 
       <div>
         <label for="study">Etude :</label>
-        <input id="study" v-model="study" type="text">
+        <input id="study" v-model="study" type="text" value="Techn'hom Time Machine">
       </div>
     </form>
 
