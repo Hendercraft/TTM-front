@@ -83,6 +83,10 @@ h1{
     text-align: right;
 }
 
+.custom_select select{
+    width: 290px;
+}
+
 input {
     /* Pour s'assurer que tous les champs texte ont la même police.
        Par défaut, les textarea ont une police monospace */
@@ -95,6 +99,19 @@ input {
     /* Pour harmoniser le look & feel des bordures des champs texte */
     border: 1px solid #999;
 }
+
+textarea{
+    resize: none;
+    overflow: auto;
+
+    height: 100px;
+    width: 50%;
+
+    margin-bottom: 0em;
+
+    border-radius: 0.5em;
+}
+
 
 
 img{
