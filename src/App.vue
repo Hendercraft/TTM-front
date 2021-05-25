@@ -151,6 +151,26 @@ button:hover{
     padding-top: 20px;
   }
 
+/* On screens that are less than 700px wide, make the sidebar into a topbar */
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and(max-width: 400)
+{
+    .sidenav
+    {
+      text-align: center;
+      float: none;
+    }
+}
+
 /* Logged, unlogged part */
 .upper-nabar-elements {
     margin: 0;
