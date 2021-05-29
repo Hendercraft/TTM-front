@@ -1,6 +1,6 @@
 
 <section class="bar">
-  <nav>
+  <nav id="sidebar">
     <h1><router-link to="/">TTM</router-link></h1>
     <div class="tech"><p>Techn'hom</p></div>
     </br>
@@ -14,14 +14,55 @@
       <router-link class="menu" to="/Production" tag="a">Production</router-link>
       <router-link class="menu" to="/Hommes" tag="a">Hommes</router-link>
       <div class="modifyDatabase">
-        <router-link to="/NewRessource" tag="a">Ajouter ressource</router-link>
-        <router-link to="/Temoignage" tag="a">Mon témoignage</router-link>
-        <router-link to="/Recherche" tag="a">Recherche</router-link>
+        <div>
+          <router-link to="/NewRessource" tag="a">Ajouter ressource</router-link>
+        </div>
+        <div>
+          <router-link to="/Temoignage" tag="a">Mon témoignage</router-link>
+        </div>
+        <div>
+          <router-link class="secondMenu" to="/Recherche" tag="a">Recherche</router-link>
+          <img id="loupe" src="../../assets/loupe2.png">
+        </div>
       </div>
     </div>
   </nav>
-  <!-- <div class="disapear">
-    <img src="../../assets/Square.png">
-  </div> -->
+
+  <nav id="navbar">
+    <router-link id="logo" to="/">
+      <img class="logo_img" src="../../assets/Logo_TTM.png">
+    </router-link>
+
+    <button class="icon" @click="hamburger">
+      <img class="logo_img" src="../../assets/hamburger.png">
+    </button>
+
+    
+    <!-- <h1><router-link to="/">TTM</router-link></h1>
+    <div class="tech"><p>Techn'hom</p></div>
+    </br>
+    <div class="time"><p>Time</p></div>
+    <div class="machine"><p>Machine</p></div>
+    <div class="trait"></div>-->
+    <div id="myLinks"> 
+      <router-link class="menu" to="/A-Propos" tag="a">A propos</router-link>
+      <router-link class="menu" to="/" tag="a">Urbanisme</router-link>
+      <router-link class="menu" to="/Architecture" tag="a">Architecture</router-link>
+      <router-link class="menu" to="/Production" tag="a">Production</router-link>
+      <router-link class="menu" to="/Hommes" tag="a">Hommes</router-link>
+      <div class="modifyDatabase">
+        <div>
+          <router-link to="/NewRessource" tag="a">Ajouter ressource</router-link>
+        </div>
+        <div>
+          <router-link to="/Temoignage" tag="a">Mon témoignage</router-link>
+        </div>
+        <div>
+          <router-link class="secondMenu" to="/Recherche" tag="a">Recherche</router-link>
+          <img id="loupe" src="../../assets/loupe2.png">
+        </div>
+      </div>
+    </div>
+  </nav>
   </section>
 
