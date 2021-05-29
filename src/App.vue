@@ -127,6 +127,10 @@ export default {
   justify-content: space-between;
 }
 
+.main{
+  min-height: 93vh;
+}
+
 button{
   border: none;
   background-color: white;
@@ -152,24 +156,7 @@ button:hover{
   }
 
 /* On screens that are less than 700px wide, make the sidebar into a topbar */
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
 
-@media screen and(max-width: 400)
-{
-    .sidenav
-    {
-      text-align: center;
-      float: none;
-    }
-}
 
 /* Logged, unlogged part */
 .upper-nabar-elements {
@@ -202,16 +189,15 @@ li a:hover {
 
 footer{
   /* padding:50px 0; */
+  /* position: fixed; */
+  bottom: 0px;
+  left: 10%;
+  right: 0px;
   color:#f0f9ff;
   background-color: #282d32;
   padding-bottom: 0em;
-  margin-bottom: 0em;
 
-}
-
-.footer{
-  padding-bottom: 0em;
-  margin-bottom: 0em;
+  height: 7.5vh;
 }
 
 #container_footer{
@@ -219,23 +205,29 @@ footer{
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
+  height: 1em;
   padding-left: 5em;
   padding-right: 5em;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
 }
 #adress_footer{
   display: flex;
+  height: 1em;
   align-items: baseline;
   justify-content: space-between;
 }
 
 #phone_footer{
   display: flex;
+  height: 1em;
   align-items: baseline;
   justify-content: space-between;
 }
 
 #email_footer{
   display: flex;
+  height: 1em;
   align-items: baseline;
   justify-content: space-between;
 }
@@ -246,5 +238,20 @@ footer h1 {
 
 footer p {
   font-size: smaller;
+}
+
+@media screen and (max-width: 700px) {
+  .sidenav {
+    top: 0;
+    /* left: 0; */
+    /* right: 0; */
+    width: 100%;
+    height: auto;
+  }
+  /* .upper-navbar{
+    position: relative;
+  } */
+  /* .sidenav a {float: left;}
+  div.content {margin-left: 0;} */
 }
 </style>
