@@ -106,19 +106,23 @@ button{
 
 #navbar{
     width: 100%;
-    height: auto;
+    height: 10vh;
     display: flex;
     flex-direction: row;
 }
 
 .logo_img{
-    width: 100%;
-    height: auto;
+    /* width: 50%; */
+    height: 10vh;
+}
+
+.hamburger_img{
+    height: 10vh;
 }
 
 #logo{
     padding-bottom: 5em;
-    border-bottom: 1px white solid;
+    border-right: 1px white solid;
 }
 
 @media screen and (max-width: 700px)
