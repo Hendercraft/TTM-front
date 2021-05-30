@@ -31,8 +31,8 @@
 img{
   margin-top: 8em;
   margin-bottom: 3em;
-  height: 500px;
-  width: 1000px;
+  height: auto;
+  width: 75%;
 }
 .main{
   margin-top: 5em;
