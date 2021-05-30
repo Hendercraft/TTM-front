@@ -44,9 +44,36 @@ button{
   font-weight: lighter;
   letter-spacing: .1em;
 }
-  
-  /* Style page content
-  .main {
-    margin-left: 15%; /* Same as the width of the sidebar */
-    /* padding: 0px 10px; */
-  /* } */
+
+@media screen and (max-width:700px) {
+  .title{
+    width: 450px;
+    margin-top: 1em;
+    font-size: medium;
+    text-align: center;
+    /* border: 1px red solid; */
+  }
+  img{
+
+    height: 30vh;
+    width: auto;
+
+    /* height: 250px;
+    width: 500px; */
+    text-align: center;
+  }
+  button{
+    font-size: small;
+  }
+}
+
+@media screen and (max-width:400px) {
+  h1{
+    font-size: x-small;
+  }
+  img{
+    height: 30vh;
+    width: auto;
+    
+  }
+}
