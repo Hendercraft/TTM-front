@@ -34,17 +34,6 @@
     margin-top: 1em;
 }
 
-#loupe{
-    padding-left: .5em;
-}
-@media screen and(max-width: 700)
-{
-    #content
-    {
-        font-size: xx-small;
-    }
-}
-
 
 
 h1{
@@ -125,19 +114,56 @@ button{
     border-right: 1px white solid;
 }
 
-@media screen and (max-width: 700px)
+@media screen and (max-width: 1700px) {
+    .modifyDatabase{
+        margin-top: .2em;
+    }    
+}
+
+@media screen and (max-width: 1600px) {
+    p{
+        font-size: medium;
+    }
+    a{
+        font-size: medium;
+    }
+    h1{
+        font-size: large;
+    }
+    #loupe{
+        width: 30px;
+    }
+    .modifyDatabase{
+        margin-top: 3em;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    p{
+        font-size: small;
+    }
+    a{
+        font-size: small;
+    }
+    h1{
+        font-size: medium;
+    }
+    #loupe{
+        width: 20px;
+    }
+    
+}
+@media screen and (max-width: 950px)
 {
-    /* #navbar
-    {
-        display: block;
-    } */
     #sidebar
     {
         display: none;
     }
+
+
 }
 
-@media screen and (min-width: 700px)
+@media screen and (min-width: 950px)
 {
     #navbar
     {
