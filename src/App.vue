@@ -240,7 +240,7 @@ footer p {
   font-size: smaller;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 950px) {
   .sidenav {
     top: 0;
     /* left: 0; */
