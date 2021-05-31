@@ -248,10 +248,5 @@ footer p {
     width: 100%;
     height: auto;
   }
-  /* .upper-navbar{
-    position: relative;
-  } */
-  /* .sidenav a {float: left;}
-  div.content {margin-left: 0;} */
 }
 </style>
