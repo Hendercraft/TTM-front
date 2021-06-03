@@ -3,10 +3,10 @@
   <form class="select-type">
     <div class="select">
       <label for="selected_type">Veuillez sélectionner une ou plusieurs sous-catégorie : </label>
-      <select v-model="selected_type" multiple> 
+      <select v-model="selected_type" multiple required> 
         <option selected disabled>Sélectionnez une ou plusieurs sous-catégorie</option>
-        <option value="MainOeuvre">Main d'oeuvre</option>
-        <option value="OeuvreSociales">Oeuvres sociales</option>
+        <option value="Main d'oeuvre">Main d'oeuvre</option>
+        <option value="Oeuvres sociales">Oeuvres sociales</option>
         <option value="Formation">Formation</option>
       </select>
     </div>
@@ -84,14 +84,19 @@
     </div>
 
     <div>
-      <label for="lname">Nom :</label>
-      <input id="lname" v-model="lname" type="text" required>
+      <label for="last_name">Nom :</label>
+      <input id="last_name" v-model="last_name" type="text" required>
     </div>
 
     <div>
-      <label for="fname">Prénom :</label>
-      <input id="fname" v-model="fname" type="text">
+      <label for="name">Prénom :</label>
+      <input id="name" v-model="name" type="text">
     </div>
+
+    <div>
+      <label for="instruction_level">Degré d'instruction :</label>
+      <input id="instruction_level" v-model="instruction_level" type="text">
+    </div> 
 
     <div>
       <label for="birth_d">Date de naissance :</label>
@@ -101,8 +106,8 @@
     </div> 
 
     <div>
-      <label for="date_comp">Complément de date :</label>
-      <input id="date_comp" v-model="date_comp" type="text">
+      <label for="selected_birth_place">Lieu de naissance :</label>
+      <input id="selected_birth_place" v-model="selected_birth_place" type="text">
     </div> 
 
     <div>
@@ -157,7 +162,7 @@
     </div>
 
     <div class="foreign_key">
-      <label for="place-select">Domicile :</label>
+      <label for="place-select">Lieu de résidence :</label>
       <select id="place-select" v-model="selected_place">
         <option selected disabled>Sélectionnez un domicile</option>
         <option v-for="place in places" v-bind:value="place.id">
@@ -219,9 +224,65 @@
       </div>
 
     </form>
-
+    
     </br>
-  
+    
+    <div class="foreign_key">
+      <label for="civilState">Foyer/Etat civil :</label>
+      <input id="addCivilState" v-model="addCivilState" type="checkbox">
+      <span><img src="@/assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addCivilState">
+
+      <div>
+        <label for="home_status">Statut du foyer :</label>
+        <input id="home_status" v-model="home_status" type="text">
+      </div>
+
+      <div>
+        <label for="home_size">Taille du foyer :</label>
+        <input id="home_size" v-model="home_size" type="number">
+      </div>
+
+      <div>
+        <label for="wedding_date_d">Date du mariage :</label>
+        <input class="date" id="wedding_date_d" v-model="wedding_date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="wedding_date_m" v-model="wedding_date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="wedding_date_y" v-model="wedding_date_y" type="number" min='0' max='9999' placeholder="AAAA">
+      </div> 
+
+      <div>
+        <label for="wedding_place">Lieu de mariage :</label>
+        <input id="wedding_place" v-model="wedding_place" type="text">
+      </div> 
+
+      <div>
+        <label for="wedding_lastName">Nom du/de la mariée :</label>
+        <input id="wedding_lastName" v-model="wedding_lastName" type="text">
+      </div>
+
+      <div>
+        <label for="wedding_name">Prénom du/de la mariée :</label>
+        <input id="wedding_name" v-model="wedding_name" type="text">
+      </div> 
+
+      <div>
+        <label for="death_date_d">Date du décès:</label>
+        <input class="date" id="death_date_d" v-model="death_date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="death_date_m" v-model="death_date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="death_date_y" v-model="death_date_y" type="number" min='0' max='9999' placeholder="AAAA">
+      </div> 
+
+      <div>
+        <label for="death_place">Lieu de décès :</label>
+        <input id="death_place" v-model="death_place" type="text">
+      </div>
+
+    </form>
+
+    <br>
+
     <div class="foreign_key">
       <label for="source">Source :</label>
       <input id="addSource" v-model="addSource" type="checkbox">
@@ -236,10 +297,10 @@
       </div>
 
       <div>
-        <label for="date_d">Date :</label>
-        <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
-        <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
-        <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
+        <label for="source_date_d">Date :</label>
+        <input class="date" id="source_date_d" v-model="source_date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="source_date_m" v-model="source_date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="source_date_y" v-model="source_date_y" type="number" min='0' max='9999' placeholder="AAAA">
       </div> 
 
       <div>
@@ -304,13 +365,13 @@
       </div>
 
       <div>
-        <label for="immatriculation">Immatriculation :</label>
-        <input id="immatriculation" v-model="immatriculation" type="text">
+        <label for="registration">Immatriculation :</label>
+        <input id="registration" v-model="registration" type="text">
       </div>
 
       <div>
-        <label for="original_immatriculation">Immatriculation originelle :</label>
-        <input id="original_immatriculation" v-model="original_immatriculation" type="text">
+        <label for="original_registration">Immatriculation originelle :</label>
+        <input id="original_registration" v-model="original_registration" type="text">
       </div>
 
       <div>
@@ -355,8 +416,8 @@
       <input type="file" ref="file" @change="selectFile" />
     </label>
 
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="postActorForm">
-      Upload
+    <button class="btn btn-success" :disabled="!selectedFiles" @click="postForm">
+      Envoyer
     </button>
 
     <div class="alert alert-light" role="alert">{{ message }}</div>
