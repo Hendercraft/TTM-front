@@ -1,6 +1,6 @@
 import Bar from '@/components/Bar'
 import upload from '@/components/upload'
-import NewRessource from '@/components/NewRessource'
+import NewRessource from '@/components/ressource/NewRessource'
 
 export default {
   name: 'home',
