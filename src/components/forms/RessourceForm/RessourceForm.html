@@ -1,6 +1,6 @@
 
 <section class="ressource-form">
-  <form>
+  <form class="form">
     <div>
       <label for="name">Nom :</label>
       <input id="name" v-model="name" type="text" required>
@@ -21,7 +21,7 @@
       </select>
     </div>
 
-    <div >
+    <div class="select">
       <label for="object_architecture">Ressource fille Architecture:</label>
       <select id="object_architecture" v-model="object_architecture" multiple>
         <option selected disabled>Sélectionnez une ressource</option>
@@ -31,7 +31,7 @@
       </select>
     </div>
 
-    <div >
+    <div class="select">
       <label for="object_production">Ressource fille Production:</label>
       <select id="object_production" v-model="object_production" multiple>
         <option selected disabled>Sélectionnez une ressource</option>
@@ -41,7 +41,7 @@
       </select>
     </div>
 
-    <div >
+    <div class="select">
       <label for="actor">Ressource fille Homme:</label>
       <select id="actor" v-model="actor" multiple>
         <option selected disabled>Sélectionnez une ressource</option>
