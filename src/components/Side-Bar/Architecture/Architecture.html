@@ -2,10 +2,26 @@
 <section class="architecture">
   <h1>architecture Component</h1>
 
-  <div class="foreign_key">
-    <ul>
-      <li v-for="arch in architectures">{{ arch.name }}</li>
-    </ul>
+  <div class="ressource_list_box">
+    <div class="ressource_list"> 
+      <table cellspacing="0">
+        <tr>
+          <th>Nom de la ressource</th>
+          <th>Cliquez pour voir</th>
+          <th>Cliquez pour modifier</th>
+          <th>Cliquez pour supprimer</th>
+        </tr>
+        <tr v-for="arch in architectures" :key="arch.id">
+          <td>{{arch.name}}</td>
+          <td><router-link :to="`/Architecture/${arch.id}`">Voir</router-link></td>
+          <td><router-link :to="`/Architecture/${arch.id}`">Modifier</router-link></td>
+          <td><router-link :to="`/Architecture/${arch.id}`">Supprimer</router-link></td>
+        </tr>
+      </table>
+      <!-- <ul>
+        <li v-for="arch in architectures"><router-link :to="`/Architecture/${arch.id}`">{{arch.name}}</router-link></li>
+      </ul> -->
+    </div>
   </div>
 
 </section>
