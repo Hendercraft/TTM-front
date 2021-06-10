@@ -1,24 +1,19 @@
-import axios from "axios"
-import FormHandler from '@/components/FormHandler'
-import FormDate from '@/components/FormDate'
-import ArchitectureForm from '@/components/ArchitectureForm'
-import ProductionForm from '@/components/ProductionForm'
-import HumanForm from '@/components/HumanForm'
+import ArchitectureForm from '@/components/forms/ArchitectureForm'
+import ProductionForm from '@/components/forms/ProductionForm'
+import HumanForm from '@/components/forms/HumanForm'
+import RessourceForm from '@/components/forms/RessourceForm'
 
 
 export default {
   name: 'new-ressource',
-  components: { FormHandler, FormDate, ArchitectureForm, ProductionForm, HumanForm },
+  components: { ArchitectureForm, ProductionForm, HumanForm, RessourceForm },
   props: [],
   data() {
     return {
       errors: [],
       name: null,
       date: null,
-      category: undefined,
-      // event: null,
-      // description: null,
-
+      category: undefined
     }
   },
   computed: {
@@ -43,25 +38,5 @@ export default {
       return false
       // e.preventDefault();
     },
-    sendForm: function () {
-      axios.post('http://127.0.0.1:8000/api/database/date/create/',
-        { "name": this.name, "date": this.date },
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response => {
-          console.log(response.data.results),
-            this.name = null;
-          this.date = null;
-        })
-        .catch(error => {
-          console.log(error.response.data.detail)
-          this.errors.push(error.response.data.detail)
-        })
-    },
-
-
   }
 }
