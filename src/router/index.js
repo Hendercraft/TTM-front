@@ -7,13 +7,16 @@ import Home from '@/components/Home'
 import Login from '@/components/Login'
 import HomeLoged from '@/components/HomeLoged'
 
+/*  Ressource   */
+import Ressource from '@/components/ressource/Ressource'
+
 /* Side bar */
 import Architecture from '@/components/Side-Bar/Architecture'
 import Hommes from '@/components/Side-Bar/Hommes'
 import Production from '@/components/Side-Bar/Production'
 import Propos from '@/components/Side-Bar/Propos'
 import Urbanisme from '@/components/Side-Bar/Urbanisme'
-import NewRessource from '@/components/NewRessource'
+import NewRessource from '@/components/ressource/NewRessource'
 import profile from '@/components/profile'
 import testimony from '@/components/testimony'
 import research from '@/components/research'
@@ -86,6 +89,11 @@ const router = new Router({
       path: '/Architecture',
       name: 'Architecture',
       component: Architecture
+    },
+    {
+      path: '/Architecture/:id',
+      name: 'Architecture',
+      component: Ressource
     },
     {
       path: '/Production',
