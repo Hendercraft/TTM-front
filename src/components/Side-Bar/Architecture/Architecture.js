@@ -7,6 +7,7 @@ export default {
   data () {
     return {
       architectures:[],
+      data:null,
     }
   },
   computed: {
@@ -27,11 +28,14 @@ export default {
           }
         })
           .then(response => {
-            for (const data in response.data.results)
+            console.log(response.data.results)
+            for (var i = 0; i < response.data.results.length; i++)
             {
-              if(data.field == 'Architecture')
+              this.data = response.data.results[i]
+              console.log(this.data)
+              if(this.data['field'] == 'Architecture')
               {
-                this.architectures.push(data)
+                this.architectures.push(this.data)
                 console.log(this.architectures)
               }
             }
