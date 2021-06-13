@@ -92,7 +92,8 @@ const router = new Router({
     },
     {
       path: '/Architecture/:id',
-      name: 'Architecture',
+      name: 'Architecture/:id',
+      props:true,
       component: Ressource
     },
     {
