@@ -1,6 +1,6 @@
 
 <section class="architecture">
-  <h1>architecture Component</h1>
+  <h1>Architecture</h1>
 
   <div class="ressource_list_box">
     <div class="ressource_list"> 
@@ -13,7 +13,9 @@
         </tr>
         <tr v-for="arch in architectures" :key="arch.id">
           <td>{{arch.name}}</td>
-          <td><router-link :to="`/Architecture/${arch.id}`">Voir</router-link></td>
+          <!-- <td><router-link :to="`/Architecture/${arch.id}`">Voir</router-link></td> -->
+          <td><router-link :to="{name: 'Architecture/:id', params: {id: arch.id, table: 'Architecture'}}">Voir</router-link></td>
+
           <td><router-link :to="`/Architecture/${arch.id}`">Modifier</router-link></td>
           <td><router-link :to="`/Architecture/${arch.id}`">Supprimer</router-link></td>
         </tr>
