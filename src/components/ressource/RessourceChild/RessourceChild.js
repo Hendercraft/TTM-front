@@ -13,16 +13,17 @@ export default {
 
   },
   mounted () {
-    // this.getRessourceChild(this.childInfo)
+    this.getRessourceChild(this.childInfo)
   },
   methods: {
     getRessourceChild(childInfo)
     {
-      console.log(childInfo)
+      console.log(childInfo, "starfoula")
+      
       /*  If the table targeted is for Architecture or Production */
-      if (table != 'Homme')
+      if (childInfo.object)
       {
-        http.get(`/database/object/${id}/`,{
+        http.get(`/database/object/${childInfo.id}/`,{
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.token}`
@@ -39,7 +40,7 @@ export default {
       /*  If the table targeted is Homme  */
       else
       {
-        http.get(`/database/actor/${id}/`,{
+        http.get(`/database/actor/${childInfo.id}/`,{
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.token}`

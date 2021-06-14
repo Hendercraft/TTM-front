@@ -10,13 +10,17 @@ export default {
       ressource:[],
       list_child_ressources:[],
       index:0,
+      index_child:0,
       childInfo:[],
+      fetch_finished:false,
     }
   },
   computed: {
 
   },
   mounted () {
+  },
+  created(){
     this.getRessource(this.id)
   },
   methods: {
@@ -42,14 +46,14 @@ export default {
       if(list_objs.length != 0)
       {
         list_objs.forEach(element => {
-          http.get(`/database/objet/${obj_id}/`,{
+          http.get(`/database/object/${element}/`,{
             headers: {
               'Content-type': 'application/json',
               'Authorization': `Bearer ${localStorage.token}`
             }})
               .then(response => {
                 this.list_child_ressources.push({"id":response.data.id,"object":true,"date":0})
-                http.get(`/database/date/${response.data.date[0]}`,{
+                http.get(`/database/date/${response.data.date[0]}/`,{
                   headers: {
                     'Content-type': 'application/json',
                     'Authorization': `Bearer ${localStorage.token}`
@@ -60,7 +64,7 @@ export default {
                   var y = response.data.year
                   this.list_child_ressources[this.index]["date"] = d + m*10 + y*10
                   this.index+=1
-                  if(this.index == list_objs.length && this.ressource.actors_son.length!=0)
+                  if(this.index >= list_objs.length && this.ressource.actors_son.length!=0)
                   {
                     this.getActorChilds(this.ressource.actors_son)
                   }
@@ -104,7 +108,7 @@ export default {
                 var y = response.data.year
                 this.list_child_ressources[this.index].date = d + m*10 + y*10
                 this.index+=1
-                if(this.index == list_actors.length)
+                if(this.index >= list_actors.length)
                 {
                   console.log(this.list_child_ressources)
 
@@ -114,8 +118,8 @@ export default {
                     return a.date - b.date;
                   })
 
-                  console.log(this.list_child_ressources, "noice")
-                  this.updateChildInfo()
+                  return (this.updateChildInfo())
+                  
                 }
               })
             })
@@ -127,10 +131,11 @@ export default {
     },
     updateChildInfo()
     {
-      console.log(this.list_child_ressources[this.index])
-      this.childInfo = this.list_child_ressources[this.index]
+      console.log(this.list_child_ressources[this.index_child], "namaste")
+      this.childInfo = this.list_child_ressources[this.index_child]
+      this.fetch_finished = true
       console.log(this.childInfo, "coucou")
-      this.index += 1 
+      this.index_child += 1 
     }
   }
 }

@@ -1,8 +1,7 @@
 
 <section class="ressource">
   <h1>{{ressource.name}}</h1>
-  <body>
-    <ressource-child v-bind:id="childInfo"></ressource-child>
+  <body v-if="fetch_finished">
+    <ressource-child v-bind:childInfo="childInfo" ></ressource-child>
   </body>
 </section>
-
