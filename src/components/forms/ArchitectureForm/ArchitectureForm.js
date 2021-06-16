@@ -153,7 +153,7 @@ export default {
     this.selectedFiles = undefined
     },
     getBrand(){
-      http.get("database/abstractObject/",{
+      http.get("database/abstractObjects/",{
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${localStorage.token}`
@@ -163,7 +163,7 @@ export default {
           })
     },
     getPlaces() {
-      http.get("database/place/",{
+      http.get("database/places/",{
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.token}`
@@ -173,7 +173,7 @@ export default {
         })
     },
     getProfession(){
-      http.get("database/socialActivity/",{
+      http.get("database/socialActivities/",{
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${localStorage.token}`
