@@ -1,8 +1,8 @@
 
 <section class="new-ressource">
   <h1>Ajouter ressource</h1>
-
-  <div>
+  <login-modal />
+  <div v-if="connected">
     <label for="category-select">Veuillez sélectionner une catégorie : </label>
     <select name="category" id="category-select" v-model='category' aria-label="Sélectionnez une catégorie">
       <option selected disabled>Sélectionnez une catégorie</option>                    

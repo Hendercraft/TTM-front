@@ -1,26 +1,31 @@
+/* eslint-disable */
 import ArchitectureForm from '@/components/forms/ArchitectureForm'
 import ProductionForm from '@/components/forms/ProductionForm'
 import HumanForm from '@/components/forms/HumanForm'
 import RessourceForm from '@/components/forms/RessourceForm'
 
+import LoginModal from '../../modals/Modal_Login'
+import { tokenIsValid } from '../../../services/jwtService'
+
 
 export default {
   name: 'new-ressource',
-  components: { ArchitectureForm, ProductionForm, HumanForm, RessourceForm },
+  components: { ArchitectureForm, ProductionForm, HumanForm, RessourceForm, LoginModal },
   props: [],
   data() {
     return {
       errors: [],
       name: null,
       date: null,
-      category: undefined
+      category: undefined,
+      connected:null
     }
   },
   computed: {
 
   },
   mounted() {
-
+    this.userConnected()
   },
   methods: {
     checkForm: function (e) {
@@ -38,5 +43,14 @@ export default {
       return false
       // e.preventDefault();
     },
+
+    userConnected()
+    {
+      this.connected = tokenIsValid()
+      if(this.connected==false)
+      {
+        this.$modal.show('modal-login')
+      }
+    }
   }
 }
