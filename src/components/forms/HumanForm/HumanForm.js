@@ -1,5 +1,5 @@
 import UploadFiles from '../../UploadFiles'
-import UploadService from '../../../services/UploadFilesService'
+import UploadFilesService from '../../../services/UploadFilesService'
 import http from '../../../http-common'
 
 export default {
@@ -165,7 +165,7 @@ export default {
     this.progress = 0
     console.log('uploading...')
     this.currentFile = this.selectedFiles.item(0)
-    UploadService.upload(this.currentFile, event => {
+    UploadFilesService.upload(this.currentFile, event => {
       this.progress = Math.round((100 * event.loaded) / event.total)
       }, this.formatGroup, this.format)
       .then(response => {
