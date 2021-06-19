@@ -3,6 +3,7 @@
 }
 
 .ressource_list_box{
+    display: flex;
     margin-top: 5em;
     margin-left: 5em;
     margin-right: 5em;
@@ -12,11 +13,16 @@
 }
 
 .ressource_list{
-    width: 70%;
+    flex-grow: 2;
     height: 600px;
     left: 0;
     overflow: scroll;
     border-right: 5px black solid;
+}
+
+.filters{
+    width: 25%;
+    text-align: center;
 }
 
 table{

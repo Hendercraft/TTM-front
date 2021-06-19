@@ -1,7 +1,8 @@
 
 <section class="architecture">
   <h1>Architecture</h1>
-
+  <login-modal />
+  <delete-ressource-modal v-bind:id="deleteID" @deleted="deletedConfirmation"/>
   <div class="ressource_list_box">
     <div class="ressource_list"> 
       <table cellspacing="0">
@@ -14,17 +15,19 @@
         <tr v-for="arch in architectures" :key="arch.id">
           <td>{{arch.name}}</td>
           <!-- <td><router-link :to="`/Architecture/${arch.id}`">Voir</router-link></td> -->
-          <td><router-link :to="{name: 'Architecture/:id', params: {id: arch.id, table: 'Architecture'}}">Voir</router-link></td>
+          <td><router-link :to="{name: 'Architecture/:id', params: {id: arch.id}}">Voir</router-link></td>
 
           <td><router-link :to="`/Architecture/${arch.id}`">Modifier</router-link></td>
-          <td><router-link :to="`/Architecture/${arch.id}`">Supprimer</router-link></td>
+          <button @click="deleteRessource(arch.id)" v-model=deleteID>Supprimer</button>
         </tr>
       </table>
-      <!-- <ul>
-        <li v-for="arch in architectures"><router-link :to="`/Architecture/${arch.id}`">{{arch.name}}</router-link></li>
-      </ul> -->
+    </div>
+    <div class="filters">
+      <h2>Filtres</h2>
     </div>
   </div>
+
+  
 
 </section>
 
