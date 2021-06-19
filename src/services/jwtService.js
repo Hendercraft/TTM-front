@@ -1,6 +1,6 @@
-// import { data } from 'autoprefixer'
+/* eslint-disable */
 import axios from 'axios'
-
+import http from '../http-common'
 var data = {
   token: null,
   refreshToken: null,
@@ -14,6 +14,40 @@ export function tokenAlive (exp) {
     return false
   }
   return true
+}
+
+export function tokenIsValid()
+{
+  if(localStorage.getItem('token')!=null)
+  {
+    data.token = jwtDecrypt(localStorage.getItem('token'))
+    if(tokenAlive(data.token.exp))
+    {
+      return true
+    }
+    else
+    {
+      return false
+    }
+  }
+  else
+  {
+    return false
+  }
+}
+
+export function idConnectedUser()
+{
+  if(localStorage.getItem('token'))
+  {
+    data.token = jwtDecrypt(localStorage.getItem('token'))
+    return data.token.user_id
+  }
+  else
+  {
+    return null
+  }
+  
 }
 
 export default function jwtDecrypt (token) {
@@ -47,13 +81,15 @@ export function authHeader () {
   }
 }
 
-export function isTokenValid () {
+export function isTokenValid () 
+{
+
   data.token = jwtDecrypt(localStorage.getItem('token'))
-  console.log(data.token)
-  console.log('test')
-  console.log(localStorage.getItem('refreshToken'))
+  refreshToken = localStorage.getItem('refreshToken')
   data.userId = data.token.user_id
-  if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') === 'null')) {
+
+  if(!tokenIsValid() && !refreshToken)
+  {
     console.log('refreshing token..')
     axios.post('http://127.0.0.1:8000/api/token/refresh/', {'refresh': localStorage.getItem('refresh')})
       .then(response => {
@@ -64,14 +100,20 @@ export function isTokenValid () {
         console.log('Refresh token failed')
         console.log(error)
       })
-  } else if (!tokenAlive(data.token.exp) && (localStorage.getItem('refreshToken') !== 'null')) {
+  }
+
+  else if (!tokenIsValid() && refreshToken) 
+  {
     console.log(data.refreshToken)
     if (!tokenAlive(data.refreshToken.exp)) {
       data.token = null
       data.refreshToken = null
       return false
     }
-  } else {
+  } 
+  
+  else 
+  {
     return true
   }
 }
