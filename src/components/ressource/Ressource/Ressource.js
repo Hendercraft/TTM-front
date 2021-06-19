@@ -4,7 +4,7 @@ import RessourceChild from '../RessourceChild'
 export default {
   name: 'ressource',
   components: {RessourceChild},
-  props: ['id','table'],
+  props: ['id'],
   data () {
     return {
       ressource:[],
@@ -19,6 +19,7 @@ export default {
 
   },
   mounted () {
+    // this.filter()
   },
   created(){
     this.getRessource(this.id)
@@ -33,7 +34,6 @@ export default {
         }})
           .then(response => {
             this.ressource = response.data
-            console.log(this.ressource, "heh")
             this.getObjectChilds(this.ressource.objects_son)
           })
           .catch(err => {
@@ -77,6 +77,7 @@ export default {
       }
       else
       {
+        //If ressource don't have any object relationship
         if(this.ressource.actors_son.length!=0)
         {
           this.getActorChilds(this.ressource.actors_son)
@@ -89,14 +90,15 @@ export default {
     {    
       /*  Fetch all data from object table (Architecture and Production)  */
       list_actors.forEach(element => {
-        console.log("hello from actor child")
         http.get(`/database/actor/${element}/`,{
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${localStorage.token}`
           }})
             .then(response => {
+              //Create an empty JSON in the list
               this.list_child_ressources.push({"id":response.data.id,"object":false,"date":0})
+              //Fetch date data and fill the JSON
               http.get(`/database/date/${response.data.birth_date}/`,{
                 headers: {
                   'Content-type': 'application/json',
@@ -108,6 +110,8 @@ export default {
                 var y = response.data.year
                 this.list_child_ressources[this.index].date = d + m*10 + y*10
                 this.index+=1
+
+                //If the for loop is finished, sort the list_child_ressource by date and return updateChildfInfo func
                 if(this.index >= list_actors.length)
                 {
                   console.log(this.list_child_ressources)
@@ -131,12 +135,14 @@ export default {
     },
     updateChildInfo()
     {
-      console.log(this.list_child_ressources[this.index_child], "namaste")
       this.childInfo = this.list_child_ressources[this.index_child]
       this.fetch_finished = true
-      console.log(this.childInfo, "coucou")
       this.index_child += 1 
-    }
+    },
+    // filter()
+    // {
+
+    // }
   }
 }
 
