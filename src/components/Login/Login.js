@@ -1,3 +1,4 @@
+/* eslint-disable */
 import http from '../../http-common'
 
 export default {
@@ -32,7 +33,6 @@ export default {
       })
     },
     Login: function(){
-      console.log("login ...")
       http.post('token/',{"username":this.username, "password":this.password})
       .then(response => {
         this.loginSuccessful(response)
