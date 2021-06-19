@@ -1,11 +1,8 @@
 /* eslint-disable */
 import Vue from 'vue'
-// import axios from 'axios'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-// import Register from '@/components/Register'
 import Login from '@/components/Login'
-import HomeLoged from '@/components/HomeLoged'
 
 /*  Ressource   */
 import Ressource from '@/components/ressource/Ressource'
@@ -24,7 +21,10 @@ import research from '@/components/research'
 // import {isTokenValid} from '../services/jwtService'
 import {tokenAlive} from '@/services/jwtService'
 
+import VModal from 'vue-js-modal'
+
 Vue.use(Router)
+Vue.use(VModal)
 
 const router = new Router({
 
@@ -60,14 +60,6 @@ const router = new Router({
       component: profile,
       meta: {
         guest: true
-      }
-    },
-    {
-      path: '/home',
-      name: 'HomeLoged',
-      component: HomeLoged,
-      meta: {
-        requiresAuth: true
       }
     },
     {
