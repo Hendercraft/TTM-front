@@ -78,9 +78,6 @@ export default {
     if (this.token == null || this.token == 'null'){
       this.token = localStorage.getItem('token')
     }
-    // if (!tokenAlive(this.token)){
-    //   
-    // }
     console.log(tokenAlive(this.token))
     if (tokenAlive(this.token)){
       this.$forceUpdate()
