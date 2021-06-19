@@ -8,7 +8,7 @@
       <div class="body">
         <p>Voulez vous vraiment supprimer cette ressource ?</p>
         <button @click="deleteRessource">Supprimer</button>
-        <button @click="closeModal">Retour</button>         
+        <button @click="closeModal">Retour</button>
       </div>
       <div>
           {{error}}
@@ -59,8 +59,10 @@ export default {
 </script>
 <style lang="css">
 
+
 .partition-title{
   font-size: 30px;
+  text-align: center;
 }
 
 .box{
@@ -70,5 +72,6 @@ export default {
 
 .body{
     margin-top: 3em;
+    text-align: center;
 }
 </style>

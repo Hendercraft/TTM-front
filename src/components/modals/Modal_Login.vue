@@ -9,18 +9,18 @@
         <input type="password" v-model="password" placeholder="Mot de passe">
       </form>
 
-      <div>
+      <div class="buttons">
         <button @click="signIn">Se connecter</button><br>
         <div class="register">
           <p>Toujours pas de compte ?</p>
           <button><router-link class="link" to="/register" tag="a">S'inscrire</router-link></button>
         </div>
-        
       </div>
     </div>
   </modal>
 </template>
 <script>
+/* eslint-disable */
 import login from '../Login/Login'
 const MODAL_WIDTH = 656
 export default {
@@ -40,6 +40,8 @@ export default {
     signIn() {
       console.log("works here")
       login.methods.externLogin(this.username, this.password)
+      this.$modal.hide('modal-login')
+      this.$forceUpdate()
     }
   }
 }
@@ -47,6 +49,7 @@ export default {
 <style lang="css">
 .partition-title{
   font-size: 30px;
+  text-align: center;
 }
 
 .box{
@@ -55,8 +58,13 @@ export default {
 }
 
 form{
-  margin: 3em;
+  margin: 2em;
+  margin-left: 8em;
   margin-bottom: 1em;
+}
+
+.buttons{
+  text-align: center;
 }
 
 .link:hover {
