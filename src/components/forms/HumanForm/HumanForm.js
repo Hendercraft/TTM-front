@@ -188,7 +188,7 @@ export default {
     this.selectedFiles = undefined
     },
   getBrand(){
-    http.get("database/abstractObject/",{
+    http.get("database/abstractObjects/",{
       headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${localStorage.token}`
@@ -198,7 +198,7 @@ export default {
         })
   },
   getPlaces() {
-    http.get("database/place/",{
+    http.get("database/places/",{
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.token}`
@@ -208,7 +208,7 @@ export default {
         })
   },
   getProfession(){
-    http.get("database/profession/",{
+    http.get("database/professions/",{
       headers: {
         'Content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.token}`
@@ -305,486 +305,161 @@ export default {
     })
     .then(response =>{
       this.selected_birthdate = response.data.id
-    })
 
-    /*  Arrival date */
-    http.post("database/date/create/",
-    {
-      "name":"Arrival date", "day": this.arrivalDate_d, "month": this.arrivalDate_m,"year":this.arrivalDate_y
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_arrival_date = response.data.id
-    })
-
-    /*  Departure date */
-    http.post("database/date/create/",
-    {
-      "name":"Departure date", "day": this.departureDate_d, "month": this.departureDate_m,"year":this.departureDate_y
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_departure_date = response.data.id
-    })
-
-    /*  Wedding date */
-    http.post("database/date/create/",
-    {
-      "name":"Wedding date", "day": this.wedding_date_d, "month": this.wedding_date_m,"year":this.wedding_date_y
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_wedding_date = response.data.id
-    })
-
-    /*  Death date */
-    http.post("database/date/create/",
-    {
-      "name":"Death date", "day": this.death_date_d, "month": this.death_date_m,"year":this.death_date_y
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_death_date = response.data.id
-    })
-
-    /*  Source date */
-    http.post("database/date/create/",
-    {
-      "name":"Source date", "day": this.source_date_d, "month": this.source_date_m,"year":this.source_date_y
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_source_date = response.data.id
-    })
-
-    /*  Source author */
-    http.post("database/author/create/",
-    {
-      "name":this.author,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_editor = response.data.id
-    })
-
-    /*  Source editor */
-    http.post("database/author/create/",
-    {
-      "name":this.editor,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.selected_editor = response.data.id
-    })
-
-
-
-    /*  Source  */
-    http.post("database/source/create/",
-    {
-      "name":this.sourceName,
-      "date_source":this.selected_source_date, 
-      "conservationPlace": this.conservationPlace,
-      "author": 1,  //Temporary
-      "editor": 1,  //Temporary
-      "rights": this.rights,
-
-      "viability": this.viability,
-      "registration": this.registration,
-      "original_registration":this.original_registration,
-      "study":this.study,
-
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-    })
-
-    //Actor class
-    http.post("database/actor/create/",
-    {
-      "categorie":this.categorie,
-      "domain":this.selected_type,
-      "building":this.building_select,
-      "name":this.name,
-      "last_name":this.last_name,
-      "profession":this.selected_profession,
-      "instruction_level":this.instruction_level,
-      "birth_date":this.selected_birthdate,
-      "birth_place":this.selected_birth_place,
-      "gender":this.gender,
-      "arrival_date":this.selected_arrival_date,
-      "departure_date":this.selected_departure_date,
-      "nationality":this.nationality,
-      "living_place":this.selected_place,
-      "home_status":this.home_status,
-      "home_size":this.home_size,
-      "wedding_date":this.selected_wedding_date,
-      "wedding_place":this.wedding_place,
-      "wedding_name":this.wedding_name,
-      "wedding_lastName":this.wedding_lastName,
-      "death_date":this.selected_death_date,
-      "death_place":this.death_place,
-      "commentary":this.commentary,
-      "source":this.source,
-    }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.token}`
-      }
-    })
-    .then(response =>{
-      this.sourceDateId = response.data.id
-    })
-    .catch(error => {
-      console.log(error)
-    })
-    this.upload()
-  },
-
-  postActorForm(){
-      if(this.addBrand && this.addPlace && this.addProfession){
-
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_brand = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_profession = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_placeLocation = response.data.id
-          http.post("database/place/create/", {
-            "name":this.placeName, "description":this.placeDescription, "place_location":this.selected_placeLocation
-          }, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.token}`
-            }
-          })
-          .then(response=> {
-            console.log(response)
-            this.selected_place = response.data.id
-          })
-          .catch(error =>{
-            console.log(error)
-          })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-
-
-
-      if(this.addBrand && this.addPlace && !this.addProfession){
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_brand = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_placeLocation = response.data.id
-          http.post("database/place/create/", {
-            "name":this.placeName, "description":this.placeDescription, "place_location":this.selected_placeLocation
-          }, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.token}`
-            }
-          })
-          .then(response=> {
-            console.log(response)
-          this.selected_place = response.data.id
-          })
-          .catch(error =>{
-            console.log(error)
-          })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-
-
-      if(this.addBrand && !this.addPlace && this.addProfession){
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_brand = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_profession = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-      if(this.addBrand && !this.addPlace && !this.addProfession){
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_brand = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-      if(!this.addBrand && this.addPlace && this.addProfession){
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_profession = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_placeLocation = response.data.id
-          http.post("database/place/create/", {
-            "name":this.placeName, "description":this.placeDescription, "place_location":this.selected_placeLocation
-          }, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.token}`
-            }
-          })
-          .then(response=> {
-            console.log(response)
-            this.selected_place = response.data.id
-          })
-          .catch(error =>{
-            console.log(error)
-          })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-
-
-      if(!this.addBrand && this.addPlace && !this.addProfession){
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_placeLocation = response.data.id
-          http.post("database/place/create/", {
-            "name":this.placeName, "description":this.placeDescription, "place_location":this.selected_placeLocation
-          }, {
-            headers: {
-              'Authorization': `Bearer ${localStorage.token}`
-            }
-          })
-          .then(response=> {
-            console.log(response)
-            this.selected_place = response.data.id
-          })
-          .catch(error =>{
-            console.log(error)
-          })
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-
-
-      if(!this.addBrand && !this.addPlace && this.addProfession){
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_profession = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-      if(!this.addBrand && !this.addPlace && !this.addProfession){
-        console.log("yes")
-      }
-
-
-      // Main post part
-
+      /*  Arrival date */
       http.post("database/date/create/",
       {
-        "":""
+        "name":"Arrival date", "day": this.arrivalDate_d, "month": this.arrivalDate_m,"year":this.arrivalDate_y
       }, {
         headers: {
           'Authorization': `Bearer ${localStorage.token}`
         }
       })
       .then(response =>{
-        this.birthdate = response.data.id
-      })
+        this.selected_arrival_date = response.data.id
+        /*  Departure date */
+        http.post("database/date/create/",
+        {
+          "name":"Departure date", "day": this.departureDate_d, "month": this.departureDate_m,"year":this.departureDate_y
+        }, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.token}`
+          }
+        })
+        .then(response =>{
+          this.selected_departure_date = response.data.id
 
-      http.post("database/date/create/",
-      {
-        "":""
-      }, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.token}`
-        }
-      })
-      .then(response =>{
-        this.arrivalDate = response.data.id
-      })
+          /*  Wedding date */
+          http.post("database/date/create/",
+          {
+            "name":"Wedding date", "day": this.wedding_date_d, "month": this.wedding_date_m,"year":this.wedding_date_y
+          }, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.token}`
+            }
+          })
+          .then(response =>{
+            this.selected_wedding_date = response.data.id
+            /*  Death date */
+            http.post("database/date/create/",
+            {
+              "name":"Death date", "day": this.death_date_d, "month": this.death_date_m,"year":this.death_date_y
+            }, {
+              headers: {
+                'Authorization': `Bearer ${localStorage.token}`
+              }
+            })
+            .then(response =>{
+              this.selected_death_date = response.data.id
 
-      http.post("database/date/create/",
-      {
-        "":""
-      }, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.token}`
-        }
-      })
-      .then(response =>{
-        this.departureDate = response.data.id
-      })
+              /*  Source date */
+              http.post("database/date/create/",
+              {
+                "name":"Source date", "day": this.source_date_d, "month": this.source_date_m,"year":this.source_date_y
+              }, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.token}`
+                }
+              })
+              .then(response =>{
+                this.selected_source_date = response.data.id
 
-      http.post("database/date/create/",
-      {
-        "":""
-      }, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.token}`
-        }
+                /*  Source author */
+                http.post("database/author/create/",
+                {
+                  "name":this.author,
+                }, {
+                  headers: {
+                    'Authorization': `Bearer ${localStorage.token}`
+                  }
+                })
+                .then(response =>{
+                  this.selected_editor = response.data.id
+
+                  /*  Source editor */
+                  http.post("database/author/create/",
+                  {
+                    "name":this.editor,
+                  }, {
+                    headers: {
+                      'Authorization': `Bearer ${localStorage.token}`
+                    }
+                  })
+                  .then(response =>{
+                    this.selected_editor = response.data.id
+                    /*  Source  */
+                    http.post("database/source/create/",
+                    {
+                      "name":this.sourceName,
+                      "date_source":this.selected_source_date, 
+                      "conservationPlace": this.conservationPlace,
+                      "author": 1,  //Temporary
+                      "editor": 1,  //Temporary
+                      "rights": this.rights,
+
+                      "viability": this.viability,
+                      "registration": this.registration,
+                      "original_registration":this.original_registration,
+                      "study":this.study,
+
+                    }, {
+                      headers: {
+                        'Authorization': `Bearer ${localStorage.token}`
+                      }
+                    })
+                    .then(response =>{
+                      this.source.push(response.data.id)
+                      /*Actor class*/
+                      http.post("database/actor/create/",
+                      {
+                        "categorie":this.categorie,
+                        "domain":this.selected_type[0],
+                        "building":this.building_select,
+                        "name":this.name,
+                        "last_name":this.last_name,
+                        "profession":this.selected_profession,
+                        "instruction_level":this.instruction_level,
+                        "birth_date":this.selected_birthdate,
+                        "birth_place":this.selected_birth_place,
+                        "gender":this.gender,
+                        "arrival_date":this.selected_arrival_date,
+                        "departure_date":this.selected_departure_date,
+                        "nationality":this.nationality,
+                        "living_place":this.selected_place,
+                        "home_status":this.home_status,
+                        "home_size":this.home_size,
+                        "wedding_date":this.selected_wedding_date,
+                        "wedding_place":this.wedding_place,
+                        "wedding_name":this.wedding_name,
+                        "wedding_lastName":this.wedding_lastName,
+                        "death_date":this.selected_death_date,
+                        "death_place":this.death_place,
+                        "commentary":this.commentary,
+                        "source":this.source,
+                      }, {
+                        headers: {
+                          'Authorization': `Bearer ${localStorage.token}`
+                        }
+                      })
+                      .then(response =>{
+                        this.sourceDateId = response.data.id
+                        this.upload()
+                      })
+                      .catch(error => {
+                        console.log(error)
+                      })
+                    })
+                  })
+                })
+              })
+            })
+          })
+        })
       })
-      .then(response =>{
-        this.sourceDateId = response.data.id
-      })
-    }
-  },
-}
+    })
+  }
+
+  
+}}
+
 
