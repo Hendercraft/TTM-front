@@ -116,7 +116,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  margin-left: 10%; /* Same as the width of the sidebar */
+  margin-left: 190px; /* Same as the width of the sidebar */
   padding-bottom: 0em;
   margin-bottom: 0em;
   display: flex;
@@ -142,7 +142,7 @@ button:hover{
 
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 10%; /* Set the width of the sidebar */
+    width: 190px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -240,10 +240,13 @@ footer p {
 @media screen and (max-width: 950px) {
   .sidenav {
     top: 0;
-    /* left: 0; */
-    /* right: 0; */
     width: 100%;
-    height: auto;
+    height: 90px;
+  }
+  #app{
+    margin-top: 90px;
+    margin-left: 0em;
+    margin-right: 0em;
   }
 }
 </style>

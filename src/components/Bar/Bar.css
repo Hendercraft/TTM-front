@@ -1,5 +1,5 @@
 .bar {
-    /* max-height: 100%; */
+    background-color: black;
 }
 
 #content {
@@ -34,50 +34,13 @@
     margin-top: 1em;
 }
 
-
-
-h1{
-    font-size: 3.5em;
-    padding-bottom: 0em;
-    color: white;
-}
-p{
-    padding-top: 0em;
-    padding-bottom: 0em;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    letter-spacing: .4em;
-    color: white;
-    font-weight: bold;
+#TTM_logo{
+    width: 98%;
+    padding-bottom: 2em;
+    border-bottom: 1px rgb(71, 71, 71) solid;
 }
 
-.tech{
-    padding-top: 0em;
-    padding-bottom: 0em;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    height: 20px;
-    float: left;
-}
-.time{
-    padding-top: 0em;
-    padding-bottom: 0em;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    margin-right: 1.5em;
-    float: center;
-}
-.machine{
-    padding-top: 0em;
-    padding-bottom: 0em;
-    margin-top: 0em;
-    margin-bottom: 0em;
-    float: right;
-}
-.trait{
-    margin-top: 2.3em;
-    border-bottom: 1px white solid;
-}
+
 
 a{
     color: rgb(218, 218, 218);
@@ -109,50 +72,6 @@ button{
     height: 10vh;
 }
 
-#logo{
-    padding-bottom: 5em;
-    border-right: 1px white solid;
-}
-
-@media screen and (max-width: 1700px) {
-    .modifyDatabase{
-        margin-top: .2em;
-    }    
-}
-
-@media screen and (max-width: 1600px) {
-    p{
-        font-size: medium;
-    }
-    a{
-        font-size: medium;
-    }
-    h1{
-        font-size: large;
-    }
-    #loupe{
-        width: 30px;
-    }
-    .modifyDatabase{
-        margin-top: 3em;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    p{
-        font-size: small;
-    }
-    a{
-        font-size: small;
-    }
-    h1{
-        font-size: medium;
-    }
-    #loupe{
-        width: 20px;
-    }
-    
-}
 @media screen and (max-width: 950px)
 {
     #sidebar
