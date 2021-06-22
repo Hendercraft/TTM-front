@@ -1,7 +1,10 @@
 
 <section class="ressource">
-  <h1>{{ressource.name}}</h1>
+  <h1 id="title">{{ressource.name}}</h1>
+  <p id="description">{{ressource.description}}</p>
   <body v-if="fetch_finished">
+    <button id="left_button" @click="leftRessource" :disabled="leftDisabled"><img src="../../../assets/fleche.png"/></button>
+    <button id="right_button" @click="rightRessource" :disabled="rightDisabled"><img src="../../../assets/fleche.png"/></button>
     <ressource-child v-bind:childInfo="childInfo" ></ressource-child>
   </body>
 </section>
