@@ -50,6 +50,11 @@ export default {
       if(this.connected==false)
       {
         this.$modal.show('modal-login')
+        this.$forceUpdate()
+      }
+      else
+      {
+        this.$forceUpdate()
       }
     }
   }
