@@ -4,8 +4,33 @@
 
 body{
     margin: 0 auto;
-    width: 900px;
+    width: 1000px;
     padding: 1em;
     border: 1px solid #CCC;
     border-radius: 1em;
+}
+
+#left_button img{
+    left: -100px;
+    bottom: -300px;
+    position: relative;
+    height: 50px;
+    transform: scaleX(-1);
+}
+
+
+
+#right_button img{
+    left: 930px;
+    bottom: -300px;
+    position: relative;
+    height: 50px;
+}
+
+#description{
+    margin-top: 2em;
+}
+
+#title{
+    margin-left: 4em;
 }
