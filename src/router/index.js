@@ -94,9 +94,21 @@ const router = new Router({
       component: Production
     },
     {
+      path: '/Production/:id',
+      name: 'Production/:id',
+      props:true,
+      component: Ressource
+    },
+    {
       path: '/Hommes',
       name: 'Hommes',
       component: Hommes
+    },
+    {
+      path: '/Hommes/:id',
+      name: 'Hommes/:id',
+      props:true,
+      component: Ressource
     },
     {
       path: '/Temoignage',
