@@ -3,10 +3,10 @@
     <div class="main">
       <nav id="upper-navbar">
         <ul>
-          <li class="upper-nabar-elements" v-if="!logged"><router-link to="/login">Connexion</router-link></li>
-          <li class="upper-nabar-elements" v-if="!logged"><router-link to="/register">Inscription</router-link></li>
-          <li class="upper-nabar-elements" v-if="logged"><router-link to="/profile">Profil</router-link></li>
-          <li class="upper-nabar-elements" v-if="logged"><button v-on:click="logout">Déconnexion</button></li>
+          <li class="upper-nabar-elements" v-if="!logged" :key="logged"><router-link to="/login">Connexion</router-link></li>
+          <li class="upper-nabar-elements" v-if="!logged" :key="logged"><router-link to="/register">Inscription</router-link></li>
+          <li class="upper-nabar-elements" v-if="logged" :key="logged"><router-link to="/profile">Profil</router-link></li>
+          <li class="upper-nabar-elements" v-if="logged" :key="logged"><button v-on:click="logout">Déconnexion</button></li>
         </ul>
       </nav>
       <bar class="sidenav"></bar>
