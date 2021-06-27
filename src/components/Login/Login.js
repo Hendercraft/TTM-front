@@ -24,9 +24,8 @@ export default {
       http.post('token/',{"username":username, "password":password})
       .then(response => {
         localStorage.setItem('token', response.data.access)
-        localStorage.setItem('refresh', req.data.refresh)
+        localStorage.setItem('refresh', response.data.refresh)
         localStorage.setItem('refreshToken', null)
-        this.$router.replace(this.$route.query.redirect || '/')
       })
       .catch(error => {
         console.log(error)
@@ -42,7 +41,7 @@ export default {
       })
       .catch(error =>{
         console.log(error.response.data.detail)
-        // this.errors = error.response.data.detail
+        this.errors = error.response.data.detail
         this.loginFailed()
 
       })
