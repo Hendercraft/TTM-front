@@ -2,7 +2,7 @@
   <modal name="modal-delete-ressource" transition="pop-out" :width="modalWidth" :focus-trap="true" :height="300">
     <div class="box">
       <div class="partition-title">
-        Supression de ressource
+        <p>Supression de ressource</p>
       </div>
 
       <div class="body">

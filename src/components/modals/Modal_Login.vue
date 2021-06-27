@@ -11,6 +11,7 @@
 
       <div class="buttons">
         <button @click="signIn">Se connecter</button><br>
+        <div class="error" v-if="errorMessage">{{errorMessage}}</div>
         <div class="register">
           <p>Toujours pas de compte ?</p>
           <button><router-link class="link" to="/register" tag="a">S'inscrire</router-link></button>
@@ -22,6 +23,7 @@
 <script>
 /* eslint-disable */
 import login from '../Login/Login'
+import {tokenIsValid} from '../../services/jwtService'
 const MODAL_WIDTH = 656
 export default {
   name: 'LoginModal',
@@ -29,7 +31,10 @@ export default {
     return {
       modalWidth: MODAL_WIDTH,
       username:null,
-      password:null
+      password:null,
+
+      error:null,
+      errorMessage:null,
     }
   },
   created() {
@@ -38,10 +43,20 @@ export default {
   },
   methods: {
     signIn() {
-      console.log("works here")
       login.methods.externLogin(this.username, this.password)
-      this.$modal.hide('modal-login')
-      this.$forceUpdate()
+      console.log("cocuou")
+      this.error = tokenIsValid()
+      if(this.error)
+      {
+        console.log(this.error)
+        this.$modal.hide('modal-login')
+      }
+      else
+      {
+        console.log(this.error)
+        this.errorMessage = "Veuillez recommencer (parfois il faut appuyer deux fois sur 'se connecter')"
+        this.$forceUpdate()        
+      }
     }
   }
 }
@@ -50,6 +65,12 @@ export default {
 .partition-title{
   font-size: 30px;
   text-align: center;
+}
+
+.error{
+  color: red;
+  margin-bottom: 0em;
+  margin-top: 1em;
 }
 
 .box{
