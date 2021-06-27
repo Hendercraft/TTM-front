@@ -13,6 +13,9 @@ export default {
       index_child:0,
       childInfo:[],
       fetch_finished:false,
+
+      leftDisabled: true,
+      rightDisabled: false,
     }
   },
   computed: {
@@ -20,6 +23,7 @@ export default {
   },
   mounted () {
     // this.filter()
+    this.$forceUpdate()
   },
   created(){
     this.getRessource(this.id)
@@ -27,14 +31,12 @@ export default {
   methods: {
     getRessource(id)
     {
-      http.get(`/database/ressource/${id}/`,{
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': `Bearer ${localStorage.token}`
-        }})
+      console.log("get ressource!")
+      http.get(`/database/ressource/${id}/`)
           .then(response => {
             this.ressource = response.data
             this.getObjectChilds(this.ressource.objects_son)
+            console.log(this.ressource)
           })
           .catch(err => {
             console.log(err)
@@ -46,26 +48,20 @@ export default {
       if(list_objs.length != 0)
       {
         list_objs.forEach(element => {
-          http.get(`/database/object/${element}/`,{
-            headers: {
-              'Content-type': 'application/json',
-              'Authorization': `Bearer ${localStorage.token}`
-            }})
+          http.get(`/database/object/${element}/`)
               .then(response => {
                 this.list_child_ressources.push({"id":response.data.id,"object":true,"date":0})
-                http.get(`/database/date/${response.data.date[0]}/`,{
-                  headers: {
-                    'Content-type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.token}`
-                  }})
+                http.get(`/database/date/${response.data.date}/`)
                 .then(response => {
                   var d = response.data.day
                   var m = response.data.month
                   var y = response.data.year
                   this.list_child_ressources[this.index]["date"] = d + m*10 + y*10
                   this.index+=1
-                  if(this.index >= list_objs.length && this.ressource.actors_son.length!=0)
+                  console.log(this.index)
+                  if(this.index >= list_objs.length)
                   {
+                    console.log("then")
                     this.getActorChilds(this.ressource.actors_son)
                   }
                 })
@@ -77,6 +73,7 @@ export default {
       }
       else
       {
+        console.log("noice")
         //If ressource don't have any object relationship
         if(this.ressource.actors_son.length!=0)
         {
@@ -87,57 +84,106 @@ export default {
     },
 
     getActorChilds(list_actors)
-    {    
-      /*  Fetch all data from object table (Architecture and Production)  */
-      list_actors.forEach(element => {
-        http.get(`/database/actor/${element}/`,{
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${localStorage.token}`
-          }})
-            .then(response => {
-              //Create an empty JSON in the list
-              this.list_child_ressources.push({"id":response.data.id,"object":false,"date":0})
-              //Fetch date data and fill the JSON
-              http.get(`/database/date/${response.data.birth_date}/`,{
-                headers: {
-                  'Content-type': 'application/json',
-                  'Authorization': `Bearer ${localStorage.token}`
-                }})
+    {
+      if(list_actors.length > 0)
+      {
+        /*  Fetch all data from object table (Architecture and Production)  */
+        list_actors.forEach(element => {
+          http.get(`/database/actor/${element}/`)
               .then(response => {
-                var d = response.data.day
-                var m = response.data.month
-                var y = response.data.year
-                this.list_child_ressources[this.index].date = d + m*10 + y*10
-                this.index+=1
+                //Create an empty JSON in the list
+                this.list_child_ressources.push({"id":response.data.id,"object":false,"date":0})
+                //Fetch date data and fill the JSON
+                http.get(`/database/date/${response.data.birth_date}/`)
+                .then(response => {
+                  var d = response.data.day
+                  var m = response.data.month
+                  var y = response.data.year
+                  this.list_child_ressources[this.index].date = d + m*10 + y*10
+                  this.index+=1
 
-                //If the for loop is finished, sort the list_child_ressource by date and return updateChildfInfo func
-                if(this.index >= list_actors.length)
-                {
-                  console.log(this.list_child_ressources)
+                  //If the for loop is finished, sort the list_child_ressource by date and return updateChildfInfo func
+                  if(this.index >= list_actors.length)
+                  {
+                    console.log(this.list_child_ressources)
 
 
-                  /*  Sort by date  */
-                  this.list_child_ressources.sort(function(a,b){
-                    return a.date - b.date;
-                  })
+                    /*  Sort by date  */
+                    this.list_child_ressources.sort(function(a,b){
+                      return a.date - b.date;
+                    })
 
-                  return (this.updateChildInfo())
-                  
-                }
+                    return (this.updateChildInfo())
+                    
+                  }
+                })
               })
-            })
-            .catch(error => {
-              console.log(error)
-            })
-        
-      })
+              .catch(error => {
+                console.log(error)
+              })
+          
+        })
+      }
+      else
+      {
+        console.log(this.list_child_ressources)
+
+        /*  Sort by date  */
+        this.list_child_ressources.sort(function(a,b){
+          return a.date - b.date;
+        })
+        return (this.updateChildInfo())
+      }
+      
     },
     updateChildInfo()
     {
+      console.log(this.list_child_ressources, "noiiiiiiiiice")
+      console.log("updateChildInfo")
+      if(this.list_child_ressources.length == 1)
+      {
+        this.leftDisabled = true
+        this.rightDisabled = true
+      }
       this.childInfo = this.list_child_ressources[this.index_child]
       this.fetch_finished = true
-      this.index_child += 1 
+    },
+    leftRessource()
+    {
+      this.$forceUpdate()
+      if(this.index_child > 0)
+      {
+        this.index_child -= 1 
+        this.rightDisabled = false
+        // this.childInfo = this.list_child_ressources[this.index_child]
+        this.$set(this.childInfo, 0 ,this.list_child_ressources[this.index_child])
+        this.index_child -= 1 
+        this.$forceUpdate()
+      }
+      else
+      {
+        this.rightDisabled = false
+        this.leftDisabled = true
+        this.$forceUpdate()
+      }
+    },
+    rightRessource()
+    {
+      this.$forceUpdate()
+      if(this.index_child < this.list_child_ressources.length-1)
+      {
+        this.index_child += 1
+        this.leftDisabled = false
+        this.childInfo = this.list_child_ressources[this.index_child]
+        this.$set(this.childInfo, 0, this.list_child_ressources[this.index_child])
+        this.$forceUpdate()
+      }
+      else
+      {
+        this.leftDisabled = false
+        this.rightDisabled = true
+        this.$forceUpdate()
+      }
     },
     // filter()
     // {

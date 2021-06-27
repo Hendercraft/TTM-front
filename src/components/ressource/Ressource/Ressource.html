@@ -5,6 +5,6 @@
   <body v-if="fetch_finished">
     <button id="left_button" @click="leftRessource" :disabled="leftDisabled"><img src="../../../assets/fleche.png"/></button>
     <button id="right_button" @click="rightRessource" :disabled="rightDisabled"><img src="../../../assets/fleche.png"/></button>
-    <ressource-child v-bind:childInfo="childInfo" ></ressource-child>
+    <ressource-child v-bind:childInfo="childInfo" :key="index_child" ></ressource-child>
   </body>
 </section>

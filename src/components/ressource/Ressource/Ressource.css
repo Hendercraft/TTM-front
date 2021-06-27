@@ -10,22 +10,32 @@ body{
     border-radius: 1em;
 }
 
-#left_button img{
+
+
+#left_button{
     left: -100px;
     bottom: -300px;
     position: relative;
     height: 50px;
-    transform: scaleX(-1);
 }
 
-
-
-#right_button img{
+#right_button {
     left: 930px;
     bottom: -300px;
     position: relative;
     height: 50px;
 }
+
+#left_button img{
+    height: 50px;
+    transform: scaleX(-1);
+}
+
+#right_button img{
+    height: 50px;
+}
+
+
 
 #description{
     margin-top: 2em;
