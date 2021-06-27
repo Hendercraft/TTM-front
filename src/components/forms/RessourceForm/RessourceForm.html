@@ -17,7 +17,7 @@
         <option selected disabled>Sélectionnez une catégorie</option>
         <option value="Architecture">Architecture</option>
         <option value="Production">Production</option>
-        <option value="Homme">Homme</option>
+        <option value="Hommes">Hommes</option>
       </select>
     </div>
 
@@ -46,11 +46,15 @@
       <select id="actor" v-model="actor" multiple>
         <option selected disabled>Sélectionnez une ressource</option>
         <option v-for="homme in hommes" v-bind:value="homme.id">
-          {{ homme.name }}
+          {{ homme.name }} {{ homme.last_name }}
         </option>
       </select>
     </div>
   </form>
   <button class="btn btn-success" :disabled="!name" @click="postForm">Envoyer</button>
+
+  <div>
+    {{errors}}
+  </div>
 </section>
 
