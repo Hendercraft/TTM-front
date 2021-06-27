@@ -25,3 +25,13 @@ button{
     background-color: rgb(124, 124, 124);
     border-radius: 10px 10px;
 }
+
+.body label{
+    /* display: inline; */
+    /* border: 1px black solid; */
+    width: 200px;
+    text-align: left;
+    margin-top: 2em;
+    text-decoration: underline;
+    font-weight: bold;
+}
