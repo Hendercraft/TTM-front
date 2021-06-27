@@ -1,68 +1,91 @@
-import UploadFiles from '../../UploadFiles.vue'
 import http from '../../../http-common'
+import SuccessModal from '../../modals/Modal_Success'
 
 export default {
   name: 'architecture-form',
-  components: {UploadFiles},
+  components: {SuccessModal},
   props: [],
-  data () {
+  data() {
     return {
-      selected_menu:[],
-      selected_type:[],
+      categorie:"Architecture",
+      selected_menu: [],
 
-      typo_select:null,
-      addTypo:false,
+      name:null,
 
-      domaine:null,
-      building_select:null,
-      typo_periode_select:null,
-      typo_energie_select:null,
-      building_select:null,
-      typo_periode_select:null,
-      
-      commentary:null,
-
-      selected_brand:null,
-      addBrand:false,
-      brands:[],
-
-      brandName:null,
-      brandDescription:null,
-
-      
+      typo_select: null,
+      typologies:[],
+      addTypo: false,
+      typo_name:null,
+      typo_plan_select: null,
+      typo_wall_select: null,
+      typo_roof_select: null,
+      typo_floor_select: null,
+      typo_couverture_select: null,
+      typo_light_select: null,
 
 
-      selected_place:null,
-      addPlace:false,
-      places:[],
+      domaine: null,
+      building_select: null,
+      typo_periode_select: null,
 
-      placeName:null,
-      street_number:null,
-      street_type:null,
-      street_name:null,
-      post_code:null,
-      city:null,
-      country:null,
-      place_said:null,
-      placeDescription:null,
+      selected_energy:null,
+      typo_energie_select: null,
 
-      source:null,
-      addSource:false,
-      date_d:null,
-      date_m:null,
-      date_y:null,
-      date_comp:null,
-      editor:null,
-      droits:null,
-      source_type:null,
-      format:null,
-      immatriculation:null,
-      original_immatriculation:null,
-      author:null,
-      study:null,
-      
-      
-      output:"",
+      commentary: null,
+
+      selected_brand: null,
+      addBrand: false,
+      brands: [],
+
+      brandName: null,
+      brandDescription: null,
+
+      selected_date: null,
+      date_d: null,
+      date_m: null,
+      date_y: null,
+
+
+      selected_place: null,
+      addPlace: false,
+      places: [],
+
+      placeName: null,
+      street_number: null,
+      street_type: null,
+      street_name: null,
+      post_code: null,
+      city: null,
+      country: null,
+      place_said: null,
+      placeDescription: null,
+
+      source: [],
+      sourceName: null,
+      addSource: false,
+      selected_source_date: null,
+      source_date_d: null,
+      source_date_m: null,
+      source_date_y: null,
+      date_comp: null,
+      selected_editor: null,
+      editor: null,
+      droits: null,
+      source_type: null,
+      format: null,
+      registration: null,
+      original_registration: null,
+      selected_author: null,
+      author: null,
+      study: null,
+      cote: null,
+      conservation: null,
+
+      ObjectId:null,
+      errors:null,
+
+
+      output: "",
       ressource_file: "",
 
       selectedFiles: undefined,
@@ -74,326 +97,344 @@ export default {
     }
   },
   computed: {
-    
+
   },
-  mounted () {
+  mounted() {
     this.getPlaces()
-    this.getProfession()
+    this.getTypologie()
     this.getBrand()
-    
+
   },
   methods: {
-    getFormatGroup: function(event){
+    getFormatGroup: function (event) {
 
       // 1. Get the selected index
       const index = event.target.selectedIndex;
-  
+
       // 2. Find the selected option
       const option = event.target.options[index];
-  
+
       // 3. Select the parent element (optgroup) for the selected option
       const optgroup = option.parentElement;
-  
+
       // 4. Finally, get the label (Country group)
       this.formatGroup = optgroup.getAttribute('label');
-      
-      this.output = '<p>Your Selected Group is <strong>' + this.formatGroup +'</strong></p>';
+
+      this.output = '<p>Your Selected Group is <strong>' + this.formatGroup + '</strong></p>';
       console.log(this.formatGroup);
     },
 
-  
-  selectFile () {
-    this.selectedFiles = this.$refs.file.files
-  },
-  upload () {
-    this.progress = 0
-    console.log('uploading...')
-    this.currentFile = this.selectedFiles.item(0)
-    UploadService.upload(this.currentFile, event => {
-      this.progress = Math.round((100 * event.loaded) / event.total)
-      }, this.formatGroup)
-      .then(response => {
-        console.log("Uploaded")
-        this.message = response.data
-        this.fileId = response.data.id
-        http.post('database/ressource/create/', {
-          "designation": this.designation,
-          "repere_historique": this.repere_historique,
-          "ressource_date": this.date,
-          "localization": this.localization,
-          "adress": this.adresse,
-          "description": this.description,
-          "mots_cles": this.mots_cles,
-          "ressource_source": this.source,
-          "editeur": this.editeur,
-          "droits": this.droits,
-          "ressource_type": this.ressource_type,
-          "ressource_format": this.format,
-          "immatriculation": this.immatriculation,
-          "etude": this.etude,
-          "auteur": this.auteur,
-          "date_etude": this.date_etude,
-          "ressource_file": this.fileId
-        })
-        .then(response =>{
-          console.log(response.data)
-        })
-        // this.$emit(this.fileId)
-        // console.log(this.fileId)
-      })
-      .then(files => {
-        this.fileInfos = files.data.results
-      })
-      .catch(() => {
-        this.progress = 0
-        this.message = 'Could not upload the file!'
-        this.currentFile = undefined
-      })
 
-    this.selectedFiles = undefined
+    selectFile() {
+      this.selectedFiles = this.$refs.file.files
     },
-    getBrand(){
-      http.get("database/abstractObjects/",{
+    getBrand() {
+      http.get("database/abstractObjects/", {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${localStorage.token}`
-        }})
-          .then(response => {
-            this.brands = response.data.results
-          })
+        }
+      })
+        .then(response => {
+          this.brands = response.data.results
+        })
     },
     getPlaces() {
-      http.get("database/places/",{
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': `Bearer ${localStorage.token}`
-      }})
+      http.get("database/places/", {
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.token}`
+        }
+      })
         .then(response => {
           this.places = response.data.results
         })
     },
-    getProfession(){
-      http.get("database/socialActivities/",{
+    getTypologie() {
+      http.get("database/typologies/", {
         headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${localStorage.token}`
-        }})
-          .then(response => {
-            this.professions = response.data.results
-          })
+        }
+      })
+        .then(response => {
+          this.typologies = response.data.results
+        })
     },
-    postActorForm(){
-      if(this.addBrand && this.addPlace && this.addProfession){
-
+    postForm() {
+      if (this.addBrand) {
         // Brand post part
         http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
+          "name": this.brandName, "definition": this.brandDescription
         }, {
           headers: {
             'Authorization': `Bearer ${localStorage.token}`
           }
         })
-        .then(response =>{
-          console.log(response)
-          this.selected_brand = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_profession = response.data.id
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-          this.selected_place = response.data.id
-
-          http.post("database/actor/create/", {
-            
-          },{
-            headers: {
-              'Authorization': `Bearer ${localStorage.token}` 
-              }
+          .then(response => {
+            console.log(response)
+            this.selected_brand = response.data.id
           })
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          .catch(error => {
+            console.log(error)
+          })
       }
 
 
-
-      if(this.addBrand && this.addPlace && !this.addProfession){
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
+      if (this.addTypo) {
+        // Typologie post part
+        http.post("database/typology/create/", {
+          "name":this.typo_name, "plan": this.typo_plan_select, "wall": this.typo_wall_select, "roof": this.typo_roof_select, "floor": this.typo_floor_select, "cover": this.typo_couverture_select, "light": this.typo_light_select
         }, {
           headers: {
             'Authorization': `Bearer ${localStorage.token}`
           }
         })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          .then(response => {
+            console.log(response)
+            this.typo_select = response.data.id
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      }
 
+
+      if (this.addPlace) {
         // Place post part
         http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-
-
-      if(this.addBrand && !this.addPlace && this.addProfession){
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
+          "street_number": this.street_number, "street_type": this.street_type, "street_name": this.street_name, "post_code": this.post_code, "city": this.city, "country": this.country, "place_said": this.place_said
         }, {
           headers: {
             'Authorization': `Bearer ${localStorage.token}`
           }
         })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          .then(response => {
+            console.log(response)
+            this.selected_placeLocation = response.data.id
+            http.post("database/place/create/", {
+              "name": this.placeName, "description": this.placeDescription, "place_location": this.selected_placeLocation
+            }, {
+              headers: {
+                'Authorization': `Bearer ${localStorage.token}`
+              }
+            })
+              .then(response => {
+                console.log(response)
+                this.selected_place = response.data.id
+              })
+              .catch(error => {
+                console.log(error)
+              })
+          })
+          .catch(error => {
+            console.log(error)
+          })
       }
-      if(this.addBrand && !this.addPlace && !this.addProfession){
-        // Brand post part
-        http.post("database/abstractObject/create/", {
-          "name":this.brandName, "definition":this.brandDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-      if(!this.addBrand && this.addPlace && this.addProfession){
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
-        })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
+      // Other classes creation
 
 
-      if(!this.addBrand && this.addPlace && !this.addProfession){
-        // Place post part
-        http.post("database/placeLocation/create/", {
-          "street_number":this.street_number, "street_type":this.street_type, "street_name":this.street_name, "post_code":this.post_code, "city":this.city, "country":this.country, "place_said":this.place_said
-        }, {
-          headers: {
-          'Authorization': `Bearer ${localStorage.token}` 
-          }
-        })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      /*  Object date*/
+      http.post("database/date/create/",
+      {
+        "name": "Architecture date", "day": this.date_d, "month": this.date_m, "year": this.date_y
+      }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.token}`
       }
+      })
+      .then(response => {
+      this.selected_date = response.data.id
+      
+      /*  Energy */
+      http.post("database/energy/create/",
+      {
+        "energy": this.typo_energie_select
+      }, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.token}`
+      }
+      })
+      .then(response => {
+        this.selected_energy = response.data.id
+      })
+      /*  Source date */
+      http.post("database/date/create/",
+        {
+          "name": "Source date", "day": this.source_date_d, "month": this.source_date_m, "year": this.source_date_y
+        }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.token}`
+        }
+      })
+        .then(response => {
+          this.selected_source_date = response.data.id
+
+          /*  Source author */
+          http.post("database/author/create/",
+            {
+              "name": this.author,
+            }, {
+            headers: {
+              'Authorization': `Bearer ${localStorage.token}`
+            }
+          })
+            .then(response => {
+              this.selected_editor = response.data.id
+
+              /*  Source editor */
+              http.post("database/author/create/",
+                {
+                  "name": this.editor,
+                }, {
+                headers: {
+                  'Authorization': `Bearer ${localStorage.token}`
+                }
+              })
+                .then(response => {
+                  this.selected_editor = response.data.id
 
 
-      if(!this.addBrand && !this.addPlace && this.addProfession){
-        // Profession post part
-        http.post("database/profession/create/", {
-          "name":this.professionName, "definition":this.professionDescription
-        }, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.token}`
-          }
+                  let formData = new FormData()
+                  this.currentFile = this.selectedFiles.item(0)
+
+                  formData.append('url', this.currentFile)
+                  formData.append('file_type', this.formatGroup)
+                  formData.append('file_extension', this.format)
+                  http.post('database/file/create/', formData,
+                    {
+                      headers:
+                      {
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.token}`
+                      }
+                    })
+                    .then(response => {
+                      this.fileId = response.data.id
+
+                      /*  Source  */
+                      http.post("database/source/create/",
+                        {
+                          "name": this.sourceName,
+                          "date_source": this.selected_source_date,
+                          "conservationPlace": this.conservationPlace,
+                          "author": this.author,
+                          "editor": this.editor,
+                          "rights": this.rights,
+                          "url": this.fileId,
+
+                          "viability": this.viability,
+                          "registration": this.registration,
+                          "original_registration": this.original_registration,
+                          "study": this.study,
+
+                        }, {
+                        headers: {
+                          'Authorization': `Bearer ${localStorage.token}`
+                        }
+                      })
+                        .then(response => {
+                          this.source.push(response.data.id)
+                          let lower_menu = ""
+                          this.selected_menu.forEach(element => {
+                            lower_menu = element + " ; "
+                          });
+                          /*Object class*/
+                          http.post("database/object/create/",
+                            {
+                              "categorie": this.categorie,
+                              "domain": lower_menu,
+                              "name":this.name,
+                              "abstract_object":this.selected_brand,
+                              "building": this.building_select,
+                              "period":this.typo_periode_select,
+                              "date":this.selected_date,
+                              "fk_typologie":this.typo_select,
+                              "energy":this.selected_energy,
+                              "place":this.selected_place,
+                              "description": this.commentary,
+                              "source": this.source,
+                            }, {
+                            headers: {
+                              'Authorization': `Bearer ${localStorage.token}`
+                            }
+                          })
+                            .then(response => {
+                              this.ObjectId = response.data.id
+                              this.selected_menu= []
+                              this.name=null
+                              this.typo_select= null
+                              this.typologies=[]
+                              this.addTypo= false
+                              this.typo_name=null
+                              this.typo_plan_select= null
+                              this.typo_wall_select= null
+                              this.typo_roof_select= null
+                              this.typo_floor_select= null
+                              this.typo_couverture_select= null
+                              this.typo_light_select= null
+                              this.domaine= null
+                              this.building_select= null
+                              this.typo_periode_select=null
+                              this.selected_energy=null
+                              this.typo_energie_select= null
+                              this.commentary= null
+                              this.selected_brand= null
+                              this.addBrand= false
+                              this.brands= []
+                              this.brandName= null
+                              this.brandDescription= null
+                              this.selected_date= null
+                              this.date_d= null
+                              this.date_m= null
+                              this.date_y= null
+                              this.selected_place= null
+                              this.addPlace= false
+                              this.places= []
+                              this.placeName= null
+                              this.street_number= null
+                              this.street_type= null
+                              this.street_name= null
+                              this.post_code= null
+                              this.city= null
+                              this.country= null
+                              this.place_said= null
+                              this.placeDescription= null
+                              this.source= []
+                              this.sourceName= null
+                              this.addSource= false
+                              this.selected_source_date= null
+                              this.source_date_d= null
+                              this.source_date_m= null
+                              this.source_date_y= null
+                              this.date_comp= null
+                              this.selected_editor= null
+                              this.editor= null
+                              this.droits= null
+                              this.source_type= null
+                              this.format= null
+                              this.registration= null
+                              this.original_registration= null
+                              this.selected_author= null
+                              this.author= null
+                              this.study= null
+                              this.cote= null
+                              this.conservation= null
+                              this.$forceUpdate()
+                              this.$modal.show('modal-success')
+
+                              
+                            })
+                            .catch(error => {
+                              console.log(error)
+                              this.errors = error.message
+                            })
+                        })
+                    })
+                })
+            })
         })
-        .then(response =>{
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }
-      if(!this.addBrand && !this.addPlace && !this.addProfession){
-        console.log("yes")
-      }
+      })
     }
   }
 }

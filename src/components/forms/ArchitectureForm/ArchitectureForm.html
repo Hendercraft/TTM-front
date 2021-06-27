@@ -1,5 +1,6 @@
 
 <section class="architecture-form">
+  <success-modal />
   <form>
     <div class="select">
       <label for="table-select">Veuillez sélectionner un sous-menu : </label>
@@ -38,6 +39,11 @@
       </div>
 
     </form>
+
+    <div>
+      <label for="name">Nom :</label>
+      <input id="name" v-model="name" type="text" >
+    </div> 
 
     <div class="custom_select">
       <label for="building_select">Bâtiment :</label>
@@ -109,16 +115,21 @@
     <div class="foreign_key">
       <label for="typo_select">Typologie :</label>
       <select id="typo_select" v-model="typo_select">
-        <option selected disabled>Sélectionnez une typographie</option>
-        <option value="Bâtiment à étage">Bâtiment à étage</option>
-        <option value="Halle">Halle</option>
-        <option value="Cheminée d'usine">Cheminée d'usine</option>
+        <option selected disabled>Sélectionnez une typogolie</option>
+        <option v-for="typo in typologies" v-bind:value="typo.id">
+          {{ typo.name }}
+        </option>
       </select>
       <input id="addTypo" v-model="addTypo" type="checkbox">
       <span><img src="../../../assets/plus.png"/></span>
     </div>
 
     <form class="addProfession_form" v-if="addTypo">
+
+      <div>
+        <label for="typo_name">Nom :</label>
+        <input id="typo_name" v-model="typo_name" type="text">
+      </div> 
 
       <div class="custom_select">
         <label for="typo_plan_select">Plan :</label>
@@ -217,7 +228,7 @@
 
       <div class="custom_select">
         <label for="typo_floor_select">Etage :</label>
-        <select id="typo_floor_select" v-model="typo_select">
+        <select id="typo_floor_select" v-model="typo_floor_select">
           <option selected disabled>Sélectionnez un etage</option>
           <option value="Sous-sol">Sous-sol</option>
           <option value="Etage de soubassement">Etage de soubassement</option>
@@ -366,10 +377,10 @@
       </div>
 
       <div>
-        <label for="date_d">Date :</label>
-        <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
-        <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
-        <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
+        <label for="source_date_d">Date :</label>
+        <input class="date" id="source_date_d" v-model="source_date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="source_date_m" v-model="source_date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="source_date_y" v-model="source_date_y" type="number" min='0' max='9999' placeholder="AAAA">
       </div> 
 
       <div>
@@ -434,17 +445,17 @@
       </div>
 
       <div>
-        <label for="immatriculation">Immatriculation :</label>
-        <input id="immatriculation" v-model="immatriculation" type="number" required>
+        <label for="registration">Immatriculation :</label>
+        <input id="registration" v-model="registration" type="number" required>
       </div>
 
       <div>
-        <label for="original_immatriculation">Immatriculation originelle :</label>
-        <input id="original_immatriculation" v-model="original_immatriculation" type="text">
+        <label for="original_registration">Immatriculation originelle :</label>
+        <input id="original_registration" v-model="original_registration" type="text">
       </div>
 
       <div>
-        <label for="author">Auteur notice(date) :</label>
+        <label for="author">Auteur notice :</label>
         <input id="author" v-model="author" type="text" required>
       </div>
 
@@ -459,33 +470,18 @@
     </div>
 
   </form>
-  <div class="output" v-html="output">{{ output }}</div>
+  
+
+  <label class="btn btn-default">
+      <input type="file" ref="file" @change="selectFile" />
+  </label>
+
+  <button class="btn btn-success" :disabled="!selectedFiles" @click="postForm">
+      Upload
+  </button>
 
   
-  <div class="uploadFile" v-if="selected_type">
-
-    <div v-if="currentFile" class="progress">
-      <div
-        class="progress-bar progress-bar-info progress-bar-striped"
-        role="progressbar"
-        :aria-valuenow="progress"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :style="{ width: progress + '%' }"
-      >
-        {{ progress }}%
-      </div>
-    </div>
-
-    <label class="btn btn-default">
-      <input type="file" ref="file" @change="selectFile" />
-    </label>
-
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="postActorForm">
-      Upload
-    </button>
-
-    <div class="alert alert-light" role="alert">{{ message }}</div>
+  <div class="error" v-if="errors">
+    {{errors}}
   </div>
-  <!-- <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files> -->
 </section>
