@@ -1,4 +1,5 @@
 <section class="production-form">
+  <success-modal />
   <form>
     <div class="select">
       <label for="table-select">Veuillez sélectionner un sous-menu : </label>
@@ -36,6 +37,11 @@
         <textarea placeholder="Description" v-model="brandDescription"></textarea>
       </div>
     </form>
+
+    <div>
+      <label for="name">Nom :</label>
+      <input id="name" v-model="name" type="text" >
+    </div> 
 
     <div class="custom_select">
       <label for="building_select">Bâtiment :</label>
@@ -154,8 +160,8 @@
     </form>
 
     <div class="custom_select">
-      <label for="energie_select">Energie :</label>
-      <select id="energie_select" v-model="energie_select">
+      <label for="energy_select">Energie :</label>
+      <select id="energy_select" v-model="energy_select">
         <option selected disabled>Sélectionnez une énergie</option>
         <option value="Energie animale">Energie animale</option>
         <option value="Energie électrique">Energie électrique</option>
@@ -222,10 +228,10 @@
       </div>
 
       <div>
-        <label for="date_d">Date :</label>
-        <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
-        <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
-        <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
+        <label for="source_date_d">Date :</label>
+        <input class="date" id="source_date_d" v-model="source_date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="source_date_m" v-model="source_date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="source_date_y" v-model="source_date_y" type="number" min='0' max='9999' placeholder="AAAA">
       </div> 
 
       <div>
@@ -290,13 +296,13 @@
       </div>
 
       <div>
-        <label for="immatriculation">Immatriculation :</label>
-        <input id="immatriculation" v-model="immatriculation" type="number">
+        <label for="registration">Immatriculation :</label>
+        <input id="registration" v-model="registration" type="number">
       </div>
 
       <div>
-        <label for="original_immatriculation">Immatriculation originelle :</label>
-        <input id="original_immatriculation" v-model="original_immatriculation" type="text">
+        <label for="original_registration">Immatriculation originelle :</label>
+        <input id="original_registration" v-model="original_registration" type="text">
       </div>
 
       <div>
@@ -316,34 +322,17 @@
 
   </form>
 
-  <div class="output" v-html="output">{{ output }}</div>
 
-  
-  <div class="uploadFile" v-if="selected_type">
 
-    <div v-if="currentFile" class="progress">
-      <div
-        class="progress-bar progress-bar-info progress-bar-striped"
-        role="progressbar"
-        :aria-valuenow="progress"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :style="{ width: progress + '%' }"
-      >
-        {{ progress }}%
-      </div>
-    </div>
-
-    <label class="btn btn-default">
+  <label class="btn btn-default">
       <input type="file" ref="file" @change="selectFile" />
-    </label>
+  </label>
 
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="postActorForm">
+  <button class="btn btn-success" :disabled="!selectedFiles" @click="postForm">
       Upload
-    </button>
+  </button>
 
-    <div class="alert alert-light" role="alert">{{ message }}</div>
+  <div class="error" v-if="errors">
+    {{errors}}
   </div>
-  <!-- <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files> -->
-
 </section>
