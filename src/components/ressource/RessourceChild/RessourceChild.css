@@ -1,3 +1,95 @@
 .ressource-child {
 
 }
+
+
+.file_view img{
+    padding-bottom: 1em;
+    border-bottom: 2px solid #CCC;
+    border-radius: 1em;
+    max-height: 600px;
+    width: 100%;
+}
+
+.details{
+    /* border: 1px red solid; */
+}
+
+.details label{
+    /* display: inline; */
+    /* border: 1px black solid; */
+    width: 200px;
+    text-align: left;
+    margin-top: 2em;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* .details div + div{
+    margin-top: 1em;
+} */
+
+.typologie{
+    /* border: 1px solid #CCC;
+    border-radius: 1em; */
+}
+
+.home label{
+    margin-left: 3em;
+    margin-top: .5em;
+}
+
+.profession label{
+    margin-left: 3em;
+    margin-top: .5em;
+}
+
+.typologie label{
+    margin-left: 3em;
+    margin-top: .5em;
+
+}
+
+.Adresse label{
+    margin-left: 3em;
+    margin-top: .5em;
+}
+
+.Source label{
+    margin-left: 3em;
+    margin-top: .5em;
+}
+
+.constructor label{
+    margin-left: 3em;
+    margin-top: .5em;
+}
+
+#constructor_title{
+    margin-top: 2em;
+    margin-left: 0em;
+}
+
+#home_title{
+    margin-top: 2em;
+    margin-left: 0em;
+}
+
+#profession_title{
+    margin-top: 2em;
+    margin-left: 0em;
+}
+
+#source_title{
+    margin-top: 2em;
+    margin-left: 0em;
+}
+
+#address_title {
+    margin-top: 2em;
+    margin-left: 0em;
+}
+#typologie_title{
+    margin-top: 2em;
+    margin-left: 0em;
+}

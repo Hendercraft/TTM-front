@@ -2,26 +2,170 @@
 <section class="ressource-child">
 
   <div class="file_view">
-    <img src="this.ressource.url">
+    <img v-bind:src="ressource.url">
   </div>
 
-  <div class="details" v-if="ressource.categorie == 'Architecture'">
+  <div class="details">
     <div v-if="ressource.name">
       <label>Nom :</label>
       {{ressource.name}}
     </div>
-    <div v-if="ressource.lower_categorie">
-      <label>Type :</label>
-      {{ressource.lower_categorie}}
+
+    <div v-if="ressource.last_name">
+      <label>Prénom :</label>
+      {{ressource.last_name}}
     </div>
-    <div v-if="ressource.abstract_object[0]">
+
+    <div v-if="ressource.categorie">
+      <label>Categorie :</label>
+      {{ressource.categorie}}
+    </div>
+    <div v-if="ressource.domain">
+      <label>Type :</label>
+      {{ressource.domain}}
+    </div>
+    <div v-if="ressource.abstract_object">
       <label>Raison sociale :</label>
       {{ressource.abstract_object}}
     </div>
-    <div v-if="ressource.type_object">
+    <div v-if="ressource.building">
       <label>Batiment :</label>
-      {{ressource.type_object}}
+      {{ressource.building}}
     </div>
+
+    <!-- Hommes part -->
+    <div v-if="ressource.instruction_level">
+      <label>Degré d'instruction :</label>
+      {{ressource.instruction_level}}
+    </div>
+
+    <div class="date" v-if="ressource.birth_date">
+      <label>Date de naissance :</label>
+        {{ressource.birth_date_day}}<span> /</span>
+        {{ressource.birth_date_month}}<span> /</span>
+        {{ressource.birth_date_year}}
+    </div>
+
+    <div v-if="ressource.birth_place">
+      <label>Lieu de naissance :</label>
+      {{ressource.birth_place}}
+    </div>
+
+    <div v-if="ressource.gender">
+      <label>Sexe :</label>
+      {{ressource.gender}}
+    </div>
+
+    <div v-if="ressource.nationality">
+      <label>Nationalité :</label>
+      {{ressource.nationality}}
+    </div>
+
+    <div class="profession" v-if="ressource.home_status">
+      <label id="profession_title">Profession :</label>
+      <div v-if="ressource.profession_name">
+        <label>Nom :</label>
+        {{ressource.profession_name}}
+      </div>
+      <div v-if="ressource.profession_definition">
+        <label>Description :</label>
+        {{ressource.profession_definition}}
+      </div>
+      <div class="date" v-if="ressource.arrival_date">
+        <label>Date d'arrivée :</label>
+          {{ressource.arrival_date_day}}<span> /</span>
+          {{ressource.arrival_date_month}}<span> /</span>
+          {{ressource.arrival_date_year}}
+      </div>
+  
+      <div class="date" v-if="ressource.departure_date">
+        <label>Date de départ :</label>
+          {{ressource.departure_date_day}}<span> /</span>
+          {{ressource.departure_date_month}}<span> /</span>
+          {{ressource.departure_date_year}}
+      </div>
+    </div>
+
+    <div class="home" v-if="ressource.home_status">
+      <label id="home_title">Foyer/Etat civil:</label>
+      <div v-if="ressource.home_status">
+        <label>Statut du foyer :</label>
+        {{ressource.home_status}}
+      </div>
+      <div v-if="ressource.home_size">
+        <label>Taille du foyer :</label>
+        {{ressource.home_size}}
+      </div>
+      <div v-if="ressource.wedding_date">
+        <label>Date du mariage :</label>
+        {{ressource.wedding_date_day}}<span> /</span>
+        {{ressource.wedding_date_month}}<span> /</span>
+        {{ressource.wedding_date_year}}
+      </div>
+      <div v-if="ressource.wedding_place">
+        <label>Lieu de mariage :</label>
+        {{ressource.wedding_place}}
+      </div>
+      <div v-if="ressource.wedding_name">
+        <label>Nom du/de la mariée :</label>
+        {{ressource.wedding_name}}
+      </div>
+      <div v-if="ressource.wedding_lastName">
+        <label>Prénom du/de la mariée :</label>
+        {{ressource.wedding_lastName}}
+      </div>
+      <div v-if="ressource.death_date">
+        <label>Date du décès :</label>
+        {{ressource.death_date_day}}<span> /</span>
+        {{ressource.death_date_month}}<span> /</span>
+        {{ressource.death_date_year}}
+      </div>
+      <div v-if="ressource.death_place">
+        <label>Lieu de décès :</label>
+        {{ressource.death_place}}
+      </div>
+    </div>
+
+
+    <!-- Production part -->
+    <div v-if="ressource.machine">
+      <label>Machine :</label>
+      {{ressource.machine}}
+    </div>
+
+    <div class="constructor" v-if="ressource.constructor_inscription">
+      <label id="constructor_title">Constructeur :</label>
+      <div v-if="ressource.constructor_inscription">
+        <label>Inscription :</label>
+        {{ressource.constructor_inscription}}
+      </div>
+      <div v-if="ressource.constructor_precision">
+        <label>Précision :</label>
+        {{ressource.constructor_precision}}
+      </div>
+    </div>
+
+    <div v-if="ressource.material">
+      <label>Matériaux :</label>
+      {{ressource.material}}
+    </div>
+
+    <div v-if="ressource.conservation_state">
+      <label>Etat de conservation :</label>
+      {{ressource.conservation_state}}
+    </div>
+
+    <div v-if="ressource.precision_conservation_state">
+      <label>Précision sur l'état de conservation :</label>
+      {{ressource.precision_conservation_state}}
+    </div>
+
+
+
+
+
+
+    <!-- Architecture part -->
     <div v-if="ressource.period">
       <label>Période :</label>
       {{ressource.period}}
@@ -33,7 +177,7 @@
         {{ressource.date_year}}
     </div>
     <div class="typologie" v-if="ressource.fk_typologie">
-      <label>Typologie :</label>
+      <label id="typologie_title">Typologie :</label>
       <div v-if="ressource.plan">
         <label>Plan :</label>
         {{ressource.plan}}
@@ -68,8 +212,8 @@
       <label>Energie :</label>
       {{ressource.energy}}
     </div>
-    <div class="Adresse" v-if="ressource.place[0]">
-      <label>Adresse :</label>
+    <div class="Adresse" v-if="ressource.place || ressource.living_place">
+      <label id="address_title">Adresse :</label>
       <div v-if="ressource.place_name">
         <label>Nom du lieu :</label>
         {{ressource.place_name}}
@@ -106,9 +250,24 @@
         <label>Description :</label>
         {{ressource.place_description}}
       </div>
-      
     </div>
-    <div class="Source" v-if="ressource.source">
+    
+
+
+
+
+
+     
+      
+
+
+
+
+
+
+      <!--Source and description  -->
+    <div class="Source">
+      <label id="source_title">Source :</label>
       <div v-if="ressource.source_name">
         <label>Nom de la source :</label>
         {{ressource.source_name}}
@@ -133,9 +292,7 @@
       </div>
       <div v-if="ressource.editor">
         <label>Editeur :</label>
-        {{ressource.editor_name}}
-        {{ressource.editor_lastname}}
-        {{ressource.editor_status}}
+        {{ressource.editor}}
       </div>
       <div v-if="ressource.rights">
         <label>Droits :</label>
@@ -159,9 +316,7 @@
       </div>
       <div v-if="ressource.author">
         <label>Auteur notice :</label>
-        {{ressource.author_name}}
-        {{ressource.author_lastname}}
-        {{ressource.author_status}}
+        {{ressource.author}}
       </div>
       <div v-if="ressource.study">
         <label>Etude :</label>
@@ -172,9 +327,20 @@
         {{ressource.state}}
       </div>
     </div>
+
+    <div v-if="ressource.commentary">
+      <label>Commentaire :</label>
+      {{ressource.commentary}}
+    </div>
+
     <div v-if="ressource.description">
       <label>Commentaire :</label>
       {{ressource.description}}
+    </div>
+
+    <div v-if="ressource.content">
+      <label>Commentaire 2 :</label>
+      {{ressource.content}}
     </div>
   </div>
   
