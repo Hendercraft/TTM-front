@@ -1,15 +1,14 @@
-import UploadFiles from '../../UploadFiles'
-import UploadFilesService from '../../../services/UploadFilesService'
 import http from '../../../http-common'
+import SuccessModal from '../../modals/Modal_Success'
 
 export default {
   name: 'human-form',
-  components: {UploadFiles},
+  components: {SuccessModal},
   props: [],
   data () {
     return {
       categorie:"Hommes",
-      selected_type:[],
+      selected_menu:[],
 
       selected_brand:null,
       addBrand:false,
@@ -126,7 +125,14 @@ export default {
       progress: 0,
       message: '',
       fileId: null,
+      formatGroup:null,
+      type:null,
       fileInfos: [],
+
+
+
+      RessouceSuccessfullyAdded:false,
+      errors:null,
     }
   },
   computed: {
@@ -137,6 +143,7 @@ export default {
     this.getPlaces()
     this.getProfession()
     this.getBrand()
+    this.$modal.show('modal-success')
   },
   methods: {
     getFormatGroup: function(event){
@@ -150,7 +157,7 @@ export default {
       // 3. Select the parent element (optgroup) for the selected option
       const optgroup = option.parentElement;
   
-      // 4. Finally, get the label (Country group)
+      // 4. Finally, get the label (Format group)
       this.formatGroup = optgroup.getAttribute('label');
       
       this.output = '<p>Your Selected Group is <strong>' + this.formatGroup +'</strong></p>';
@@ -161,32 +168,6 @@ export default {
   selectFile () {
     this.selectedFiles = this.$refs.file.files
   },
-  upload () {
-    this.progress = 0
-    console.log('uploading...')
-    this.currentFile = this.selectedFiles.item(0)
-    UploadFilesService.upload(this.currentFile, event => {
-      this.progress = Math.round((100 * event.loaded) / event.total)
-      }, this.formatGroup, this.format)
-      .then(response => {
-        console.log("Uploaded")
-        this.message = response.data
-        this.fileId = response.data.id
-        
-        // this.$emit(this.fileId)
-        // console.log(this.fileId)
-      })
-      .then(files => {
-        this.fileInfos = files.data.results
-      })
-      .catch(() => {
-        this.progress = 0
-        this.message = 'Could not upload the file!'
-        this.currentFile = undefined
-      })
-
-    this.selectedFiles = undefined
-    },
   getBrand(){
     http.get("database/abstractObjects/",{
       headers: {
@@ -282,7 +263,7 @@ export default {
         })
         .then(response=> {
           console.log(response)
-          this.selected_place.push(response.data.id) 
+          this.selected_place=response.data.id 
         })
         .catch(error =>{
           console.log(error)
@@ -317,6 +298,8 @@ export default {
       })
       .then(response =>{
         this.selected_arrival_date = response.data.id
+
+
         /*  Departure date */
         http.post("database/date/create/",
         {
@@ -387,66 +370,93 @@ export default {
                   })
                   .then(response =>{
                     this.selected_editor = response.data.id
-                    /*  Source  */
-                    http.post("database/source/create/",
+
+
+                    let formData = new FormData()
+                    this.currentFile = this.selectedFiles.item(0)
+
+                    formData.append('url', this.currentFile)
+                    formData.append('file_type', this.formatGroup)
+                    formData.append('file_extension', this.format)
+                    http.post('database/file/create/', formData, 
                     {
-                      "name":this.sourceName,
-                      "date_source":this.selected_source_date, 
-                      "conservationPlace": this.conservationPlace,
-                      "author": 1,  //Temporary
-                      "editor": 1,  //Temporary
-                      "rights": this.rights,
-
-                      "viability": this.viability,
-                      "registration": this.registration,
-                      "original_registration":this.original_registration,
-                      "study":this.study,
-
-                    }, {
-                      headers: {
-                        'Authorization': `Bearer ${localStorage.token}`
-                      }
-                    })
-                    .then(response =>{
-                      this.source.push(response.data.id)
-                      /*Actor class*/
-                      http.post("database/actor/create/",
+                      headers: 
                       {
-                        "categorie":this.categorie,
-                        "domain":this.selected_type[0],
-                        "building":this.building_select,
-                        "name":this.name,
-                        "last_name":this.last_name,
-                        "profession":this.selected_profession,
-                        "instruction_level":this.instruction_level,
-                        "birth_date":this.selected_birthdate,
-                        "birth_place":this.selected_birth_place,
-                        "gender":this.gender,
-                        "arrival_date":this.selected_arrival_date,
-                        "departure_date":this.selected_departure_date,
-                        "nationality":this.nationality,
-                        "living_place":this.selected_place,
-                        "home_status":this.home_status,
-                        "home_size":this.home_size,
-                        "wedding_date":this.selected_wedding_date,
-                        "wedding_place":this.wedding_place,
-                        "wedding_name":this.wedding_name,
-                        "wedding_lastName":this.wedding_lastName,
-                        "death_date":this.selected_death_date,
-                        "death_place":this.death_place,
-                        "commentary":this.commentary,
-                        "source":this.source,
-                      }, {
-                        headers: {
-                          'Authorization': `Bearer ${localStorage.token}`
-                        }
-                      })
-                      .then(response =>{
-                        this.sourceDateId = response.data.id
-                        this.upload()
-                      })
-                      .catch(error => {
-                        console.log(error)
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${localStorage.token}`
+                    } })
+                    .then(response => 
+                      {
+                        this.fileId=response.data.id
+                      
+                        /*  Source  */
+                        http.post("database/source/create/",
+                        {
+                          "name":this.sourceName,
+                          "date_source":this.selected_source_date, 
+                          "conservationPlace": this.conservationPlace,
+                          "author": this.author,
+                          "editor": this.editor,
+                          "rights": this.rights,
+                          "url": this.fileId,
+
+                          "viability": this.viability,
+                          "registration": this.registration,
+                          "original_registration":this.original_registration,
+                          "study":this.study,
+
+                        }, {
+                          headers: {
+                            'Authorization': `Bearer ${localStorage.token}`
+                          }
+                        })
+                        .then(response =>{
+                          this.source.push(response.data.id)
+                          let lower_menu = ""
+                          this.selected_menu.forEach(element => {
+                            lower_menu = element + " ; "
+                          });
+                          /*Actor class*/
+                          http.post("database/actor/create/",
+                          {
+                            "categorie":this.categorie,
+                            "abstract_object":this.selected_brand,
+                            "domain":lower_menu,
+                            "building":this.building_select,
+                            "name":this.name,
+                            "last_name":this.last_name,
+                            "profession":this.selected_profession,
+                            "instruction_level":this.instruction_level,
+                            "birth_date":this.selected_birthdate,
+                            "birth_place":this.selected_birth_place,
+                            "gender":this.gender,
+                            "arrival_date":this.selected_arrival_date,
+                            "departure_date":this.selected_departure_date,
+                            "nationality":this.nationality,
+                            "living_place":this.selected_place,
+                            "home_status":this.home_status,
+                            "home_size":this.home_size,
+                            "wedding_date":this.selected_wedding_date,
+                            "wedding_place":this.wedding_place,
+                            "wedding_name":this.wedding_name,
+                            "wedding_lastName":this.wedding_lastName,
+                            "death_date":this.selected_death_date,
+                            "death_place":this.death_place,
+                            "commentary":this.commentary,
+                            "source":this.source,
+                          }, {
+                            headers: {
+                              'Authorization': `Bearer ${localStorage.token}`
+                            }
+                          })
+                          .then(response =>{
+                            this.ObjectId = response.data.id
+                            this.$modal.show('modal-success')
+                          })
+                          .catch(error => {
+                            console.log(error)
+                            this.errors = error.message
+                          })
                       })
                     })
                   })

@@ -1,9 +1,10 @@
 
 <section class="human-form">
+  <success-modal />
   <form class="select-type">
     <div class="select">
-      <label for="selected_type">Veuillez sélectionner une ou plusieurs sous-catégorie : </label>
-      <select v-model="selected_type" multiple required> 
+      <label for="selected_menu">Veuillez sélectionner une ou plusieurs sous-catégorie : </label>
+      <select v-model="selected_menu" multiple required> 
         <option selected disabled>Sélectionnez une ou plusieurs sous-catégorie</option>
         <option value="Main d'oeuvre">Main d'oeuvre</option>
         <option value="Oeuvres sociales">Oeuvres sociales</option>
@@ -13,7 +14,7 @@
   </form>
 
   <!-- Actor part -->
-  <form class="architecture_actor_form" v-if="selected_type">
+  <form class="architecture_actor_form" v-if="selected_menu">
 
     <div class="foreign_key">
       <label for="brand-select">Raison sociale :</label>
@@ -391,38 +392,18 @@
   </form>
 
   
+  <label class="btn btn-default">
+    <input type="file" ref="file" @change="selectFile" />
+  </label>
 
-
-
-  <div class="output" v-html="output">{{ output }}</div>
-
-  
-  <div class="uploadFile" v-if="selected_type">
-
-    <div v-if="currentFile" class="progress">
-      <div
-        class="progress-bar progress-bar-info progress-bar-striped"
-        role="progressbar"
-        :aria-valuenow="progress"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :style="{ width: progress + '%' }"
-      >
-        {{ progress }}%
-      </div>
-    </div>
-
-    <label class="btn btn-default">
-      <input type="file" ref="file" @change="selectFile" />
-    </label>
-
-    <button class="btn btn-success" :disabled="!selectedFiles" @click="postForm">
+  <button class="btn btn-success" :disabled="!selectedFiles" @click="postForm">
       Envoyer
-    </button>
+  </button>
 
-    <div class="alert alert-light" role="alert">{{ message }}</div>
+
+  <div class="error" v-if="errors">
+    {{errors}}
   </div>
-  <!-- <upload-files :type="formatGroup" v-if="formatGroup" v-on:getId="getDataFromFileHandler"></upload-files> -->
 
 </section>
 
