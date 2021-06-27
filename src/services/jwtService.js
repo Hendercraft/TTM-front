@@ -50,7 +50,7 @@ export function idConnectedUser()
   
 }
 
-export default function jwtDecrypt (token) {
+export function jwtDecrypt (token) {
   if (token == null) {
     return null
   } else {

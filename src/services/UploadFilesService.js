@@ -1,3 +1,4 @@
+/*  eslint-disable  */
 import http from '../http-common'
 
 class UploadFilesService {
@@ -14,6 +15,10 @@ class UploadFilesService {
         'Authorization': `Bearer ${localStorage.token}`
       },
       onUploadProgress
+    })
+    .then(response => {
+      let file_id = response.data.id
+      return file_id
     })
   }
 
