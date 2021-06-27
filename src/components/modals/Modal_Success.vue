@@ -2,7 +2,7 @@
   <modal name="modal-success" transition="pop-out" :width="modalWidth" :focus-trap="true" :height="300">
     <div class="box">
       <div class="partition-title">
-        Vous avez bien ajouter la ressource !
+        Vous avez bien ajouté la ressource !
       </div>
     </div>
   </modal>
@@ -29,7 +29,8 @@ export default {
 </script>
 <style lang="css">
 .partition-title{
-  font-size: 30px;
+  margin-top: 5em;
+  font-size: 25px;
   text-align: center;
 }
 
