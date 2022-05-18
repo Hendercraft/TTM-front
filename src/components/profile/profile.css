@@ -1,0 +1,37 @@
+.profile {
+
+}
+
+.main{
+    width: 60%;
+    margin-top: 5em;
+    margin-left: 20em;
+    background-color: rgb(124, 124, 124);
+    /* border: 1px blue solid; */
+    border-radius: 10px 10px;
+    padding: 0;
+}
+
+.upper-bar{
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px black solid;
+}
+
+button{
+    background-color: rgb(124, 124, 124);
+    border-radius: 10px 10px;
+}
+
+.body label{
+    /* display: inline; */
+    /* border: 1px black solid; */
+    width: 200px;
+    text-align: left;
+    margin-top: 2em;
+    text-decoration: underline;
+    font-weight: bold;
+}

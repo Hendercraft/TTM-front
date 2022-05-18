@@ -1,0 +1,487 @@
+
+<section class="architecture-form">
+  <success-modal />
+  <form>
+    <div class="select">
+      <label for="table-select">Veuillez sélectionner un sous-menu : </label>
+      <select id="table-select" v-model="selected_menu" multiple> 
+        <option selected disabled>Sélectionnez un type</option>
+        <option value="Ateliers">Ateliers</option>
+        <option value="CiteOuvriere">Cité ouvrière</option>
+        <option value="InfrastructureSociales">Infrastructure sociales</option>
+      </select>
+    </div>
+  </form>
+
+  <!-- Architecture part -->
+  <form class="ressource-form" v-if="selected_menu!=[]">
+
+    <div class="foreign_key">
+      <label for="brand-select">Raison sociale :</label>
+      <select id="brand-select" v-model="selected_brand">
+        <option selected disabled>Sélectionnez une raison</option>
+        <option v-for="brand in brands" v-bind:value="brand.id">
+          {{ brand.name }}
+        </option>
+      </select>
+      <input id="addbrand" v-model="addBrand" type="checkbox">
+      <span><img src="../../../assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addBrand">
+      <div>
+        <label for="brandName">Nom de la société :</label>
+        <input id="brandName" v-model="brandName" type="text">
+      </div>
+
+      <div>
+        <textarea placeholder="Description" v-model="brandDescription"></textarea>
+      </div>
+
+    </form>
+
+    <div>
+      <label for="name">Nom :</label>
+      <input id="name" v-model="name" type="text" >
+    </div> 
+
+    <div class="custom_select">
+      <label for="building_select">Bâtiment :</label>
+      <select id="building_select" v-model="building_select">
+        <option selected disabled>Sélectionnez un bâtiment</option>
+        <option value="Atelier d'ajustage">Atelier d'ajustage</option>
+        <option value="Atelier d'usinage">Atelier d'usinage</option>
+        <option value="Atelier de blanchissement">Atelier de blanchissement</option>
+        <option value="Atelier de construction mécanique">Atelier de construction mécanique</option>
+        <option value="Atelier de filature">Atelier de filature</option>
+        <option value="Atelier de finissage">Atelier de finissage</option>
+        <option value="Atelier de forge">Atelier de forge</option>
+        <option value="Atelier de gros usinage">Atelier de gros usinage</option>
+        <option value="Atelier de montage">Atelier de montage</option>
+        <option value="Atelier de peinture">Atelier de peinture</option>
+        <option value="Atelier de réparation">Atelier de réparation</option>
+        <option value="Atelier de retordage">Atelier de retordage</option>
+        <option value="Atelier de soudure">Atelier de soudure</option>
+        <option value="Atelier de teinturerie">Atelier de teinturerie</option>
+        <option value="Atelier de tôlerie">Atelier de tôlerie</option>
+        <option value="Atelier de tréfilerie">Atelier de tréfilerie</option>
+        <option value="Bureaux">Bureaux</option>
+        <option value="Centre de formation">Centre de formation</option>
+        <option value="Chaufferie">Chaufferie</option>
+        <option value="Eglise">Eglise</option>
+        <option value="Entrepôt">Entrepôt</option>
+        <option value="Fonderie">Fonderie</option>
+        <option value="Garage">Garage</option>
+        <option value="Gazogène">Gazogène</option>
+        <option value="Hangar">Hangar</option>
+        <option value="Infirmerie">Infirmerie</option>
+        <option value="Laboratoire">Laboratoire</option>
+        <option value="Loge du concierge">Loge du concierge</option>
+        <option value="Logement de contremaître">Logement de contremaître</option>
+        <option value="Logement de gardien">Logement de gardien</option>
+        <option value="Logement ouvrier">Logement ouvrier</option>
+        <option value="Logament patronal">Logament patronal</option>
+        <option value="Magasin">Magasin</option>
+        <option value="Salle blanche">Salle blanche</option>
+        <option value="Salle des machines">Salle des machines</option>
+        <option value="Station électrique">Station électrique</option>
+        <option value="Transformateur">Transformateur</option>
+      </select>
+    </div>
+
+    <div class="custom_select">
+      <label for="typo_periode_select">Période :</label>
+      <select id="typo_periode_select" v-model="typo_periode_select">
+        <option selected disabled>Sélectionnez une période</option>
+        <option value="1er quart 19e siècle">1er quart 19e siècle</option>
+        <option value="2e quart 19e siècle">2e quart 19e siècle</option>
+        <option value="3e quart 19e siècle">3e quart 19e siècle</option>
+        <option value="4e quart 19e siècle">4e quart 19e siècle</option>
+        <option value="1er quart 20e siècle">1er quart 20e siècle</option>
+        <option value="2e quart 20e siècle">2e quart 20e siècle</option>
+        <option value="3e quart 20e siècle">3e quart 20e siècle</option>
+        <option value="4e quart 20e siècle">4e quart 20e siècle</option>
+        <option value="1er quart 21e siècle">1er quart 21e siècle</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="date_t">Date :</label>
+      <input class="date" id="date_d" v-model="date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+      <input class="date" id="date_m" v-model="date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+      <input class="date" id="date_y" v-model="date_y" type="number" min='0' max='9999' placeholder="AAAA">
+    </div> 
+
+    <div class="foreign_key">
+      <label for="typo_select">Typologie :</label>
+      <select id="typo_select" v-model="typo_select">
+        <option selected disabled>Sélectionnez une typogolie</option>
+        <option v-for="typo in typologies" v-bind:value="typo.id">
+          {{ typo.name }}
+        </option>
+      </select>
+      <input id="addTypo" v-model="addTypo" type="checkbox">
+      <span><img src="../../../assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addTypo">
+
+      <div>
+        <label for="typo_name">Nom :</label>
+        <input id="typo_name" v-model="typo_name" type="text">
+      </div> 
+
+      <div class="custom_select">
+        <label for="typo_plan_select">Plan :</label>
+        <select id="typo_plan_select" v-model="typo_plan_select">
+          <option selected disabled>Sélectionnez un plan</option>
+          <option value="Ensemble concerté type cité ouvrière">Ensemble concerté type cité ouvrière</option>
+          <option value="Ensemble régulier">Ensemble régulier</option>
+          <option value="Ensemble irrégulier">Ensemble irrégulier</option>
+          <option value="Jardin irrégulier">Jardin irrégulier</option>
+          <option value="Jardin mixte">Jardin mixte</option>
+          <option value="Jardin régulier">Jardin régulier</option>
+          <option value="Plan allongé">Plan allongé</option>
+          <option value="Plan centré">Plan centré</option>
+          <option value="Plan en croix grecque">Plan en croix grecque</option>
+          <option value="Plan en croix latine">Plan en croix latine</option>
+          <option value="Plan en échiquier">Plan en échiquier</option>
+          <option value="Plan en H">Plan en H</option>
+          <option value="Plan en L">Plan en L</option>
+          <option value="Plan en U">Plan en U</option>
+          <option value="Plan orthogonal">Plan orthogonal</option>
+          <option value="Plan radioconcentrique">Plan radioconcentrique</option>
+          <option value="Plan rayonnant">Plan rayonnant</option>
+          <option value="Plan rectangulaire">Plan rectangulaire</option>
+          <option value="Rotonde">Rotonde</option>
+        </select>
+      </div>
+      <div class="custom_select">
+        <label for="typo_wall_select">Mur :</label>
+        <select id="typo_wall_select" v-model="typo_wall_select">
+          <option selected disabled>Sélectionnez un mur</option>
+          <option value="Acier">Acier</option>
+          <option value="Aluminium">Aluminium</option>
+          <option value="Basalte">Basalte</option>
+          <option value="Béton">Béton</option>
+          <option value="Béton armé">Béton armé</option>
+          <option value="Béton précontraint">Béton précontraint</option>
+          <option value="Bois">Bois</option>
+          <option value="Brique">Brique</option>
+          <option value="Calcaire">Calcaire</option>
+          <option value="Ciment">Ciment</option>
+          <option value="Ciment amiante">Ciment amiante</option>
+          <option value="Crépi">Crépi</option>
+          <option value="Enduit">Enduit</option>
+          <option value="Essentage de ciment amiante">Essentage de ciment amiante</option>
+          <option value="Essantage de matériaux synthétique">Essantage de matériaux synthétique</option>
+          <option value="Essantage de planches">Essantage de planches</option>
+          <option value="Essantage de tôles">Essantage de tôles</option>
+          <option value="Fonte">Fonte</option>
+          <option value="Gneiss">Gneiss</option>
+          <option value="Granite">Granite</option>
+          <option value="Grès">Grès</option>
+          <option value="Marbre">Marbre</option>
+          <option value="Meulière">Meulière</option>
+          <option value="Moellon">Moellon</option>
+          <option value="Mur-rideau">Mur-rideau</option>
+          <option value="Pan de bois">Pan de bois</option>
+          <option value="Pan de métal">Pan de métal</option>
+          <option value="Parpaing de béton">Parpaing de béton</option>
+          <option value="Pierre">Pierre</option>
+          <option value="Pierre artificielle">Pierre artificielle</option>
+          <option value="Pierre de taille">Pierre de taille</option>
+          <option value="Plâtre">Plâtre</option>
+          <option value="Poudingue">Poudingue</option>
+          <option value="Quartz">Quartz</option>
+          <option value="Schiste">Schiste</option>
+          <option value="Silex">Silex</option>
+          <option value="Torchis">Torchis</option>
+          <option value="Tuf">Tuf</option>
+          <option value="Verre">Verre</option>
+        </select>
+      </div>
+
+      <div class="custom_select">
+        <label for="typo_roof_select">Toit :</label>
+        <select id="typo_roof_select" v-model="typo_roof_select">
+          <option selected disabled>Sélectionnez une toiture</option>
+          <option value="Ardoise">Ardoise</option>
+          <option value="Béton">Béton</option>
+          <option value="Bois">Bois</option>
+          <option value="Chaume">Chaume</option>
+          <option value="Ciment">Ciment</option>
+          <option value="Ciment amiante">Ciment amiante</option>
+          <option value="Plomb">Plomb</option>
+          <option value="Tôle nervurée">Tôle nervurée</option>
+          <option value="Tôle ondulée">Tôle ondulée</option>
+          <option value="Tuiles">Tuiles</option>
+          <option value="Tuiles en écaille">Tuiles en écaille</option>
+          <option value="Tuilles flamande">Tuilles flamande</option>
+          <option value="Tuilles mécaniques">Tuilles mécaniques</option>
+          <option value="Tuilles mécaniques à glaçure plombifère">Tuilles mécaniques à glaçure plombifère</option>
+          <option value="Tuilles plates">Tuilles plates</option>
+          <option value="Verre">Verre</option>
+          <option value="Zinc">Zinc</option>
+        </select>
+      </div>
+
+      <div class="custom_select">
+        <label for="typo_floor_select">Etage :</label>
+        <select id="typo_floor_select" v-model="typo_floor_select">
+          <option selected disabled>Sélectionnez un etage</option>
+          <option value="Sous-sol">Sous-sol</option>
+          <option value="Etage de soubassement">Etage de soubassement</option>
+          <option value="Rez-de-chaussée">Rez-de-chaussée</option>
+          <option value="Rez-de-chaussée surélevé">Rez-de-chaussée surélevé</option>
+          <option value="Entresol">Entresol</option>
+          <option value="Etage">Etage</option>
+          <option value="Etage de comble">Etage de comble</option>
+          <option value="Comble à surcroît">Comble à surcroît</option>
+        </select>
+      </div>
+
+      <div class="custom_select">
+        <label for="typo_couverture_select">Couverture :</label>
+        <select id="typo_couverture_select" v-model="typo_couverture_select">
+          <option selected disabled>Sélectionnez une courverture</option>
+          <option value="Apprentis">Apprentis</option>
+          <option value="Bulbe">Bulbe</option>
+          <option value="Dôme">Dôme</option>
+          <option value="Shed">Shed</option>
+          <option value="Toit à longs pans">Toit à longs pans</option>
+          <option value="Toit conique">Toit conique</option>
+          <option value="Toit en bâtière">Toit en bâtière</option>
+          <option value="Toit en double bâtière">Toit en double bâtière</option>
+          <option value="Toit polygonal">Toit polygonal</option>
+          <option value="Croupe">Croupe</option>
+          <option value="Croupe brisée">Croupe brisée</option>
+          <option value="Demi-croupe">Demi-croupe</option>
+          <option value="Flèche">Flèche</option>
+          <option value="Lanterneau">Lanterneau</option>
+          <option value="Lanternon">Lanternon</option>
+          <option value="Pignon">Pignon</option>
+          <option value="Pignon couvert">Pignon couvert</option>
+          <option value="Pigon découvert">Pigon découvert</option>
+          <option value="Toit brisé en pavillon">Toit brisé en pavillon</option>
+          <option value="Toit en pavillon">Toit en pavillon</option>
+          <option value="Toit plat">Toit plat</option>
+          <option value="Toit terrasse">Toit terrasse</option>
+        </select>
+      </div>
+
+      <div class="custom_select">
+        <label for="typo_light_select">Lumière :</label>
+        <select id="typo_light_select" v-model="typo_light_select">
+          <option selected disabled>Sélectionnez une lumière</option>
+          <option value="Artificielle">Artificielle</option>
+          <option value="Latérale">Latérale</option>
+          <option value="Zénitale">Zénitale</option>
+        </select>
+      </div>
+    </form>
+    <div class="custom_select">
+      <label for="typo_energie_select">Energie :</label>
+      <select id="typo_energie_select" v-model="typo_energie_select">
+        <option selected disabled>Sélectionnez une énergie</option>
+        <option value="Energie animale">Energie animale</option>
+        <option value="Energie électrique">Energie électrique</option>
+        <option value="Energie éolienne">Energie éolienne</option>
+        <option value="Energie humaine">Energie humaine</option>
+        <option value="Energie hydraulique">Energie hydraulique</option>
+        <option value="Energie solaire">Energie solaire</option>
+        <option value="Energie thermique">Energie thermique</option>
+        <option value="Achetée">Achetée</option>
+        <option value="Produite à distance">Produite à distance</option>
+        <option value="Produite sur place">Produite sur place</option>
+      </select>
+    </div>
+
+    <div class="foreign_key">
+      <label for="place-select">Adresse :</label>
+      <select id="place-select" v-model="selected_place">
+        <option selected disabled>Sélectionnez une adresse</option>
+        <option v-for="place in places" v-bind:value="place.id">
+          {{ place.name }}
+        </option>
+      </select>
+      <input id="addplace" v-model="addPlace" type="checkbox">
+      <span><img src="../../../assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addPlace">
+      <div>
+        <label for="placeName">Nom du lieu :</label>
+        <input id="placeName" v-model="placeName" type="text">
+      </div>
+
+      <!-- START OF PLACELOCATION TABLE -->
+      <div>
+        <label for="street_number">Numéro de rue :</label>
+        <input id="street_number" v-model="street_number" type="number">
+      </div>
+
+      <div>
+        <label for="street_type">Extension :</label>
+        <input id="street_type" v-model="street_type" type="text">
+      </div>
+
+      <div>
+        <label for="street_name">Nom de la rue :</label>
+        <input id="street_name" v-model="street_name" type="text">
+      </div>
+
+      <div>
+        <label for="post_code">Code postal :</label>
+        <input id="post_code" v-model="post_code" type="number">
+      </div>
+
+      <div>
+        <label for="city">Ville :</label>
+        <input id="city" v-model="city" type="text">
+      </div>
+
+      <div>
+        <label for="country">Pays :</label>
+        <input id="country" v-model="country" type="text">
+      </div>
+
+      <div>
+        <label for="place_said">Lieu-dit :</label>
+        <input id="place_said" v-model="place_said" type="text">
+      </div>
+
+      
+
+      <!-- END OF PLACELOCATION TABLE -->
+
+      <div>
+        <textarea placeholder="Description" v-model="placeDescription"></textarea>
+      </div>
+
+    </form>
+
+    </br>
+  
+    <div class="foreign_key">
+      <label for="source">Source :</label>
+      <input id="addSource" v-model="addSource" type="checkbox">
+      <span><img src="../../../assets/plus.png"/></span>
+    </div>
+
+    <form class="addProfession_form" v-if="addSource">
+
+      <div>
+        <label for="sourceName">Nom de la source :</label>
+        <input id="sourceName" v-model="sourceName" type="text" required>
+      </div>
+
+      <div>
+        <label for="source_date_d">Date :</label>
+        <input class="date" id="source_date_d" v-model="source_date_d" type="number" min='0' max='31' placeholder="JJ"><span>/</span>
+        <input class="date" id="source_date_m" v-model="source_date_m" type="number" min='0' max='12' placeholder="MM"><span>/</span>
+        <input class="date" id="source_date_y" v-model="source_date_y" type="number" min='0' max='9999' placeholder="AAAA">
+      </div> 
+
+      <div>
+        <label for="date_comp">Complément de date :</label>
+        <input id="date_comp" v-model="date_comp" type="text">
+      </div>
+
+      <div>
+        <label for="conservation">Lieu de conservation :</label>
+        <input id="conservation" v-model="conservation" type="text">
+      </div>
+
+      <div>
+        <label for="cote">Cote :</label>
+        <input id="cote" v-model="cote" type="text">
+      </div> 
+
+      <div>
+        <label for="editor">Editeur :</label>
+        <input id="editor" v-model="editor" type="text">
+      </div>
+
+      <div>
+        <label for="droits">Droits :</label>
+        <input id="droits" v-model="droits" type="text">
+      </div>
+
+      <div>
+        <label for="source_type">Type :</label>
+        <input id="source_type" v-model="source_type" type="text">
+      </div>
+
+      <div>
+        <label for="format">Format : </label>
+        <select id="format" v-model="format" @change="getFormatGroup($event)" required>
+          <optgroup label="Image">
+            <option value="JPG">JPG</option>
+            <option value="PNG">PNG</option>
+          </optgroup>
+          <optgroup label="Video">
+            <option value="MP4">MP4</option>
+            <option value="AVI">AVI</option>
+            <option value="MOV">MOV</option>
+          </optgroup>        
+          
+          <optgroup  label="Document">
+            <option value="PDF">PDF</option>
+          </optgroup>
+    
+          <optgroup label="Cao">
+            <option value="STL">STL</option>
+            <option value="CAD">CAD</option>
+          </optgroup>
+    
+          <optgroup label="Audio">
+            <option value="MP3">MP3</option>
+            <option value="FLAC">FLAC</option>
+            <option value="WAV">WAV</option>
+          </optgroup>
+          
+        </select>
+      </div>
+
+      <div>
+        <label for="registration">Immatriculation :</label>
+        <input id="registration" v-model="registration" type="text" required>
+      </div>
+
+      <div>
+        <label for="original_registration">Immatriculation originelle :</label>
+        <input id="original_registration" v-model="original_registration" type="text">
+      </div>
+
+      <div>
+        <label for="author">Auteur notice :</label>
+        <input id="author" v-model="author" type="text" required>
+      </div>
+
+      <div>
+        <label for="study">Etude :</label>
+        <input id="study" v-model="study" type="text" placeholder="Techn'hom Time Machine">
+      </div>
+    </form>
+
+    <div>
+      <textarea placeholder="Commentaire" v-model="commentary"></textarea>
+    </div>
+
+  </form>
+  
+
+  <label class="btn btn-default">
+      <input type="file" ref="file" @change="selectFile" />
+  </label>
+
+  <button class="btn btn-success" :disabled="!selectedFiles" @click="postForm">
+      Upload
+  </button>
+
+  
+  <div class="error" v-if="errors">
+    {{errors}}
+  </div>
+</section>

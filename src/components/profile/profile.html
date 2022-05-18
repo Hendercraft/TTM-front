@@ -1,0 +1,118 @@
+
+<section class="profile">
+  <h1>Profil</h1>
+  <div class="main">
+    <div class="upper-bar">
+      <div class="bt-data">
+        <button v-on:click='changeToData'>Informations peronnelles</button>
+      </div>
+      <div class="bt-discipline">
+        <button v-on:click='changeToDiscipline'>Discipline</button>
+      </div>
+      <div class="bt-champs">
+        <button v-on:click='changeToChamps'>Champs de recherche</button>
+      </div>
+      <div class="bt-etablissement">
+        <button v-on:click='changeToEtablissement'>Etablissement de recherche</button>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="data" v-if='data'>
+        <p>Ceci correspond à l'onglet informations peronnelles</p>
+
+        <div>
+          <label>Username: </label>
+          {{user.username}}
+        </div>
+
+        <div>
+          <label>Prénom: </label>
+          {{user.first_name}}
+        </div>
+
+        <div>
+          <label>Nom de famille: </label>
+          {{user.last_name}}
+        </div>
+
+        <div v-if="user.groups[0]">
+          <label>Statut sur le site: </label>
+          {{user.groups[0]}}
+        </div>        
+
+        <div v-if="user.userEmail">
+          <label>Email: </label>
+          {{user.userEmail}}
+        </div>
+
+        <div v-if="user.phoneNumber">
+          <label>Numéro de téléphone: </label>
+          {{user.phoneNumber}}
+        </div>
+
+        <div v-if="user.postalAdress">
+          <label>Adresse postale: </label>
+          {{user.postalAdress}}
+        </div>
+
+        <div v-if="user.is_staff">
+          <label>Administrateur: </label>
+          {{user.is_staff}}
+        </div>
+
+      </div>
+      
+      <div class="discipline" v-if='discipline'>
+        <p>Ceci correspond à l'onglet discipline</p>
+
+        <div v-if="user.discipline">
+          <label>Discipline: </label>
+          {{user.discipline}}
+        </div>
+
+        <div v-if="user.commentsDiscipline">
+          <label>Description: </label>
+          {{user.commentsDiscipline}}
+        </div>
+
+      </div>
+    
+      <div class="champs" v-if='champs'>
+        <p>Ceci correspond à l'onglet champs</p>
+
+        <div v-if="user.researchField">
+          <label>Champs de recherche: </label>
+          {{user.researchField}}
+        </div>
+
+        <div v-if="user.commentsResearch">
+          <label>Description: </label>
+          {{user.commentsResearch}}
+        </div>
+      </div>
+      
+
+      <div class="etablissement" v-if='etablissement'>
+        <p>Ceci correspond à l'onglet etablissement</p>
+
+        <div v-if="user.laboratory">
+          <label>Laboratoire: </label>
+          {{user.laboratory}}
+        </div>
+
+        <div v-if="user.establishment">
+          <label>Etablissement: </label>
+          {{user.establishment}}
+        </div>
+
+        <div v-if="user.commentsEstablishment">
+          <label>Description: </label>
+          {{user.commentsEstablishment}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+

@@ -1,0 +1,44 @@
+
+<section class="register">
+  <h1>Inscription</h1>
+  <form class="register-form">
+    <div>
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" v-model="username">
+    </div>
+    
+    <div>
+      <label for="fname">Prénom</label>
+      <input type="text" id="fname" v-model="first_name">
+    </div>
+    
+    <div>
+      <label for="lname">Nom</label>
+      <input type="text" id="lname" v-model="last_name">
+    </div>
+    
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" v-model="email">
+    </div>
+
+    <div>
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" v-model="password">
+    </div>
+      
+    <div>
+      <label for="rpassword">Répétez le mot de passe</label>
+      <input type="password" id="rpassword" v-model="password_bis">
+    </div>
+    
+    <p class="warning-password" v-if="password !== password_bis && password_bis !== null">Attention! Vos mots de passe sont différents</p>
+
+    
+  </form>
+  
+  <button class="register" v-if="password == password_bis && password_bis !== null" v-on:click="Registered">Inscription</button>
+
+  <p class="error-message" v-if="errors!=null">{{ errors }}</p>
+</section>
+

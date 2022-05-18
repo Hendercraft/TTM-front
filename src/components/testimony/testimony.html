@@ -1,0 +1,17 @@
+<section class="testimony">
+  <h1>Mon témoignage</h1>
+  <div id="testimony-box" v-if="logged">
+    <textarea name="testimony" placeholder="Veuillez insérer un témoignage" v-model="testimony"></textarea>
+    <div>
+      <button class="btn btn-success" :disabled="!testimony" @click="postTestimony">
+        Envoyer
+      </button>
+    </div>
+  </div>
+  <div id="unlogged" v-if="!logged">
+    <p id="message">
+      Veuillez vous connecter/inscrire afin de pouvoir déposer un témoignage.</br>
+      Ceci nous sert à lier les témoignage aux personnes et donc de pouvoir réaliser des études sur ceux-ci.
+    </p>
+  </div>
+</section>

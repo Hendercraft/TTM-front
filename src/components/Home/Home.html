@@ -1,0 +1,42 @@
+
+<section class="home">
+  
+  <div class="head">
+    <h1 class="title">DES USINES DANS LA VILLE</h1>
+  </div>
+
+  <div class="upper-bar">
+    <div class="bt-visite-virtuelle">
+      <button v-on:click='changeToVisite_virtuelle'>Visite Virtuelle</button>
+    </div>
+    <div class="bt-multimedia">
+      <button v-on:click='changeToMultimedia'>Multimédia</button>
+    </div>
+    <div class="bt-cartographie">
+      <button v-on:click='changeToCartographie'>Cartographie</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="home" v-if='home'>
+      <img src="../../assets/TA_Belfort_1827_ad09003_anu0303p032ta.jpg"/>
+    </div>
+    <div class="visite-virtuelle" v-if='visite_virtuelle'>
+      <p>Ceci correspond à l'onglet visite virtuelle</p>
+    </div>
+    
+    <div class="multimedia" v-if='multimedia'>
+      <p>Ceci correspond à l'onglet multimedia</p>
+    </div>
+  
+    <div class="cartographie" v-if='cartographie'>
+      <p>Ceci correspond à l'onglet cartographie</p>
+      <img src="../../assets/patrimoine1.jpg"/>
+    </div>
+  </div>
+  
+  
+  
+  
+</section>
+

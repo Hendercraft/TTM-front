@@ -1,0 +1,57 @@
+
+<section class="bar">
+  <nav id="sidebar">
+    <router-link class="title_logo" to="/"><img id="TTM_logo" src="../../assets/Logo_TTM.jpg"/></router-link>
+    
+    <div id="content">
+      <router-link class="menu" to="/A-Propos" tag="a">A propos</router-link>
+      <router-link class="menu" to="/" tag="a">Urbanisme</router-link>
+      <router-link class="menu" to="/Architecture" tag="a">Architecture</router-link>
+      <router-link class="menu" to="/Production" tag="a">Production</router-link>
+      <router-link class="menu" to="/Hommes" tag="a">Hommes</router-link>
+      <div class="modifyDatabase">
+        <div>
+          <router-link to="/NewRessource" tag="a">Ajouter ressource</router-link>
+        </div>
+        <div>
+          <router-link to="/Temoignage" tag="a">Mon témoignage</router-link>
+        </div>
+        <div>
+          <router-link class="secondMenu" to="/Recherche" tag="a">Recherche</router-link>
+          <img id="loupe" src="../../assets/loupe2.png">
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav id="navbar">
+    <router-link id="logo" to="/">
+      <img class="logo_img" src="../../assets/Logo_TTM.jpg">
+    </router-link>
+
+    <button class="icon" @click="hamburger">
+      <img class="hamburger_img" src="../../assets/hamburger.png">
+    </button>
+
+    <div id="myLinks"> 
+      <router-link class="menu" to="/A-Propos" tag="a">A propos</router-link>
+      <router-link class="menu" to="/" tag="a">Urbanisme</router-link>
+      <router-link class="menu" to="/Architecture" tag="a">Architecture</router-link>
+      <router-link class="menu" to="/Production" tag="a">Production</router-link>
+      <router-link class="menu" to="/Hommes" tag="a">Hommes</router-link>
+      <div class="modifyDatabase">
+        <div>
+          <router-link to="/NewRessource" tag="a">Ajouter ressource</router-link>
+        </div>
+        <div>
+          <router-link to="/Temoignage" tag="a">Mon témoignage</router-link>
+        </div>
+        <div>
+          <router-link class="secondMenu" to="/Recherche" tag="a">Recherche</router-link>
+          <img id="loupe" src="../../assets/loupe2.png">
+        </div>
+      </div>
+    </div>
+  </nav>
+  </section>
+

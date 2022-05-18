@@ -1,0 +1,60 @@
+
+<section class="ressource-form">
+  <form class="form">
+    <div>
+      <label for="name">Nom :</label>
+      <input id="name" v-model="name" type="text" required>
+    </div>
+
+    <div>
+      <label for="description">Description :</label>
+      <input id="description" v-model="description" type="text">
+    </div>
+
+    <div class="">
+      <label for="field">Catégorie :</label>
+      <select id="field" v-model="field" required>
+        <option selected disabled>Sélectionnez une catégorie</option>
+        <option value="Architecture">Architecture</option>
+        <option value="Production">Production</option>
+        <option value="Hommes">Hommes</option>
+      </select>
+    </div>
+
+    <div class="select">
+      <label for="object_architecture">Ressource fille Architecture:</label>
+      <select id="object_architecture" v-model="object_architecture" multiple>
+        <option selected disabled>Sélectionnez une ressource</option>
+        <option v-for="architecture in architectures" v-bind:value="architecture.id">
+          {{ architecture.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="select">
+      <label for="object_production">Ressource fille Production:</label>
+      <select id="object_production" v-model="object_production" multiple>
+        <option selected disabled>Sélectionnez une ressource</option>
+        <option v-for="production in productions" v-bind:value="production.id">
+          {{ production.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="select">
+      <label for="actor">Ressource fille Homme:</label>
+      <select id="actor" v-model="actor" multiple>
+        <option selected disabled>Sélectionnez une ressource</option>
+        <option v-for="homme in hommes" v-bind:value="homme.id">
+          {{ homme.name }} {{ homme.last_name }}
+        </option>
+      </select>
+    </div>
+  </form>
+  <button class="btn btn-success" :disabled="!name" @click="postForm">Envoyer</button>
+
+  <div>
+    {{errors}}
+  </div>
+</section>
+
